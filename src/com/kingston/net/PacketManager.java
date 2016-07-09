@@ -3,9 +3,11 @@ package com.kingston.net;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
-public class PacketManager {
+public enum PacketManager {
 
-	public static void execPacket(Packet pact){
+	INSTANCE;
+	
+	public  void execPacket(Packet pact){
 		if(pact == null) return;
 		try {
 			Method m = pact.getClass().getMethod("execPacket");
@@ -21,7 +23,7 @@ public class PacketManager {
 		}
 	}
 	
-	public static Packet createNewPacket(short packetType){
+	public  Packet createNewPacket(short packetType){
 		Class<? extends Packet> packetClass = PacketType.getPacketClassBy(packetType);
 		if(packetClass == null){
 			throw new IllegalPacketException("类型为"+packetType+"的包定义不存在");

@@ -13,13 +13,13 @@ public class ServerLogin  extends Packet{
 	private  String userPwd; 
 
 	@Override
-	public void writePacketMsg(ByteBuf buf) {
+	public void writePacketBody(ByteBuf buf) {
 		buf.writeInt(userId);
 		writeUTF8(buf, userPwd);
 	}
 
 	@Override
-	public void readFromBuff(ByteBuf buf) {
+	public void readPacketBody(ByteBuf buf) {
 		this.userId = buf.readInt();
 		this.userPwd =readUTF8(buf);
 

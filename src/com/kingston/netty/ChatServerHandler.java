@@ -11,14 +11,12 @@ import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.kingston.ball.SyncPosManager;
-import com.kingston.ball.User;
 import com.kingston.base.ServerManager;
 import com.kingston.net.Packet;
 import com.kingston.net.PacketManager;
 import com.kingston.net.PacketType;
 import com.kingston.service.login.ClientHeartBeat;
-import com.kingston.service.login.LoginManagerProxy;
+import com.kingston.service.login.LoginManager;
 import com.kingston.service.login.ServerLogin;
 
 public class ChatServerHandler extends ChannelHandlerAdapter{
@@ -34,15 +32,11 @@ public class ChatServerHandler extends ChannelHandlerAdapter{
 		System.err.println("receive pact,type = " + packet.getClass().getSimpleName());
 		if(packet.getPacketType() == PacketType.ServerLogin ){
 			ServerLogin loginPact = (ServerLogin)packet;
-			LoginManagerProxy.getManager().validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
-			
-			User user = new User(loginPact.getUserId());
-			SyncPosManager.INSTANCE.addTeamMember(user);
-			
+			LoginManager.INSTANCE.validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
 			return ;
 		}else{
 			if(validateSession(packet)){
-				PacketManager.execPacket(packet);
+				PacketManager.INSTANCE.execPacket(packet);
 			}
 		}
 		

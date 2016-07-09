@@ -11,13 +11,13 @@ public class ClientLogin extends Packet{
 	private byte isValid;
 	
 	@Override
-	public void writePacketMsg(ByteBuf buf) {
+	public void writePacketBody(ByteBuf buf) {
 		writeUTF8(buf, alertMsg);
 		buf.writeByte(isValid);
 	}
 
 	@Override
-	public void readFromBuff(ByteBuf buf) {
+	public void readPacketBody(ByteBuf buf) {
 		this.alertMsg = readUTF8(buf);
 		this.isValid = buf.readByte();
 	}

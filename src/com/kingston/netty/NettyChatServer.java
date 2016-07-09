@@ -9,7 +9,6 @@ import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
-import io.netty.handler.codec.LengthFieldBasedFrameDecoder;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
 
@@ -47,12 +46,13 @@ public class NettyChatServer {
 
 		@Override
 		protected void initChannel(SocketChannel arg0) throws Exception {
-			ChannelPipeline pipeline = arg0.pipeline();
-			pipeline.addLast(new PacketDecoder(1024*1, 0,2,0,2));
-			pipeline.addLast(new LengthFieldPrepender(2));
-			pipeline.addLast(new PacketEncoder());
-			pipeline.addLast("idleStateHandler", new IdleStateHandler(10, 0, 0)); 
-			pipeline.addLast(new ChatServerHandler());
+			 ChannelPipeline pipeline = arg0.pipeline();
+		            pipeline.addLast(new PacketDecoder(1024*4,0,4,0,4));
+		            pipeline.addLast(new LengthFieldPrepender(4));
+		            pipeline.addLast(new PacketEncoder());
+		            //当有操作操作超出指定空闲秒数时，便会触发UserEventTriggered事件
+		            pipeline.addLast("idleStateHandler", new IdleStateHandler(10, 0, 0));
+		            pipeline.addLast(new ChatServerHandler());
 		}
 	}
 	

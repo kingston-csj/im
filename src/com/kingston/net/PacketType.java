@@ -5,8 +5,6 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.kingston.ball.ClientSyncPos;
-import com.kingston.ball.ServerSyncPos;
 import com.kingston.service.login.ClientHeartBeat;
 import com.kingston.service.login.ClientLogin;
 import com.kingston.service.login.ServerHeartBeat;
@@ -16,13 +14,11 @@ public enum PacketType {
 	//业务上行数据包
 	ServerLogin((short)0x0001,ServerLogin.class),
 	ServerHearBeat((short)0x0002,ServerHeartBeat.class),
-	ServerSyncPos((short)0x0003,ServerSyncPos.class),
 	
 
 	//业务下行数据包
 	ClientLogin((short)0x2000,ClientLogin.class),
 	ClientHeartBeat((short)0x2001,ClientHeartBeat.class),
-	ClientSyncPos((short)0x2002,ClientSyncPos.class),
 	
 	;
 
@@ -41,6 +37,7 @@ public enum PacketType {
 			typeSet.add(type);
 		}
 	}
+	
 	PacketType(short type,Class<? extends Packet> packetClass){
 		this.setType(type);
 		this.packetClass = packetClass;

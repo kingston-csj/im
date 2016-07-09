@@ -8,13 +8,13 @@ import com.kingston.net.PacketType;
 public class ClientHeartBeat extends Packet{
 
 	@Override
-	public void writePacketMsg(ByteBuf buf) {
+	public void writePacketBody(ByteBuf buf) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void readFromBuff(ByteBuf buf) {
+	public void readPacketBody(ByteBuf buf) {
 		// TODO Auto-generated method stub
 		
 	}
