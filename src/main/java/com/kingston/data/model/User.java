@@ -1,4 +1,4 @@
-package com.kingston.model;
+package com.kingston.data.model;
 
 public class User {
 	private long userId;

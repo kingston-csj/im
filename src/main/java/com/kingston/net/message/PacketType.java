@@ -1,14 +1,14 @@
-package com.kingston.net;
+package com.kingston.net.message;
 
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.kingston.service.login.ClientHeartBeat;
-import com.kingston.service.login.ClientLogin;
-import com.kingston.service.login.ServerHeartBeat;
-import com.kingston.service.login.ServerLogin;
+import com.kingston.logic.login.message.ClientHeartBeat;
+import com.kingston.logic.login.message.ClientLogin;
+import com.kingston.logic.login.message.ServerHeartBeat;
+import com.kingston.logic.login.message.ServerLogin;
 
 public enum PacketType {
 	//业务上行数据包

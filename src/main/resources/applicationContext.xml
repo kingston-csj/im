@@ -21,14 +21,22 @@
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
 		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<!-- 自动扫描所有mapper配置 -->
+		<property name="mapperLocations"  
+                  value="classpath:com/kingston/data/mybatis/*Mapper.xml"/>
 	</bean>
 
+	<!-- 注册spring上下文环境 -->
+	<bean id= "context" class = "com.kingston.base.SpringContext"/>
+	
 	<context:annotation-config />
+	
+	<!-- 自动扫描该包下所有组件 -->
 	<context:component-scan base-package="com.kingston" />
 
-	<!-- Mapper接口所在包名，Spring会自动查找其下的Mapper -->
+	<!-- 自动扫描所有dao并注入到spring容器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.kingston.dao" />
+		<property name="basePackage" value="com.kingston.data.dao" />
 	</bean>
 
 	<bean id="transactionManager"

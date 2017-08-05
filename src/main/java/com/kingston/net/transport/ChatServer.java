@@ -1,4 +1,4 @@
-package com.kingston.transport;
+package com.kingston.net.transport;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
@@ -20,10 +20,13 @@ import com.kingston.net.codec.PacketEncoder;
 
 public class ChatServer {
 
+	//避免使用默认线程数参数
+	private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
+	private	EventLoopGroup workerGroup = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
+
 	public void bind(int port) throws IOException {
-		//避免使用默认线程数参数
-		EventLoopGroup bossGroup = new NioEventLoopGroup(1);
-		EventLoopGroup workerGroup = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
+
+
 		System.err.println("服务端已启动，正在监听用户的请求......");
 		try{
 			ServerBootstrap b = new ServerBootstrap();
@@ -31,7 +34,7 @@ public class ChatServer {
 			.channel(NioServerSocketChannel.class)
 			.option(ChannelOption.SO_BACKLOG, 1024)
 			.childHandler(new ChildChannelHandler());
-			
+
 			ChannelFuture f = b.bind(new InetSocketAddress(port))
 					.sync();
 			f.channel().closeFuture().sync();
@@ -42,19 +45,32 @@ public class ChatServer {
 			workerGroup.shutdownGracefully();
 		}
 	}
-	
+
+	public void close() {
+		try{
+			if (bossGroup != null) {
+				bossGroup.shutdownGracefully();
+			}
+			if (workerGroup != null) {
+				workerGroup.shutdownGracefully();
+			}
+		}catch(Exception e){
+
+		}
+	}
+
 	private class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
 
 		@Override
 		protected void initChannel(SocketChannel arg0) throws Exception {
-			 ChannelPipeline pipeline = arg0.pipeline();
-		            pipeline.addLast(new PacketDecoder(1024*4,0,4,0,4));
-		            pipeline.addLast(new LengthFieldPrepender(4));
-		            pipeline.addLast(new PacketEncoder());
-		            //当有操作操作超出指定空闲秒数时，便会触发UserEventTriggered事件
-		            pipeline.addLast("idleStateHandler", new IdleStateHandler(10, 0, 0));
-		            pipeline.addLast(new MessageTransportHandler());
+			ChannelPipeline pipeline = arg0.pipeline();
+			pipeline.addLast(new PacketDecoder(1024*4,0,4,0,4));
+			pipeline.addLast(new LengthFieldPrepender(4));
+			pipeline.addLast(new PacketEncoder());
+			//当有操作操作超出指定空闲秒数时，便会触发UserEventTriggered事件
+			pipeline.addLast("idleStateHandler", new IdleStateHandler(10, 0, 0));
+			pipeline.addLast(new MessageTransportHandler());
 		}
 	}
-	
+
 }

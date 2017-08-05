@@ -8,8 +8,8 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
-import com.kingston.net.Packet;
-import com.kingston.net.PacketManager;
+import com.kingston.net.message.Packet;
+import com.kingston.net.message.PacketManager;
 
 public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 

@@ -1,4 +1,4 @@
-package com.kingston.net;
+package com.kingston.net.message;
 
 public class IllegalPacketException  extends RuntimeException{
 

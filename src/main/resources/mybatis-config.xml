@@ -5,7 +5,7 @@
 <configuration>
 	<!--别名申明 -->
 	<typeAliases>
-		<typeAlias type="com.kingston.model.User" alias="user" />
+		<typeAlias type="com.kingston.data.model.User" alias="user" />
 	</typeAliases>
 	<environments default="development">
 		<environment id="development">
@@ -19,8 +19,6 @@
 			</dataSource>
 		</environment>
 	</environments>
-	<!-- 映射文件配置 -->
-	<mappers>
-		<mapper resource="com/kingston/dao/UserDao.xml" /><!--'/' cannot be placed by '.' -->
-	</mappers>
+	
+	
 </configuration>

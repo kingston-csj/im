@@ -6,7 +6,8 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kingston.model.User;
+import com.kingston.data.model.User;
+import com.kingston.net.message.Packet;
 
 import io.netty.channel.Channel;
 

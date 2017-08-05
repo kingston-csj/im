@@ -1,4 +1,4 @@
-package com.kingston.transport;
+package com.kingston.net.transport;
 
 import java.io.IOException;
 import java.util.Map;
@@ -8,14 +8,15 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kingston.base.ServerManager;
+import com.kingston.base.SpringContext;
+import com.kingston.logic.login.LoginManager;
+import com.kingston.logic.login.message.ClientHeartBeat;
+import com.kingston.logic.login.message.ServerLogin;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
-import com.kingston.net.Packet;
-import com.kingston.net.PacketManager;
-import com.kingston.net.PacketType;
-import com.kingston.service.login.ClientHeartBeat;
-import com.kingston.service.login.LoginManager;
-import com.kingston.service.login.ServerLogin;
+import com.kingston.net.message.Packet;
+import com.kingston.net.message.PacketManager;
+import com.kingston.net.message.PacketType;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerAdapter;
@@ -31,7 +32,6 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 	//客户端超时次数
 	private Map<ChannelHandlerContext,Integer> clientOvertimeMap = new ConcurrentHashMap<>();
 
-	
 	@Override
 	public void channelActive(ChannelHandlerContext ctx) throws Exception {
 		if (!ChannelUtils.addChannelSession(ctx.channel(), new IoSession(ctx.channel()))) {
@@ -44,15 +44,17 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 	public void channelRead(ChannelHandlerContext context,Object msg)
 			throws Exception{
 		Packet  packet = (Packet)msg;
-		System.err.println("receive pact,type = " + packet.getClass().getSimpleName());
+		System.err.println("receive pact, content is " + packet.getClass().getSimpleName());
 		if(packet.getPacketType() == PacketType.ServerLogin ){
 			ServerLogin loginPact = (ServerLogin)packet;
-			LoginManager.INSTANCE.validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
+			
+			LoginManager loginMgr = SpringContext.getBean(LoginManager.class);
+			loginMgr.validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
 			return ;
-		}else{
-			if(validateSession(packet)){
-				PacketManager.INSTANCE.execPacket(packet);
-			}
+		}
+		
+		if(validateSession(packet)){
+			PacketManager.INSTANCE.execPacket(packet);
 		}
 
 		clientOvertimeMap.remove(context);//只要接受到数据包，则清空超时次数
@@ -84,7 +86,6 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
 		System.err.println("业务逻辑出错");
 		cause.printStackTrace();
-		//	        ctx.fireExceptionCaught(cause);
 		Channel channel = ctx.channel();
 		if(cause instanceof  IOException && channel.isActive()){
 			System.err.println("simpleclient"+channel.remoteAddress()+"异常");
@@ -102,7 +103,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 				System.err.println("客户端读超时");
 				int overtimeTimes = clientOvertimeMap.getOrDefault(ctx, 0);
 				if(overtimeTimes < ServerConfigs.MAX_RECONNECT_TIMES){
-					ServerManager.INSTANCE.sendPacketTo(new ClientHeartBeat(), ctx);
+					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new ClientHeartBeat());
 					addUserOvertime(ctx);
 				}else{
 					ServerManager.INSTANCE.ungisterUserContext(ctx.channel());

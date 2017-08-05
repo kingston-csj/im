@@ -3,8 +3,8 @@ import org.junit.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.annotation.Rollback;
 
-import com.kingston.dao.UserDao;
-import com.kingston.model.User;
+import com.kingston.data.dao.UserDao;
+import com.kingston.data.model.User;
 
 public class UserDaoTest extends BaseTestCase {
 

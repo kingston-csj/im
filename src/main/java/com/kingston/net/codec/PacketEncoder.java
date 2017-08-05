@@ -8,7 +8,7 @@ import io.netty.handler.codec.MessageToByteEncoder;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.kingston.net.Packet;
+import com.kingston.net.message.Packet;
 
 public class PacketEncoder extends MessageToByteEncoder<Packet> {
 

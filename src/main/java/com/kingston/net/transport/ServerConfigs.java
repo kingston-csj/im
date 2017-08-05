@@ -1,4 +1,4 @@
-package com.kingston.transport;
+package com.kingston.net.transport;
 
 public class ServerConfigs {
 	

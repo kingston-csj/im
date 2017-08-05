@@ -7,11 +7,11 @@ import java.util.concurrent.ConcurrentMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.kingston.model.User;
+import com.kingston.data.model.User;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
-import com.kingston.net.Packet;
 import com.kingston.net.SessionCloseReason;
+import com.kingston.net.message.Packet;
 
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
@@ -29,7 +29,16 @@ public enum ServerManager {
 	private ConcurrentMap<Long, IoSession> userId2Sessions = new ConcurrentHashMap<>();
 
 
-	public void sendPacketTo(Packet pact,Long userId){
+	
+	/**
+	 *  向单一在线用户发送数据包
+	 */
+	public void sendPacketTo(IoSession session, Packet pact) {
+		if(pact == null || session == null) return;
+		session.sendPacket(pact);
+	}
+
+	public void sendPacketTo(Long userId, Packet pact) {
 		if(pact == null || userId <= 0) return;
 
 		IoSession session = userId2Sessions.get(userId);
@@ -37,7 +46,12 @@ public enum ServerManager {
 			session.sendPacket(pact);
 		}
 	}
-
+	
+	public void sendPacketTo(Channel channel, Packet pact) {
+		if(pact == null || channel == null) return;
+		channel.writeAndFlush(pact);
+	}
+	
 	/**
 	 *  向所有在线用户发送数据包
 	 */
@@ -47,13 +61,7 @@ public enum ServerManager {
 		userId2Sessions.values().forEach( (session) -> session.sendPacket(pact));
 	}
 
-	/**
-	 *  向单一在线用户发送数据包
-	 */
-	public void sendPacketTo(Packet pact,ChannelHandlerContext targetContext ){
-		if(pact == null || targetContext == null) return;
-		targetContext.writeAndFlush(pact);
-	}
+	
 
 
 	public IoSession getSessionBy(long userId) {

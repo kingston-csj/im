@@ -1,8 +1,8 @@
-package com.kingston.dao;
+package com.kingston.data.dao;
 
 import org.springframework.stereotype.Component;
 
-import com.kingston.model.User;
+import com.kingston.data.model.User;
 
 @Component
 public interface UserDao {
