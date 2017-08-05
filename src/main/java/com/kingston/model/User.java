@@ -1,11 +1,13 @@
 package com.kingston.model;
 
 public class User {
-	private Integer userId;
-	private String userName;
-	private String password;
+	private long userId;
+	/** 用户名字 */
+	private String  userName;
+	/** 密码 */
+	private String  authentication;
 	
-	public Integer getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 	public void setUserId(Integer userId) {
@@ -17,11 +19,11 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getPassword() {
-		return password;
+	public String getAuthentication() {
+		return authentication;
 	}
-	public void setPassword(String password) {
-		this.password = password;
+	public void setAuthentication(String password) {
+		this.authentication = password;
 	}
 	
 }

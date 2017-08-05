@@ -8,7 +8,7 @@ import com.kingston.base.ServerDataPool;
 import com.kingston.transport.ChatServer;
 import com.kingston.transport.ServerConfigs;
 
-public class ServerStart {
+public class ServerStartup {
 
 	public static void main(String[] args)  {
 		readSpringContextConfig();

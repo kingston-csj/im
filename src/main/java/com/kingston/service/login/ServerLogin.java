@@ -8,19 +8,19 @@ import com.kingston.net.PacketType;
 public class ServerLogin  extends Packet{
 
 	private byte reqType;
-	private int userId;
-	private  String userName;
-	private  String userPwd; 
+	private long userId;
+	private String userName;
+	private String userPwd; 
 
 	@Override
 	public void writePacketBody(ByteBuf buf) {
-		buf.writeInt(userId);
+		buf.writeLong(userId);
 		writeUTF8(buf, userPwd);
 	}
 
 	@Override
 	public void readPacketBody(ByteBuf buf) {
-		this.userId = buf.readInt();
+		this.userId = buf.readLong();
 		this.userPwd =readUTF8(buf);
 
 		System.err.println("id="+userId+",pwd="+userPwd);
@@ -53,11 +53,11 @@ public class ServerLogin  extends Packet{
 		this.userPwd = userPwd;
 	}
 
-	public int getUserId() {
+	public long getUserId() {
 		return userId;
 	}
 
-	public void setUserId(int userId) {
+	public void setUserId(long userId) {
 		this.userId = userId;
 	}
 
@@ -67,6 +67,11 @@ public class ServerLogin  extends Packet{
 
 	public void setReqType(byte reqType) {
 		this.reqType = reqType;
+	}
+
+	@Override
+	public String toString() {
+		return "ServerLogin [reqType=" + reqType + ", userId=" + userId + ", userName=" + userName + "]";
 	}
 
 }

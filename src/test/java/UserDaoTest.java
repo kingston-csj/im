@@ -14,7 +14,7 @@ public class UserDaoTest extends BaseTestCase {
 	@Test
 	public void testSelect() throws Exception {
 
-		User user = userDao.findById(1);
+		User user = userDao.findById(1L);
 		System.out.println(user.getUserName());
 	}
 
@@ -24,7 +24,7 @@ public class UserDaoTest extends BaseTestCase {
 		User user = new User();
 		user.setUserId(2);
 		user.setUserName("Tom");
-		user.setPassword("sdf");
+		user.setAuthentication("sdf");
 		userDao.addUser(user);
 
 	}

@@ -1,11 +1,13 @@
 package com.kingston.dao;
 
+import org.springframework.stereotype.Component;
+
 import com.kingston.model.User;
 
-
+@Component
 public interface UserDao {
 
-	public User findById(Integer id);
+	public User findById(Long id);
 	
 	public void addUser(User user);
 	
