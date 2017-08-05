@@ -14,7 +14,6 @@ import com.kingston.net.SessionCloseReason;
 import com.kingston.net.message.Packet;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerContext;
 
 public enum ServerManager {
 
@@ -69,12 +68,10 @@ public enum ServerManager {
 	}
 
 	public boolean registerSession(User user, IoSession session) {
-
 		session.setUser(user);
 		userId2Sessions.put(user.getUserId(), session);
 
 		logger.info("[{}] registered...", user.getUserId());
-
 		return true;
 	}
 
