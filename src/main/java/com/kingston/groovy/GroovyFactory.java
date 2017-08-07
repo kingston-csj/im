@@ -4,25 +4,42 @@ import java.io.File;
 import java.util.Collection;
 
 import org.apache.commons.io.FileUtils;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.support.DefaultListableBeanFactory;
 import org.springframework.beans.factory.support.GenericBeanDefinition;
 import org.springframework.context.ApplicationContext;
-import org.springframework.context.ApplicationContextAware;  
+import org.springframework.context.ApplicationContextAware;
+
+import com.kingston.logic.chat.IChatInspector;  
   
 public class GroovyFactory implements ApplicationContextAware {  
+	
+	private Logger logger = LoggerFactory.getLogger(GroovyFactory.class);
   
-    private String directory;  
+    private String scriptRoot;  
+    
+    /** 刷新间隔 */
+    private int refreshCheckDelay;
       
-    public String getDirectory() {  
-        return directory;  
-    }  
-  
-    public void setDirectory(String directory) {  
-        this.directory = directory;  
-    }  
-  
-    @Override  
+    public String getScriptRoot() {
+		return scriptRoot;
+	}
+
+	public void setScriptRoot(String scriptRoot) {
+		this.scriptRoot = scriptRoot;
+	}
+
+	public int getRefreshCheckDelay() {
+		return refreshCheckDelay;
+	}
+
+	public void setRefreshCheckDelay(int refreshCheckDelay) {
+		this.refreshCheckDelay = refreshCheckDelay;
+	}
+
+	@Override  
     public void setApplicationContext(ApplicationContext context)  
             throws BeansException {  
         // 只有这个对象才能注册bean到spring容器  
@@ -33,13 +50,14 @@ public class GroovyFactory implements ApplicationContextAware {
         final String refreshCheckDelay = "org.springframework.scripting.support.ScriptFactoryPostProcessor.refreshCheckDelay";  
         final String language = "org.springframework.scripting.support.ScriptFactoryPostProcessor.language";  
           
-        String realDirectory = Thread.currentThread().getContextClassLoader().getResource(directory).getFile();  
+        String realDirectory = new File("").getAbsolutePath() + File.separator+scriptRoot;
+        System.err.println("加载groovy脚本的目录为:"+ realDirectory);
         File scriptDir = new File(realDirectory);
         if (!scriptDir.exists()) {
         	return;
         }
-        
-        Collection<File> files = FileUtils.listFiles(scriptDir, new String[]{"groovy"}, true);
+        System.err.println("开始加载groovy脚本");
+        Collection<File> files = FileUtils.listFiles(scriptDir, new String[]{"java"}, true);
         for (File file : files) {  
             GenericBeanDefinition bd = new GenericBeanDefinition();  
             bd.setBeanClassName("org.springframework.scripting.groovy.GroovyScriptFactory");  
@@ -49,11 +67,13 @@ public class GroovyFactory implements ApplicationContextAware {
             bd.setAttribute(language, "groovy");  
             // 文件目录  
             String filePath = file.getPath();
-            String scriptLocator = filePath.substring(filePath.indexOf(directory));
-            System.err.println(scriptLocator);
+            String scriptLocator = filePath.substring(filePath.indexOf(scriptRoot));
+            String beanName = file.getName().replace(".java", "");
+            System.err.println("注册groovy bean "+scriptLocator);
             bd.getConstructorArgumentValues().addIndexedArgumentValue(0, scriptLocator);  
             // 注册到spring容器  
-            beanFactory.registerBeanDefinition(file.getName().replace(".groovy", ""), bd);  
+            beanFactory.registerBeanDefinition(beanName, bd);  
+            
         }  
           
     }  

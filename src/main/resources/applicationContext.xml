@@ -31,6 +31,14 @@
 		<property name="mapperLocations"
 			value="classpath:com/kingston/data/mybatis/*Mapper.xml" />
 	</bean>
+	
+	<!-- groovy热部署插件 -->
+ 	<bean class="com.kingston.groovy.GroovyFactory">
+ 	 	<property name="scriptRoot" value="groovy"/>
+ 	 	<property name="refreshCheckDelay" value="10000"/>  
+ 	</bean>   
+    <bean class="org.springframework.scripting.support.ScriptFactoryPostProcessor"/> 
+    
 
 	<!-- 注册spring上下文环境 -->
 	<bean id="context" class="com.kingston.base.SpringContext" />
@@ -49,13 +57,6 @@
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
 		<property name="dataSource" ref="dataSource" />
 	</bean>
-
-	<!-- groovy热部署插件 -->
- 	<bean class="com.kingston.groovy.GroovyFactory">
- 	 	<property name="directory" value="groovy"/>
- 	 	<property name="refreshCheckDelay" value="10000"/>  
- 	</bean>   
-    <bean class="org.springframework.scripting.support.ScriptFactoryPostProcessor"/>  
 
 	<tx:annotation-driven transaction-manager="transactionManager" />
 
