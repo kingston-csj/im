@@ -9,12 +9,15 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
 import com.kingston.asyncdb.AysncDbService;
+import com.kingston.logic.chat.ChatService;
 
 public class SpringContext implements ApplicationContextAware {
 	/** spring容器上下文 */
 	private static ApplicationContext applicationContext = null;
 	/** 异步持久化服务 */
 	private static AysncDbService aysncDbService;
+	
+	private static ChatService chatService;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -40,6 +43,15 @@ public class SpringContext implements ApplicationContextAware {
 	
 	public static AysncDbService getAysncDbService() {
 		return aysncDbService;
+	}
+	
+	@Resource
+	public void setChatService(ChatService chatService) {
+		SpringContext.chatService = chatService;
+	}
+	
+	public final static ChatService getChatService() {
+		return chatService;
 	}
 	
 }

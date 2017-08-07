@@ -5,7 +5,7 @@ import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ServerLogin  extends Packet{
+public class ServerLogin extends Packet {
 
 	private byte reqType;
 	private long userId;

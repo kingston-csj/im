@@ -5,20 +5,27 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import com.kingston.logic.chat.message.ClientChat;
+import com.kingston.logic.chat.message.ServerChat;
 import com.kingston.logic.login.message.ClientHeartBeat;
 import com.kingston.logic.login.message.ClientLogin;
 import com.kingston.logic.login.message.ServerHeartBeat;
 import com.kingston.logic.login.message.ServerLogin;
 
 public enum PacketType {
+	
 	//业务上行数据包
 	ServerLogin((short)0x0001,ServerLogin.class),
 	ServerHearBeat((short)0x0002,ServerHeartBeat.class),
+	
+	ServerChat((short)0x0003, ServerChat.class),
 	
 
 	//业务下行数据包
 	ClientLogin((short)0x2000,ClientLogin.class),
 	ClientHeartBeat((short)0x2001,ClientHeartBeat.class),
+	
+	ClientChat((short)0x2002, ClientChat.class),
 	
 	;
 
