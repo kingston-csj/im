@@ -1,11 +1,11 @@
-package com.kingston.logic.login.message;
+package com.kingston.logic.chat.message;
 
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ClientHeartBeat extends Packet{
+public class RespChatPacket extends AbstractPacket {
 
 	@Override
 	public void writePacketBody(ByteBuf buf) {
@@ -21,11 +21,13 @@ public class ClientHeartBeat extends Packet{
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ClientHeartBeat;
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 	@Override
 	public void execPacket() {
+		// TODO Auto-generated method stub
 		
 	}
 

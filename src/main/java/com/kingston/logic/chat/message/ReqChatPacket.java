@@ -1,12 +1,12 @@
 package com.kingston.logic.chat.message;
 
 import com.kingston.base.SpringContext;
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ServerChat extends Packet {
+public class ReqChatPacket extends AbstractPacket {
 	
 	private long toUserId;
 	

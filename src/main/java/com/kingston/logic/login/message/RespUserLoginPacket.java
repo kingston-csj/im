@@ -1,11 +1,11 @@
 package com.kingston.logic.login.message;
 
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ClientLogin extends Packet{
+public class RespUserLoginPacket extends AbstractPacket{
 
 	private String alertMsg;
 	private byte isValid;
@@ -24,7 +24,7 @@ public class ClientLogin extends Packet{
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ClientLogin;
+		return PacketType.RespLogin;
 	}
 
 	@Override

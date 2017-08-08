@@ -8,7 +8,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketManager;
 
 public class PacketDecoder extends LengthFieldBasedFrameDecoder{
@@ -25,7 +25,7 @@ public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 		if(frame.readableBytes() <= 0) return null ;
 
 		short packetType = frame.readShort();
-		Packet packet = PacketManager.INSTANCE.createNewPacket(packetType);
+		AbstractPacket packet = PacketManager.INSTANCE.createNewPacket(packetType);
 		boolean useCompression = packet.isUseCompression();
 		ByteBuf realBuf = decompression(frame,useCompression);
 		packet.readPacketBody(realBuf);

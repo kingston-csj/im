@@ -4,14 +4,21 @@ import io.netty.buffer.ByteBuf;
 
 import java.io.UnsupportedEncodingException;
 
-public abstract  class Packet {
+/**
+ * 抽象消息定义
+ * @author chenshujin
+ */
+public abstract  class AbstractPacket {
 
 	abstract public void writePacketBody(ByteBuf buf);
 
 	abstract public void readPacketBody(ByteBuf buf);
 
-	abstract public PacketType  getPacketType();
+	abstract public PacketType getPacketType();
 
+	/**
+	 * 业务处理
+	 */
 	abstract public void execPacket();
 
 	protected  String readUTF8(ByteBuf buf){

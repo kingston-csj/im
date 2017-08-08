@@ -7,7 +7,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kingston.data.model.User;
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 
 import io.netty.channel.Channel;
 
@@ -49,7 +49,7 @@ public class IoSession {
 	 * 向客户端发送消息
 	 * @param packet
 	 */
-	public void sendPacket(Packet packet) {
+	public void sendPacket(AbstractPacket packet) {
 		if (packet == null) {
 			return;
 		}

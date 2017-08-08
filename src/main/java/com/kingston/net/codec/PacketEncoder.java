@@ -8,12 +8,12 @@ import io.netty.handler.codec.MessageToByteEncoder;
 import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPOutputStream;
 
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 
-public class PacketEncoder extends MessageToByteEncoder<Packet> {
+public class PacketEncoder extends MessageToByteEncoder<AbstractPacket> {
 
 	@Override
-	protected void encode(ChannelHandlerContext ctx, Packet msg, ByteBuf out)
+	protected void encode(ChannelHandlerContext ctx, AbstractPacket msg, ByteBuf out)
 			throws Exception {
 		out.writeShort(msg.getPacketType().getType());	//消息头
 		//消息体

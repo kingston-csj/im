@@ -6,14 +6,14 @@ import org.springframework.stereotype.Component;
 import com.kingston.base.ServerManager;
 import com.kingston.data.dao.UserDao;
 import com.kingston.data.model.User;
-import com.kingston.logic.login.message.ClientLogin;
+import com.kingston.logic.login.message.RespUserLoginPacket;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
 
 import io.netty.channel.ChannelHandlerContext;
 
 @Component
-public class LoginManager {
+public class LoginService {
 
 	@Autowired
 	private UserDao userDao;
@@ -21,7 +21,7 @@ public class LoginManager {
 	public void validateLogin(ChannelHandlerContext context, long userId, String password) {
 		User user = validate(userId, password);
 		IoSession session = ChannelUtils.getSessionBy(context.channel());
-		ClientLogin resp = new ClientLogin();
+		RespUserLoginPacket resp = new RespUserLoginPacket();
 		if(user != null) {
 			resp.setIsValid((byte)1);
 			resp.setAlertMsg("登录成功");

@@ -1,29 +1,32 @@
 package com.kingston.logic.login.message;
 
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ServerHeartBeat extends Packet{
+public class RespHeartBeatPacket extends AbstractPacket{
 
 	@Override
 	public void writePacketBody(ByteBuf buf) {
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void readPacketBody(ByteBuf buf) {
+		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ServerHearBeat;
+		return PacketType.RespHeartBeat;
 	}
 
 	@Override
 	public void execPacket() {
-		System.err.println("收到客户端的pong响应");  
+		
 	}
 
 }

@@ -9,12 +9,12 @@ import org.slf4j.LoggerFactory;
 
 import com.kingston.base.ServerManager;
 import com.kingston.base.SpringContext;
-import com.kingston.logic.login.LoginManager;
-import com.kingston.logic.login.message.ClientHeartBeat;
-import com.kingston.logic.login.message.ServerLogin;
+import com.kingston.logic.login.LoginService;
+import com.kingston.logic.login.message.RespHeartBeatPacket;
+import com.kingston.logic.login.message.ReqUserLoginPacket;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketManager;
 import com.kingston.net.message.PacketType;
 
@@ -43,12 +43,12 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 	@Override
 	public void channelRead(ChannelHandlerContext context,Object msg)
 			throws Exception{
-		Packet  packet = (Packet)msg;
+		AbstractPacket  packet = (AbstractPacket)msg;
 		System.err.println("receive pact, content is " + packet.getClass().getSimpleName());
-		if(packet.getPacketType() == PacketType.ServerLogin ){
-			ServerLogin loginPact = (ServerLogin)packet;
+		if(packet.getPacketType() == PacketType.ReqUserLogin ){
+			ReqUserLoginPacket loginPact = (ReqUserLoginPacket)packet;
 			
-			LoginManager loginMgr = SpringContext.getBean(LoginManager.class);
+			LoginService loginMgr = SpringContext.getBean(LoginService.class);
 			loginMgr.validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
 			return ;
 		}
@@ -61,7 +61,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 
 	}
 
-	private  boolean validateSession(Packet loginPact){
+	private  boolean validateSession(AbstractPacket loginPact){
 		return true;
 	}
 
@@ -103,7 +103,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 				System.err.println("客户端读超时");
 				int overtimeTimes = clientOvertimeMap.getOrDefault(ctx, 0);
 				if(overtimeTimes < ServerConfigs.MAX_RECONNECT_TIMES){
-					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new ClientHeartBeat());
+					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new RespHeartBeatPacket());
 					addUserOvertime(ctx);
 				}else{
 					ServerManager.INSTANCE.ungisterUserContext(ctx.channel());

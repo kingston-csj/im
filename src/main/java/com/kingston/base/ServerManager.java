@@ -11,7 +11,7 @@ import com.kingston.data.model.User;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
 import com.kingston.net.SessionCloseReason;
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 
 import io.netty.channel.Channel;
 
@@ -32,12 +32,12 @@ public enum ServerManager {
 	/**
 	 *  向单一在线用户发送数据包
 	 */
-	public void sendPacketTo(IoSession session, Packet pact) {
+	public void sendPacketTo(IoSession session, AbstractPacket pact) {
 		if(pact == null || session == null) return;
 		session.sendPacket(pact);
 	}
 
-	public void sendPacketTo(Long userId, Packet pact) {
+	public void sendPacketTo(Long userId, AbstractPacket pact) {
 		if(pact == null || userId <= 0) return;
 
 		IoSession session = userId2Sessions.get(userId);
@@ -46,7 +46,7 @@ public enum ServerManager {
 		}
 	}
 	
-	public void sendPacketTo(Channel channel, Packet pact) {
+	public void sendPacketTo(Channel channel, AbstractPacket pact) {
 		if(pact == null || channel == null) return;
 		channel.writeAndFlush(pact);
 	}
@@ -54,7 +54,7 @@ public enum ServerManager {
 	/**
 	 *  向所有在线用户发送数据包
 	 */
-	public void sendPacketToAllUsers(Packet pact){
+	public void sendPacketToAllUsers(AbstractPacket pact){
 		if(pact == null ) return;
 
 		userId2Sessions.values().forEach( (session) -> session.sendPacket(pact));

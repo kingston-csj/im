@@ -1,11 +1,11 @@
 package com.kingston.logic.login.message;
 
-import com.kingston.net.message.Packet;
+import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ServerLogin extends Packet {
+public class ReqUserLoginPacket extends AbstractPacket {
 
 	private byte reqType;
 	private long userId;
@@ -28,7 +28,7 @@ public class ServerLogin extends Packet {
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ServerLogin;
+		return PacketType.ReqUserLogin;
 	}
 
 	@Override
