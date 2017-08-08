@@ -104,6 +104,7 @@
 
 	<build>
 		<resources>
+			<!-- 保留mybatics的映射文件 -->
 			<resource>
 				<directory>src/main/java</directory>
 				<includes>
@@ -116,7 +117,8 @@
 				<filtering>true</filtering>
 				<excludes>
 					<exclude>chat_room.sql</exclude>
-					<!-- <exclude>applicationContext.xml</exclude> <exclude>mybatis-config.xml</exclude> -->
+					<exclude>applicationContext.xml</exclude>
+					<exclude>mybatis-config.xml</exclude>
 				</excludes>
 			</resource>
 		</resources>
@@ -125,7 +127,28 @@
 				<artifactId>maven-resources-plugin</artifactId>
 				<executions>
 					<execution>
-						<id>copy-resources</id>
+						<id>copy-config</id>
+						<phase>validate</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/config</outputDirectory>
+							<resources>
+								<resource>
+									<directory>src/main/resources</directory>
+									<filtering>true</filtering>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
+				<artifactId>maven-resources-plugin</artifactId>
+				<executions>
+					<execution>
+						<id>copy-groovy-script</id>
 						<phase>validate</phase>
 						<goals>
 							<goal>copy-resources</goal>
