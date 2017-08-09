@@ -1,5 +1,14 @@
 package com.kingston.net.transport;
 
+import java.io.IOException;
+import java.net.InetSocketAddress;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.kingston.net.codec.PacketDecoder;
+import com.kingston.net.codec.PacketEncoder;
+
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelInitializer;
@@ -12,22 +21,16 @@ import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
 
-import java.io.IOException;
-import java.net.InetSocketAddress;
-
-import com.kingston.net.codec.PacketDecoder;
-import com.kingston.net.codec.PacketEncoder;
-
 public class ChatServer {
+	
+	private Logger logger = LoggerFactory.getLogger(ChatServer.class);
 
 	//避免使用默认线程数参数
 	private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 	private	EventLoopGroup workerGroup = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
 
 	public void bind(int port) throws IOException {
-
-
-		System.err.println("服务端已启动，正在监听用户的请求......");
+		logger.info("服务端已启动，正在监听用户的请求......");
 		try{
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup,workerGroup)
@@ -60,7 +63,6 @@ public class ChatServer {
 	}
 
 	private class ChildChannelHandler extends ChannelInitializer<SocketChannel>{
-
 		@Override
 		protected void initChannel(SocketChannel arg0) throws Exception {
 			ChannelPipeline pipeline = arg0.pipeline();

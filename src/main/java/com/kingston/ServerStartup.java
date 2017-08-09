@@ -1,15 +1,12 @@
 package com.kingston;
 
-import java.io.IOException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.kingston.logs.LoggerUtils;
+import com.kingston.http.HttpServer;
 import com.kingston.net.transport.ChatServer;
-import com.kingston.net.transport.ServerConfigs;
 
 public class ServerStartup {
 
@@ -17,7 +14,10 @@ public class ServerStartup {
 
 	private static ConfigurableApplicationContext context;
 
+	private static HttpServer httpServer = new HttpServer();
+
 	public static void main(String[] args) throws Exception {
+
 		final ServerStartup server = new ServerStartup();
 		server.start();
 
@@ -30,19 +30,12 @@ public class ServerStartup {
 
 	}
 
-	public void start() {
+	public void start() throws Exception {
 		context = new FileSystemXmlApplicationContext("config/applicationContext.xml");
-
-		startNetServer();
+		httpServer.start(ServerConfigs.HTTP_PORT);
+		new ChatServer().bind(ServerConfigs.REMOTE_SERVER_PORT);
 	}
 
-	private void startNetServer() {
-		try {
-			new ChatServer().bind(ServerConfigs.REMOTE_SERVER_PORT);
-		} catch (IOException e) {
-			LoggerUtils.error("startNetServer failed", e);
-		}
-	}
 
 	public void stop() {
 		context.close();

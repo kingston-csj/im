@@ -1,10 +1,10 @@
 package com.kingston.data.dao;
 
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 
 import com.kingston.data.model.User;
 
-@Component
+@Repository
 public interface UserDao {
 
 	public User findById(Long id);

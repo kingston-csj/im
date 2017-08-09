@@ -13,7 +13,6 @@
 		http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
-		http://grails.org/schema/gorm http://grails.org/schema/gorm/gorm.xsd
 		">
 
 	<bean id="dataSource"
@@ -32,6 +31,11 @@
 			value="classpath:com/kingston/data/mybatis/*Mapper.xml" />
 	</bean>
 	
+	<!-- 自动扫描所有dao并注入到spring容器 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="com.kingston.data.dao" />
+	</bean>
+	
 	<!-- groovy热部署插件 -->
  	<bean class="com.kingston.groovy.GroovyFactory">
  	 	<property name="scriptRoot" value="groovy"/>
@@ -47,11 +51,6 @@
 
 	<!-- 自动扫描该包下所有组件 -->
 	<context:component-scan base-package="com.kingston" />
-
-	<!-- 自动扫描所有dao并注入到spring容器 -->
-	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.kingston.data.dao" />
-	</bean>
 
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

@@ -7,11 +7,12 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.kingston.ServerConfigs;
 import com.kingston.base.ServerManager;
 import com.kingston.base.SpringContext;
 import com.kingston.logic.login.LoginService;
-import com.kingston.logic.login.message.RespHeartBeatPacket;
 import com.kingston.logic.login.message.ReqUserLoginPacket;
+import com.kingston.logic.login.message.RespHeartBeatPacket;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
@@ -44,10 +45,10 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 	public void channelRead(ChannelHandlerContext context,Object msg)
 			throws Exception{
 		AbstractPacket  packet = (AbstractPacket)msg;
-		System.err.println("receive pact, content is " + packet.getClass().getSimpleName());
+		logger.info("receive pact, content is {}", packet.getClass().getSimpleName());
+		
 		if(packet.getPacketType() == PacketType.ReqUserLogin ){
 			ReqUserLoginPacket loginPact = (ReqUserLoginPacket)packet;
-			
 			LoginService loginMgr = SpringContext.getBean(LoginService.class);
 			loginMgr.validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
 			return ;
@@ -67,28 +68,24 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 
 	@Override
 	public void close(ChannelHandlerContext ctx,ChannelPromise promise){
-		System.err.println("TCP closed...");
+		logger.error("TCP closed...");
 		ctx.close(promise);
 	}
 
-	@Override
-	public void channelInactive(ChannelHandlerContext ctx) throws Exception {
-		System.err.println("客户端关闭1");
-	}
 
 	@Override
 	public void disconnect(ChannelHandlerContext ctx, ChannelPromise promise) throws Exception {
 		ctx.disconnect(promise);
-		System.err.println("客户端关闭2");
+		logger.error("客户端关闭");
 	}
 
 	@Override
 	public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) throws Exception {
-		System.err.println("业务逻辑出错");
+		logger.error("业务逻辑出错", cause);
 		cause.printStackTrace();
 		Channel channel = ctx.channel();
 		if(cause instanceof  IOException && channel.isActive()){
-			System.err.println("simpleclient"+channel.remoteAddress()+"异常");
+			logger.error("simpleclient"+channel.remoteAddress()+"异常");
 			ctx.close();
 		}
 	}
@@ -100,7 +97,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 		if (evt instanceof IdleStateEvent) {
 			IdleStateEvent e = (IdleStateEvent) evt;
 			if (e.state() == IdleState.READER_IDLE) {
-				System.err.println("客户端读超时");
+				logger.info("客户端读超时");
 				int overtimeTimes = clientOvertimeMap.getOrDefault(ctx, 0);
 				if(overtimeTimes < ServerConfigs.MAX_RECONNECT_TIMES){
 					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new RespHeartBeatPacket());
