@@ -1,8 +1,36 @@
 # chat_server
-  ## 聊天室服务端
-  该工程使用Netty作为通信网关，spring作为IOC容器，MyBatics作为持久化方案，搭建一个类QQ的网络聊天室。  
+  ## 类QQ聊天室服务端
 
-  使用Maven管理依赖以及构建打包。运行根目录下的start.bat即可自动打包并运行（请预先配置好maven的环境变量）
+  ### 主要使用的第三方技术  
+  *  Netty，通信网关  
+  *  spring，作为IOC容器  
+  *  MyBatics，作为持久化方案  
+
+  ### 功能列表  
+  *  用户登录  
+  *  Groovy业务代码热部署  
+  *  用户请求消息的处理与响应  
+  *  通过http后台请求管理服务进程  
+  *  用户数据的持久化  
+  *  日志系统
+
+  ### ToDoList  
+  *  加入事件驱动机制  
+  *  新用户注册  
+  *  处理用户消息的线程模型  
+  *  异步处理用户数据的持久化       
+
+  ### QuickStart  
+  1. 安装git后，使用命令 git clone https://github.com/kingston-csj/chat_server  
+  2. 新建数据库chat_room  
+  3. 安装配置maven环境变量，运行根目录下start.bat脚本
+  4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/chat_client  
+  5. 启动ClientStartup类    
 
 
   栏目教程请移步：--> [csdn博客](http://blog.csdn.net/column/details/16455.html)
+  
+  欢迎star/fork，欢迎学习/使用，期待一起贡献代码！！
+
+  ## 欢迎交流讨论
+  QQ：641711541
