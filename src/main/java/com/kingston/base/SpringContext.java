@@ -10,10 +10,13 @@ import org.springframework.context.ApplicationContextAware;
 
 import com.kingston.asyncdb.AysncDbService;
 import com.kingston.logic.chat.ChatService;
+import com.kingston.logic.user.UserService;
 
 public class SpringContext implements ApplicationContextAware {
 	/** spring容器上下文 */
 	private static ApplicationContext applicationContext = null;
+	
+	private static UserService userService;
 	/** 异步持久化服务 */
 	private static AysncDbService aysncDbService;
 	
@@ -36,6 +39,15 @@ public class SpringContext implements ApplicationContextAware {
 		return applicationContext.getBean(name, requiredType);
 	}
 
+	@Resource
+	public void setUserService(UserService userService) {
+		SpringContext.userService = userService;
+	}
+	
+	public final static UserService getUserService() {
+		return userService;
+	}
+	
 	@Resource
 	public void setAysncDbService(AysncDbService aysncDbService) {
 		SpringContext.aysncDbService = aysncDbService;

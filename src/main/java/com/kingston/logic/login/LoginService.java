@@ -10,7 +10,7 @@ import com.kingston.logic.login.message.RespUserLoginPacket;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
 
-import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.Channel;
 
 @Component
 public class LoginService {
@@ -18,9 +18,9 @@ public class LoginService {
 	@Autowired
 	private UserDao userDao;
 	
-	public void validateLogin(ChannelHandlerContext context, long userId, String password) {
+	public void validateLogin(Channel channel, long userId, String password) {
 		User user = validate(userId, password);
-		IoSession session = ChannelUtils.getSessionBy(context.channel());
+		IoSession session = ChannelUtils.getSessionBy(channel);
 		RespUserLoginPacket resp = new RespUserLoginPacket();
 		if(user != null) {
 			resp.setIsValid((byte)1);

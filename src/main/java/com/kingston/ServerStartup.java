@@ -6,6 +6,7 @@ import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
 import com.kingston.http.HttpServer;
+import com.kingston.net.message.PacketType;
 import com.kingston.net.transport.ChatServer;
 
 public class ServerStartup {
@@ -31,6 +32,7 @@ public class ServerStartup {
 	}
 
 	public void start() throws Exception {
+		PacketType.initPackets();
 		context = new FileSystemXmlApplicationContext("config/applicationContext.xml");
 		httpServer.start(ServerConfigs.HTTP_PORT);
 		new ChatServer().bind(ServerConfigs.REMOTE_SERVER_PORT);

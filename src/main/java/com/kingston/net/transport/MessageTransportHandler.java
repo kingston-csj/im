@@ -13,6 +13,8 @@ import com.kingston.base.SpringContext;
 import com.kingston.logic.login.LoginService;
 import com.kingston.logic.login.message.ReqUserLoginPacket;
 import com.kingston.logic.login.message.RespHeartBeatPacket;
+import com.kingston.logic.user.UserService;
+import com.kingston.logic.user.message.ReqUserRegisterPacket;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
@@ -46,11 +48,17 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 			throws Exception{
 		AbstractPacket  packet = (AbstractPacket)msg;
 		logger.info("receive pact, content is {}", packet.getClass().getSimpleName());
-		
-		if(packet.getPacketType() == PacketType.ReqUserLogin ){
+
+		final Channel channel = context.channel();
+		if (packet.getPacketType() == PacketType.ReqUserRegister) {
+			ReqUserRegisterPacket registerPact = (ReqUserRegisterPacket)packet;
+			UserService userService = SpringContext.getUserService();
+			userService.registerNewAccount(channel, registerPact.getUserId(), registerPact.getNickName());
+			return;
+		}else if (packet.getPacketType() == PacketType.ReqUserLogin) {
 			ReqUserLoginPacket loginPact = (ReqUserLoginPacket)packet;
 			LoginService loginMgr = SpringContext.getBean(LoginService.class);
-			loginMgr.validateLogin(context,loginPact.getUserId(), loginPact.getUserPwd());
+			loginMgr.validateLogin(channel,loginPact.getUserId(), loginPact.getUserPwd());
 			return ;
 		}
 		

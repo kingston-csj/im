@@ -7,7 +7,7 @@
   *  MyBatics，作为持久化方案  
 
   ### 功能列表  
-  *  用户登录  
+  *  用户注册/登录  
   *  Groovy业务代码热部署  
   *  用户请求消息的处理与响应  
   *  通过http后台请求管理服务进程  
@@ -16,13 +16,13 @@
 
   ### ToDoList  
   *  加入事件驱动机制  
-  *  新用户注册  
+  *  客户端注册/登录界面  
   *  处理用户消息的线程模型  
   *  异步处理用户数据的持久化       
 
   ### QuickStart  
   1. 安装git后，使用命令 git clone https://github.com/kingston-csj/chat_server  
-  2. 新建数据库chat_room  
+  2. 新建数据库chat_room，导入根目录下的chat_room.sql   
   3. 安装配置maven环境变量，运行根目录下start.bat脚本
   4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/chat_client  
   5. 启动ClientStartup类    
