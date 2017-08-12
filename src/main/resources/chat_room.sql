@@ -22,11 +22,8 @@ DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `userId` bigint(20) NOT NULL,
   `userName` varchar(128) DEFAULT NULL,
-  `authentication` varchar(255) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
   PRIMARY KEY (`userId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
--- ----------------------------
--- Records of user
--- ----------------------------
-INSERT INTO `user` VALUES ('1', 'kingston', 'world');
+

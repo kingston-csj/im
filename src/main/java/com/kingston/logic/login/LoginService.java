@@ -1,5 +1,6 @@
 package com.kingston.logic.login;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,9 +38,12 @@ public class LoginService {
 	 *  验证帐号密码是否一致
 	 */
 	private User validate(long userId, String password){
+		if (userId <= 0 || StringUtils.isEmpty(password)) {
+			return null;
+		}
 		User user = userDao.findById(userId);
 		if (user != null &&
-			user.getAuthentication().equals(password)) {
+			user.getPassword().equals(password)) {
 			return user;
 		}
 		

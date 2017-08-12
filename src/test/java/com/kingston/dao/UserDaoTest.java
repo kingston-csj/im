@@ -25,7 +25,7 @@ public class UserDaoTest extends BaseTestCase {
 		User user = new User();
 		user.setUserId(2);
 		user.setUserName("Tom");
-		user.setAuthentication("sdf");
+		user.setPassword("sdf");
 		userDao.addUser(user);
 
 	}

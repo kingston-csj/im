@@ -3,9 +3,9 @@ package com.kingston.data.model;
 public class User {
 	private long userId;
 	/** 用户名字 */
-	private String  userName;
+	private String userName;
 	/** 密码 */
-	private String  authentication;
+	private String password;
 	
 	public long getUserId() {
 		return userId;
@@ -19,11 +19,11 @@ public class User {
 	public void setUserName(String userName) {
 		this.userName = userName;
 	}
-	public String getAuthentication() {
-		return authentication;
+	public String getPassword() {
+		return password;
 	}
-	public void setAuthentication(String password) {
-		this.authentication = password;
+	public void setPassword(String password) {
+		this.password = password;
 	}
 	
 }
