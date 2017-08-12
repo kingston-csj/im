@@ -53,7 +53,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 		if (packet.getPacketType() == PacketType.ReqUserRegister) {
 			ReqUserRegisterPacket registerPact = (ReqUserRegisterPacket)packet;
 			UserService userService = SpringContext.getUserService();
-			userService.registerNewAccount(channel, registerPact.getUserId(), registerPact.getNickName());
+			userService.registerNewAccount(channel, registerPact.getSex(), registerPact.getNickName(), registerPact.getPassword());
 			return;
 		}else if (packet.getPacketType() == PacketType.ReqUserLogin) {
 			ReqUserLoginPacket loginPact = (ReqUserLoginPacket)packet;

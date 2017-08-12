@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import com.kingston.asyncdb.AysncDbService;
 import com.kingston.logic.chat.ChatService;
 import com.kingston.logic.user.UserService;
+import com.kingston.logic.util.IdService;
 
 public class SpringContext implements ApplicationContextAware {
 	/** spring容器上下文 */
@@ -21,6 +22,8 @@ public class SpringContext implements ApplicationContextAware {
 	private static AysncDbService aysncDbService;
 	
 	private static ChatService chatService;
+	
+	private static IdService idService;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -46,6 +49,15 @@ public class SpringContext implements ApplicationContextAware {
 	
 	public final static UserService getUserService() {
 		return userService;
+	}
+	
+	@Resource
+	public void setIdService(IdService idService) {
+		this.idService = idService;
+	}
+	
+	public final static IdService getIdService() {
+		return idService;
 	}
 	
 	@Resource

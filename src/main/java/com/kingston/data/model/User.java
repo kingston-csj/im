@@ -1,7 +1,13 @@
 package com.kingston.data.model;
 
+import com.kingston.logic.GlobalConst;
+
 public class User {
+	
+	
 	private long userId;
+	/** 性别{@link GlobalConst#sex_of_boy} */
+	private byte sex;
 	/** 用户名字 */
 	private String userName;
 	/** 密码 */
@@ -25,5 +31,16 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
+	public byte getSex() {
+		return sex;
+	}
+	public void setSex(byte sex) {
+		this.sex = sex;
+	}
+	public void setUserId(long userId) {
+		this.userId = userId;
+	}
+	
+	
 	
 }

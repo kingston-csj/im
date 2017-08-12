@@ -7,14 +7,23 @@
 		resultType="user">
 		select * from user where userId=#{userId}
 	</select>
+	<select id="getMaxId" resultType="java.lang.Integer">
+		select max(userid) from user
+	</select>
+	<select id="findByName" parameterType="java.lang.String"
+		resultType="user">
+		select * from user where username=#{nickName}
+	</select>
 	<insert id="addUser" parameterType="user">
-		insert into user(userId,userName,authentication) 
-			values(#{userId},#{userName},#{authentication})
+		insert into user(userId,sex,userName,password) 
+			values(#{userId},#{sex},#{userName},#{password})
 	</insert>
 	<update id="updateUser" parameterType="user">
 		update user
 		set
 		userName=#{userName}
+		sex=#{sex}
+		password=#{password}
 		where userId=#{userId}
 	</update>
 	<delete id="delUser" parameterType="java.lang.Long">

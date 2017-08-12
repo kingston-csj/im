@@ -6,8 +6,12 @@ import com.kingston.data.model.User;
 
 @Repository
 public interface UserDao {
+	
+	public int getMaxId();
 
 	public User findById(Long id);
+	
+	public User findByName(String nickName);
 	
 	public void addUser(User user);
 	
