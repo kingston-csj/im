@@ -7,6 +7,7 @@ import java.util.Set;
 
 import com.kingston.logic.chat.message.ReqChatPacket;
 import com.kingston.logic.chat.message.RespChatPacket;
+import com.kingston.logic.friend.message.RespFriendListPacket;
 import com.kingston.logic.login.message.ReqHeartBeatPacket;
 import com.kingston.logic.login.message.ReqUserLoginPacket;
 import com.kingston.logic.login.message.RespHeartBeatPacket;
@@ -33,13 +34,15 @@ public enum PacketType {
 
 
 	RespHeartBeat((short)0x2001, RespHeartBeatPacket.class),
-	
+
 	//新用户注册
 	ResUserRegister((short)0x2100, ResUserRegisterPacket.class),
 
 	RespLogin((short)0x2102, RespUserLoginPacket.class),
 
 	RespChat((short)0x2103, RespChatPacket.class),
+	/** 好友列表 */
+	RespFriendList((short)0x2104, RespFriendListPacket.class);
 
 	;
 

@@ -28,14 +28,14 @@ public class ResUserRegisterPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void writePacketBody(ByteBuf buf) {
+	public void writeBody(ByteBuf buf) {
 		buf.writeByte(resultCode);
 		writeUTF8(buf, message);
 		
 	}
 
 	@Override
-	public void readPacketBody(ByteBuf buf) {
+	public void readBody(ByteBuf buf) {
 		this.resultCode = buf.readByte();
 		this.message = readUTF8(buf);
 		

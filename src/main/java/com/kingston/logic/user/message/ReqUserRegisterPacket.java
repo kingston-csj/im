@@ -40,14 +40,14 @@ public class ReqUserRegisterPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void writePacketBody(ByteBuf buf) {
+	public void writeBody(ByteBuf buf) {
 		buf.writeByte(sex);
 		writeUTF8(buf, nickName);
 		writeUTF8(buf, password);
 	}
 
 	@Override
-	public void readPacketBody(ByteBuf buf) {
+	public void readBody(ByteBuf buf) {
 		this.sex = buf.readByte();
 		this.nickName = readUTF8(buf);
 		this.password = readUTF8(buf);

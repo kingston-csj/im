@@ -8,13 +8,13 @@ import io.netty.buffer.ByteBuf;
 public class RespChatPacket extends AbstractPacket {
 
 	@Override
-	public void writePacketBody(ByteBuf buf) {
+	public void writeBody(ByteBuf buf) {
 		// TODO Auto-generated method stub
 		
 	}
 
 	@Override
-	public void readPacketBody(ByteBuf buf) {
+	public void readBody(ByteBuf buf) {
 		// TODO Auto-generated method stub
 		
 	}

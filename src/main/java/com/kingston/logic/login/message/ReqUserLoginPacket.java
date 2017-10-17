@@ -1,25 +1,23 @@
 package com.kingston.logic.login.message;
 
+import io.netty.buffer.ByteBuf;
+
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
-import io.netty.buffer.ByteBuf;
-
 public class ReqUserLoginPacket extends AbstractPacket {
 
-	private byte reqType;
 	private long userId;
-	private String userName;
-	private String userPwd; 
+	private String userPwd;
 
 	@Override
-	public void writePacketBody(ByteBuf buf) {
+	public void writeBody(ByteBuf buf) {
 		buf.writeLong(userId);
 		writeUTF8(buf, userPwd);
 	}
 
 	@Override
-	public void readPacketBody(ByteBuf buf) {
+	public void readBody(ByteBuf buf) {
 		this.userId = buf.readLong();
 		this.userPwd =readUTF8(buf);
 
@@ -34,15 +32,7 @@ public class ReqUserLoginPacket extends AbstractPacket {
 	@Override
 	public void execPacket() {
 
-		
-	}
 
-	public String getUserName() {
-		return userName;
-	}
-
-	public void setUserName(String userName) {
-		this.userName = userName;
 	}
 
 	public String getUserPwd() {
@@ -59,19 +49,6 @@ public class ReqUserLoginPacket extends AbstractPacket {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
-	}
-
-	public byte getReqType() {
-		return reqType;
-	}
-
-	public void setReqType(byte reqType) {
-		this.reqType = reqType;
-	}
-
-	@Override
-	public String toString() {
-		return "ServerLogin [reqType=" + reqType + ", userId=" + userId + ", userName=" + userName + "]";
 	}
 
 }

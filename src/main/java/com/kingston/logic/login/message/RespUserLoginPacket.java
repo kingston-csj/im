@@ -11,13 +11,13 @@ public class RespUserLoginPacket extends AbstractPacket{
 	private byte isValid;
 	
 	@Override
-	public void writePacketBody(ByteBuf buf) {
+	public void writeBody(ByteBuf buf) {
 		writeUTF8(buf, alertMsg);
 		buf.writeByte(isValid);
 	}
 
 	@Override
-	public void readPacketBody(ByteBuf buf) {
+	public void readBody(ByteBuf buf) {
 		this.alertMsg = readUTF8(buf);
 		this.isValid = buf.readByte();
 	}

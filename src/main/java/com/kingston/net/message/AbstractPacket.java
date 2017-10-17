@@ -1,18 +1,10 @@
 package com.kingston.net.message;
 
-import io.netty.buffer.ByteBuf;
-
-import java.io.UnsupportedEncodingException;
-
 /**
  * 抽象消息定义
  * @author chenshujin
  */
-public abstract  class AbstractPacket {
-
-	abstract public void writePacketBody(ByteBuf buf);
-
-	abstract public void readPacketBody(ByteBuf buf);
+public abstract class AbstractPacket extends ByteBufBean {
 
 	abstract public PacketType getPacketType();
 
@@ -20,30 +12,6 @@ public abstract  class AbstractPacket {
 	 * 业务处理
 	 */
 	abstract public void execPacket();
-
-	protected  String readUTF8(ByteBuf buf){
-		int strSize = buf.readInt();
-		byte[] content = new byte[strSize];
-		buf.readBytes(content);
-		try {
-			return new String(content,"UTF-8");
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-			return "";
-		}
-
-	}
-
-	protected  void writeUTF8(ByteBuf buf,String msg){
-		byte[] content ;
-		try {
-			content = msg.getBytes("UTF-8");
-			buf.writeInt(content.length);
-			buf.writeBytes(content);
-		} catch (UnsupportedEncodingException e) {
-			e.printStackTrace();
-		}
-	}
 
 	/**
 	 *  是否开启gzip压缩(默认关闭)
