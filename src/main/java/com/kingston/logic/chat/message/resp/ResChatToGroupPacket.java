@@ -6,7 +6,7 @@ import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResChatToUserPacket extends AbstractPacket {
+public class ResChatToGroupPacket extends AbstractPacket {
 	
 	private String content;
 

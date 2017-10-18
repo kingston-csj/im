@@ -1,11 +1,12 @@
 package com.kingston.logic.login.message;
 
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class RespHeartBeatPacket extends AbstractPacket{
+public class ResHeartBeatPacket extends AbstractPacket{
 
 	@Override
 	public void writeBody(ByteBuf buf) {
@@ -25,7 +26,7 @@ public class RespHeartBeatPacket extends AbstractPacket{
 	}
 
 	@Override
-	public void execPacket() {
+	public void execPacket(IoSession session) {
 		
 	}
 

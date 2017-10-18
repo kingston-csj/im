@@ -1,5 +1,6 @@
 package com.kingston.logic.login.message;
 
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
@@ -22,7 +23,7 @@ public class ReqHeartBeatPacket extends AbstractPacket{
 	}
 
 	@Override
-	public void execPacket() {
+	public void execPacket(IoSession session) {
 		System.err.println("收到客户端的pong响应");  
 	}
 

@@ -12,7 +12,7 @@ import com.kingston.base.ServerManager;
 import com.kingston.base.SpringContext;
 import com.kingston.logic.login.LoginService;
 import com.kingston.logic.login.message.ReqUserLoginPacket;
-import com.kingston.logic.login.message.RespHeartBeatPacket;
+import com.kingston.logic.login.message.ResHeartBeatPacket;
 import com.kingston.logic.user.UserService;
 import com.kingston.logic.user.message.ReqUserRegisterPacket;
 import com.kingston.net.ChannelUtils;
@@ -50,6 +50,8 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 		logger.info("receive pact, content is {}", packet.getClass().getSimpleName());
 
 		final Channel channel = context.channel();
+		IoSession session = ChannelUtils.getSessionBy(channel);
+		
 		if (packet.getPacketType() == PacketType.ReqUserRegister) {
 			ReqUserRegisterPacket registerPact = (ReqUserRegisterPacket)packet;
 			UserService userService = SpringContext.getUserService();
@@ -63,7 +65,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 		}
 		
 		if(validateSession(packet)){
-			PacketManager.INSTANCE.execPacket(packet);
+			PacketManager.INSTANCE.execPacket(session, packet);
 		}
 
 		clientOvertimeMap.remove(context);//只要接受到数据包，则清空超时次数
@@ -108,7 +110,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 				logger.info("客户端读超时");
 				int overtimeTimes = clientOvertimeMap.getOrDefault(ctx, 0);
 				if(overtimeTimes < ServerConfigs.MAX_RECONNECT_TIMES){
-					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new RespHeartBeatPacket());
+					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new ResHeartBeatPacket());
 					addUserOvertime(ctx);
 				}else{
 					ServerManager.INSTANCE.ungisterUserContext(ctx.channel());

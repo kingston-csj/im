@@ -2,6 +2,7 @@ package com.kingston.logic.login.message;
 
 import io.netty.buffer.ByteBuf;
 
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
@@ -30,8 +31,7 @@ public class ReqUserLoginPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void execPacket() {
-
+	public void execPacket(IoSession session) {
 
 	}
 

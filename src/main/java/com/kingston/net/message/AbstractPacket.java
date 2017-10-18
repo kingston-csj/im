@@ -1,5 +1,7 @@
 package com.kingston.net.message;
 
+import com.kingston.net.IoSession;
+
 /**
  * 抽象消息定义
  * @author chenshujin
@@ -11,7 +13,7 @@ public abstract class AbstractPacket extends ByteBufBean {
 	/**
 	 * 业务处理
 	 */
-	abstract public void execPacket();
+	abstract public void execPacket(IoSession session);
 
 	/**
 	 *  是否开启gzip压缩(默认关闭)

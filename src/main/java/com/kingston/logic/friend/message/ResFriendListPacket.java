@@ -3,18 +3,19 @@ package com.kingston.logic.friend.message;
 import java.util.List;
 
 import com.kingston.logic.friend.vo.FriendItemVo;
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class RespFriendListPacket extends AbstractPacket {
+public class ResFriendListPacket extends AbstractPacket {
 
 	private List<FriendItemVo> friends;
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.RespFriendList;
+		return PacketType.ResFriendList;
 	}
 
 	public List<FriendItemVo> getFriends() {
@@ -26,7 +27,7 @@ public class RespFriendListPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void execPacket() {
+	public void execPacket(IoSession session) {
 		// TODO Auto-generated method stub
 
 	}

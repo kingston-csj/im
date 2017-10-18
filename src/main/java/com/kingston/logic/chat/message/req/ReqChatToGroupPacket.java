@@ -1,6 +1,7 @@
 package com.kingston.logic.chat.message.req;
 
 import com.kingston.base.SpringContext;
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
@@ -47,9 +48,8 @@ public class ReqChatToGroupPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void execPacket() {
-		SpringContext.getChatService().chat(0, 0, "");
+	public void execPacket(IoSession session) {
+		SpringContext.getChatService().chat(session, toUserId, content);
 	}
-	
 
 }

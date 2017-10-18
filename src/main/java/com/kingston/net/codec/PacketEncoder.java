@@ -28,7 +28,7 @@ public class PacketEncoder extends MessageToByteEncoder<AbstractPacket> {
 	}
 
 	private void _encode(ChannelHandlerContext ctx, AbstractPacket msg, ByteBuf out) throws Exception {
-		out.writeShort(msg.getPacketType().getType());	//消息头
+		out.writeInt(msg.getPacketType().getType());	//消息头
 		//消息体
 		if(msg.isUseCompression()){  //开启gzip压缩
 			ByteBuf buf =  Unpooled.buffer();

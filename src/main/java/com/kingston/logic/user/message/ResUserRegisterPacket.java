@@ -1,5 +1,6 @@
 package com.kingston.logic.user.message;
 
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
@@ -47,9 +48,8 @@ public class ResUserRegisterPacket extends AbstractPacket {
 	}
 
 	@Override
-	public void execPacket() {
+	public void execPacket(IoSession session) {
 		// TODO Auto-generated method stub
-		
 	}
 
 	@Override

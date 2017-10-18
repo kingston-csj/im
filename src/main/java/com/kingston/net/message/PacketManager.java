@@ -3,15 +3,21 @@ package com.kingston.net.message;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 
+import com.kingston.net.IoSession;
+
 public enum PacketManager {
 
 	INSTANCE;
 	
-	public  void execPacket(AbstractPacket pact){
+	public void execPacket(IoSession session, AbstractPacket pact){
 		if(pact == null) return;
 		try {
 			Method m = pact.getClass().getMethod("execPacket");
-			m.invoke(pact, null);
+			if (m.getParameterCount() == 0) {
+				m.invoke(pact, null);
+			} else {
+				m.invoke(pact, session);
+			}
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -23,7 +29,7 @@ public enum PacketManager {
 		}
 	}
 	
-	public  AbstractPacket createNewPacket(short packetType){
+	public  AbstractPacket createNewPacket(int packetType){
 		Class<? extends AbstractPacket> packetClass = PacketType.getPacketClassBy(packetType);
 		if(packetClass == null){
 			throw new IllegalPacketException("类型为"+packetType+"的包定义不存在");

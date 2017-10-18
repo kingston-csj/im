@@ -1,11 +1,12 @@
 package com.kingston.logic.login.message;
 
+import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class RespUserLoginPacket extends AbstractPacket{
+public class ResUserLoginPacket extends AbstractPacket{
 
 	private String alertMsg;
 	private byte isValid;
@@ -24,11 +25,11 @@ public class RespUserLoginPacket extends AbstractPacket{
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.RespLogin;
+		return PacketType.ResUserLogin;
 	}
 
 	@Override
-	public void execPacket() {
+	public void execPacket(IoSession session) {
 		// TODO Auto-generated method stub
 		
 	}

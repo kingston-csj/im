@@ -24,7 +24,7 @@ public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 		ByteBuf frame = (ByteBuf) super.decode(ctx, in);
 		if(frame.readableBytes() <= 0) return null ;
 
-		short packetType = frame.readShort();
+		int packetType = frame.readInt();
 		AbstractPacket packet = PacketManager.INSTANCE.createNewPacket(packetType);
 		boolean useCompression = packet.isUseCompression();
 		ByteBuf realBuf = decompression(frame,useCompression);
