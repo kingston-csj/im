@@ -106,15 +106,16 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 		//心跳包检测读超时
 		if (evt instanceof IdleStateEvent) {
 			IdleStateEvent e = (IdleStateEvent) evt;
-			if (e.state() == IdleState.READER_IDLE) {
+			if (e.state() == IdleState.ALL_IDLE) {
 				logger.info("客户端读超时");
-				int overtimeTimes = clientOvertimeMap.getOrDefault(ctx, 0);
-				if(overtimeTimes < ServerConfigs.MAX_RECONNECT_TIMES){
-					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new ResHeartBeatPacket());
-					addUserOvertime(ctx);
-				}else{
-					ServerManager.INSTANCE.ungisterUserContext(ctx.channel());
-				}
+//				int overtimeTimes = clientOvertimeMap.getOrDefault(ctx, 0);
+//				if(overtimeTimes < ServerConfigs.MAX_RECONNECT_TIMES){
+//					ServerManager.INSTANCE.sendPacketTo(ctx.channel(), new ResHeartBeatPacket());
+//					addUserOvertime(ctx);
+//				}else{
+//					ServerManager.INSTANCE.ungisterUserContext(ctx.channel());
+//				}
+				ServerManager.INSTANCE.ungisterUserContext(ctx.channel());
 			} 
 		}
 	}

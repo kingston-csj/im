@@ -69,8 +69,8 @@ public class ChatServer {
 			pipeline.addLast(new PacketDecoder(1024*4,0,4,0,4));
 			pipeline.addLast(new LengthFieldPrepender(4));
 			pipeline.addLast(new PacketEncoder());
-			//当有操作操作超出指定空闲秒数时，便会触发UserEventTriggered事件
-			pipeline.addLast("idleStateHandler", new IdleStateHandler(10, 0, 0));
+			//客户端300秒没收发包，便会触发UserEventTriggered事件到MessageTransportHandler
+			pipeline.addLast("idleStateHandler", new IdleStateHandler(0, 0, 300));
 			pipeline.addLast(new MessageTransportHandler());
 		}
 	}
