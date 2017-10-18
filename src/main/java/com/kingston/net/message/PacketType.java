@@ -5,8 +5,9 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.kingston.logic.chat.message.ReqChatPacket;
-import com.kingston.logic.chat.message.RespChatPacket;
+import com.kingston.logic.chat.message.req.ReqChatToGroupPacket;
+import com.kingston.logic.chat.message.req.ReqChatToUserPacket;
+import com.kingston.logic.chat.message.resp.ResChatToUserPacket;
 import com.kingston.logic.friend.message.RespFriendListPacket;
 import com.kingston.logic.login.message.ReqHeartBeatPacket;
 import com.kingston.logic.login.message.ReqUserLoginPacket;
@@ -27,7 +28,9 @@ public enum PacketType {
 	//用户登陆
 	ReqUserLogin((short)0x0101, ReqUserLoginPacket.class),
 	//聊天
-	ReqChat((short)0x0102, ReqChatPacket.class),
+	ReqChatToUser((short)0x0102, ReqChatToUserPacket.class),
+	
+	ReqChatToGroup((short)0x0103, ReqChatToGroupPacket.class),
 
 
 	//业务下行数据包
@@ -39,10 +42,13 @@ public enum PacketType {
 	ResUserRegister((short)0x2100, ResUserRegisterPacket.class),
 
 	RespLogin((short)0x2102, RespUserLoginPacket.class),
-
-	RespChat((short)0x2103, RespChatPacket.class),
+	
 	/** 好友列表 */
-	RespFriendList((short)0x2104, RespFriendListPacket.class);
+	RespFriendList((short)0x2150, RespFriendListPacket.class),
+	/** 单聊 */
+	RespChatToUser((short)0x2200, ResChatToUserPacket.class),
+	/** 群聊 */
+	ResChatToGroup((short)0x2201, ReqChatToGroupPacket.class),
 
 	;
 

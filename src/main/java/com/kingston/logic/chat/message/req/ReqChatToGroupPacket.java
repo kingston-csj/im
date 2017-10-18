@@ -1,4 +1,4 @@
-package com.kingston.logic.chat.message;
+package com.kingston.logic.chat.message.req;
 
 import com.kingston.base.SpringContext;
 import com.kingston.net.message.AbstractPacket;
@@ -6,7 +6,7 @@ import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ReqChatPacket extends AbstractPacket {
+public class ReqChatToGroupPacket extends AbstractPacket {
 	
 	private long toUserId;
 	
@@ -43,14 +43,12 @@ public class ReqChatPacket extends AbstractPacket {
 
 	@Override
 	public PacketType getPacketType() {
-		// TODO Auto-generated method stub
-		return null;
+		return PacketType.ReqChatToGroup;
 	}
 
 	@Override
 	public void execPacket() {
 		SpringContext.getChatService().chat(0, 0, "");
-		
 	}
 	
 

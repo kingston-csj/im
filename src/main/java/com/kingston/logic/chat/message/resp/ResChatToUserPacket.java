@@ -1,11 +1,13 @@
-package com.kingston.logic.chat.message;
+package com.kingston.logic.chat.message.resp;
 
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class RespChatPacket extends AbstractPacket {
+public class ResChatToUserPacket extends AbstractPacket {
+	
+	private String content;
 
 	@Override
 	public void writeBody(ByteBuf buf) {
@@ -21,8 +23,7 @@ public class RespChatPacket extends AbstractPacket {
 
 	@Override
 	public PacketType getPacketType() {
-		// TODO Auto-generated method stub
-		return null;
+		return PacketType.ResChatToUser;
 	}
 
 	@Override
@@ -30,5 +31,15 @@ public class RespChatPacket extends AbstractPacket {
 		// TODO Auto-generated method stub
 		
 	}
+
+	public String getContent() {
+		return content;
+	}
+
+	public void setContent(String content) {
+		this.content = content;
+	}
+	
+	
 
 }

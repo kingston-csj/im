@@ -60,9 +60,6 @@ public enum ServerManager {
 		userId2Sessions.values().forEach( (session) -> session.sendPacket(pact));
 	}
 
-	
-
-
 	public IoSession getSessionBy(long userId) {
 		return this.userId2Sessions.get(userId);
 	}
