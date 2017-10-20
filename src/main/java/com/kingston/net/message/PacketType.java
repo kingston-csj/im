@@ -15,6 +15,7 @@ import com.kingston.logic.login.message.ReqUserLoginPacket;
 import com.kingston.logic.login.message.ResUserLoginPacket;
 import com.kingston.logic.login.message.ResHeartBeatPacket;
 import com.kingston.logic.user.message.ReqUserRegisterPacket;
+import com.kingston.logic.user.message.ResUserInfoMessage;
 import com.kingston.logic.user.message.ResUserRegisterPacket;
 
 public enum PacketType {
@@ -40,10 +41,12 @@ public enum PacketType {
 	/** 请求--请求--用户登陆  */
 	ReqUserLogin(3_001, ReqUserLoginPacket.class),
 
-	/** 请求--新用户注册  */
+	/** 推送--新用户注册  */
 	ResUserRegister(3_200, ResUserRegisterPacket.class),
     /** 推送--用户登录  */
 	ResUserLogin(3_201, ResUserLoginPacket.class),
+	/** 推送--玩家信息 */
+	ResUserInfo(3_202, ResUserInfoMessage.class),
 
 	/** 请求--单聊  */
 	ReqChatToUser(4_000, ReqChatToUserPacket.class),

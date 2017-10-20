@@ -6,7 +6,7 @@ import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ReqHeartBeatPacket extends AbstractPacket{
+public class ReqHeartBeatPacket extends AbstractPacket {
 
 	@Override
 	public void writeBody(ByteBuf buf) {
@@ -14,7 +14,7 @@ public class ReqHeartBeatPacket extends AbstractPacket{
 
 	@Override
 	public void readBody(ByteBuf buf) {
-		
+
 	}
 
 	@Override
@@ -24,7 +24,7 @@ public class ReqHeartBeatPacket extends AbstractPacket{
 
 	@Override
 	public void execPacket(IoSession session) {
-		System.err.println("收到客户端的pong响应");  
+		System.err.println("收到客户端的心跳包");
 	}
 
 }

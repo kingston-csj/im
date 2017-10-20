@@ -3,9 +3,11 @@ package com.kingston.logic.user;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.kingston.base.ServerManager;
 import com.kingston.data.dao.UserDao;
 import com.kingston.data.model.User;
 import com.kingston.logic.GlobalConst;
+import com.kingston.logic.user.message.ResUserInfoMessage;
 import com.kingston.logic.user.message.ResUserRegisterPacket;
 import com.kingston.logic.util.IdService;
 import com.kingston.net.ChannelUtils;
@@ -15,13 +17,13 @@ import io.netty.channel.Channel;
 
 @Component
 public class UserService {
-	
+
 	@Autowired
 	private UserDao userDao;
-	
+
 	@Autowired
 	private IdService idService;
-	
+
 	/**
 	 * 注册新账号
 	 * @param userId qq号码
@@ -41,7 +43,7 @@ public class UserService {
 		}
 		session.sendPacket(response);
 	}
-	
+
 	private User createNewUser(byte sex, String nickName, String password) {
 		int newId = idService.getNextId();
 		User newUser = new User();
@@ -49,10 +51,20 @@ public class UserService {
 		newUser.setUserId(newId);
 		newUser.setUserName(nickName);
 		newUser.setPassword(password);
-		
+
 		userDao.addUser(newUser);
-		
+
 		return newUser;
+	}
+
+	public void refreshUserProfile(User user) {
+		ResUserInfoMessage response = new ResUserInfoMessage();
+		response.setSex(user.getSex());
+		response.setUserId(user.getUserId());
+		response.setUserName(user.getUserName());
+		response.setSignature(user.getSignature());
+
+		ServerManager.INSTANCE.sendPacketTo(user.getUserId(), response);
 	}
 
 }

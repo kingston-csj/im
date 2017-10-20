@@ -8,16 +8,12 @@ import com.kingston.net.IoSession;
 public enum PacketManager {
 
 	INSTANCE;
-	
+
 	public void execPacket(IoSession session, AbstractPacket pact){
 		if(pact == null) return;
 		try {
-			Method m = pact.getClass().getMethod("execPacket");
-			if (m.getParameterCount() == 0) {
-				m.invoke(pact, null);
-			} else {
-				m.invoke(pact, session);
-			}
+			Method m = pact.getClass().getMethod("execPacket", IoSession.class);
+			m.invoke(pact, session);
 		} catch (NoSuchMethodException | SecurityException e) {
 			e.printStackTrace();
 		} catch (IllegalAccessException e) {
@@ -28,7 +24,7 @@ public enum PacketManager {
 			e.printStackTrace();
 		}
 	}
-	
+
 	public  AbstractPacket createNewPacket(int packetType){
 		Class<? extends AbstractPacket> packetClass = PacketType.getPacketClassBy(packetType);
 		if(packetClass == null){
@@ -43,5 +39,5 @@ public enum PacketManager {
 
 		return packet;
 	}
-	
+
 }

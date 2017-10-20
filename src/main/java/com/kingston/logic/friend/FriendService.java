@@ -6,8 +6,11 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.kingston.base.ServerManager;
 import com.kingston.data.dao.FriendDao;
+import com.kingston.data.model.User;
 import com.kingston.data.view.FriendView;
+import com.kingston.logic.friend.message.ResFriendListPacket;
 import com.kingston.logic.friend.vo.FriendItemVo;
 
 @Component
@@ -34,6 +37,14 @@ public class FriendService {
 		}
 
 		return result;
+	}
+
+	public void refreshUserFriends(User user) {
+		List<FriendItemVo> myFriends = listMyFriends(user.getUserId());
+		ResFriendListPacket friendsPact = new ResFriendListPacket();
+		friendsPact.setFriends(myFriends);
+
+		ServerManager.INSTANCE.sendPacketTo(user, friendsPact);
 	}
 
 

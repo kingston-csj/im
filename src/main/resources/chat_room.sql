@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50717
+Source Server Version : 50624
 Source Host           : localhost:3306
 Source Database       : chat_room
 
 Target Server Type    : MYSQL
-Target Server Version : 50717
+Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-08-05 21:10:21
+Date: 2017-10-20 23:16:50
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -31,6 +31,7 @@ CREATE TABLE `friendgroup` (
 -- ----------------------------
 -- Records of friendgroup
 -- ----------------------------
+INSERT INTO `friendgroup` VALUES ('1', '我的好友', '1000');
 
 -- ----------------------------
 -- Table structure for friends
@@ -54,6 +55,9 @@ CREATE TABLE `friends` (
 -- ----------------------------
 -- Records of friends
 -- ----------------------------
+INSERT INTO `friends` VALUES ('1', '1000', '1001', '大师兄', '1');
+INSERT INTO `friends` VALUES ('2', '1000', '1002', '二师兄', '1');
+INSERT INTO `friends` VALUES ('3', '1000', '1003', '三师兄', '1');
 
 -- ----------------------------
 -- Table structure for user
@@ -73,3 +77,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
+INSERT INTO `user` VALUES ('1000', 'kingston', 'kingston', '1', '专业写Bug', null, null);
+INSERT INTO `user` VALUES ('1001', 'hello', 'kingston', '1', '我爱Java', null, null);
+INSERT INTO `user` VALUES ('1002', 'world', 'kingston', '0', '我爱JavaFX', null, null);
+INSERT INTO `user` VALUES ('1003', '屌丝', 'kingston', '1', '我不做游戏，我在做一个付费系统', null, null);

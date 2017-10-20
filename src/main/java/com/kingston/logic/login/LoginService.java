@@ -13,6 +13,7 @@ import com.kingston.logic.friend.FriendService;
 import com.kingston.logic.friend.message.ResFriendListPacket;
 import com.kingston.logic.friend.vo.FriendItemVo;
 import com.kingston.logic.login.message.ResUserLoginPacket;
+import com.kingston.logic.user.UserService;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
 
@@ -25,6 +26,8 @@ public class LoginService {
 	private UserDao userDao;
 	@Autowired
 	private FriendService friendService;
+	@Autowired
+	private UserService userService;
 
 	public void validateLogin(Channel channel, long userId, String password) {
 		User user = validate(userId, password);
@@ -40,16 +43,16 @@ public class LoginService {
 	}
 
 	private void onLoginSucc(User user, IoSession session) {
+		ServerManager.INSTANCE.registerSession(user, session);
+
 		ResUserLoginPacket loginPact = new ResUserLoginPacket();
 		loginPact.setIsValid((byte)1);
 		loginPact.setAlertMsg("登录成功");
-		ServerManager.INSTANCE.registerSession(user, session);
 		ServerManager.INSTANCE.sendPacketTo(session, loginPact);
 
-		List<FriendItemVo> myFriends = friendService.listMyFriends(user.getUserId());
-		ResFriendListPacket friendsPact = new ResFriendListPacket();
-		friendsPact.setFriends(myFriends);
-		ServerManager.INSTANCE.sendPacketTo(session, friendsPact);
+		userService.refreshUserProfile(user);
+
+		friendService.refreshUserFriends(user);
 	}
 
 	/**
