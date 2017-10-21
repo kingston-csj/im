@@ -32,6 +32,7 @@ public class FriendService {
 			item.setSignature(f.getSignature());
 			item.setUserId(f.getUserId());
 			item.setUserName(f.getUserName());
+			item.setGroupName(f.getGroupName());
 
 			result.add(item);
 		}

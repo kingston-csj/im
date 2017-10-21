@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-10-20 23:16:50
+Date: 2017-10-21 20:42:04
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -32,6 +32,7 @@ CREATE TABLE `friendgroup` (
 -- Records of friendgroup
 -- ----------------------------
 INSERT INTO `friendgroup` VALUES ('1', '我的好友', '1000');
+INSERT INTO `friendgroup` VALUES ('2', '程序猿展览馆', '1000');
 
 -- ----------------------------
 -- Table structure for friends
@@ -58,6 +59,8 @@ CREATE TABLE `friends` (
 INSERT INTO `friends` VALUES ('1', '1000', '1001', '大师兄', '1');
 INSERT INTO `friends` VALUES ('2', '1000', '1002', '二师兄', '1');
 INSERT INTO `friends` VALUES ('3', '1000', '1003', '三师兄', '1');
+INSERT INTO `friends` VALUES ('4', '1000', '1004', '隔壁老王', '2');
+INSERT INTO `friends` VALUES ('5', '1000', '1005', 'bug砖家', '2');
 
 -- ----------------------------
 -- Table structure for user
@@ -77,7 +80,9 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1000', 'kingston', 'kingston', '1', '专业写Bug', null, null);
-INSERT INTO `user` VALUES ('1001', 'hello', 'kingston', '1', '我爱Java', null, null);
-INSERT INTO `user` VALUES ('1002', 'world', 'kingston', '0', '我爱JavaFX', null, null);
-INSERT INTO `user` VALUES ('1003', '屌丝', 'kingston', '1', '我不做游戏，我在做一个付费系统', null, null);
+INSERT INTO `user` VALUES ('1000', 'kingston', '000', '1', '专业写Bug', null, null);
+INSERT INTO `user` VALUES ('1001', 'hello', '000', '1', '我爱Java', null, null);
+INSERT INTO `user` VALUES ('1002', 'world', '000', '0', '我爱JavaFX', null, null);
+INSERT INTO `user` VALUES ('1003', '屌丝', '000', '1', '我不做游戏，我在做一个付费系统', null, null);
+INSERT INTO `user` VALUES ('1004', '我心飞扬', '000', '1', '把你放在 我心、最柔软的 地方', null, null);
+INSERT INTO `user` VALUES ('1005', '金刚互撸娃', '000', '1', '写代码，我很快乐~', null, null);

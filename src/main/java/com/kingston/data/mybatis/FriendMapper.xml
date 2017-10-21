@@ -9,7 +9,8 @@
 
 	<select id="getMyFriends" parameterType="java.lang.Long"
 		resultMap="friendView">
-		SELECT u.userId, u.sex, u.userName, f.remark, u.signature, fg.name
+		SELECT u.userId, u.sex, u.userName, f.remark, u.signature,
+		       fg.id AS `group`, fg.name AS groupName
 		FROM
 		friends f , friendgroup fg, user u
 		WHERE f.groupid = fg.id

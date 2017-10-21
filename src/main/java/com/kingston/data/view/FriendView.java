@@ -13,6 +13,8 @@ public class FriendView {
 	private byte sex;
 	/** 所属好友分组 */
 	private int group;
+	/** 分组备注 */
+	private String groupName;
 
 	public long getUserId() {
 		return userId;
@@ -50,5 +52,13 @@ public class FriendView {
 	public void setGroup(int group) {
 		this.group = group;
 	}
+	public String getGroupName() {
+		return groupName;
+	}
+	public void setGroupName(String groupName) {
+		this.groupName = groupName;
+	}
+
+
 
 }
