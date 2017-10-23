@@ -31,7 +31,8 @@ public class ReqChatToUserPacket extends AbstractPacket {
 
 	@Override
 	public void writeBody(ByteBuf buf) {
-		// TODO Auto-generated method stub
+		this.toUserId = buf.readLong();
+		this.content = readUTF8(buf);
 
 	}
 
