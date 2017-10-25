@@ -31,8 +31,8 @@ public class ReqChatToUserPacket extends AbstractPacket {
 
 	@Override
 	public void writeBody(ByteBuf buf) {
-		this.toUserId = buf.readLong();
-		this.content = readUTF8(buf);
+		buf.writeLong(this.toUserId);
+		writeUTF8(buf, content);
 
 	}
 

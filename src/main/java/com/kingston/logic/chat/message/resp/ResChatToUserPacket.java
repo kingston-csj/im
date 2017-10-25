@@ -7,10 +7,9 @@ import com.kingston.net.message.PacketType;
 import io.netty.buffer.ByteBuf;
 
 public class ResChatToUserPacket extends AbstractPacket {
-	
-	
+
 	private long fromUserId;
-	
+
 	private String content;
 
 	@Override
@@ -55,5 +54,5 @@ public class ResChatToUserPacket extends AbstractPacket {
 	public String toString() {
 		return "ResChatToUserPacket [fromUserId=" + fromUserId + ", content=" + content + "]";
 	}
-	
+
 }

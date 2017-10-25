@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50624
 File Encoding         : 65001
 
-Date: 2017-10-21 20:42:04
+Date: 2017-10-25 22:53:40
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -33,6 +33,7 @@ CREATE TABLE `friendgroup` (
 -- ----------------------------
 INSERT INTO `friendgroup` VALUES ('1', '我的好友', '1000');
 INSERT INTO `friendgroup` VALUES ('2', '程序猿展览馆', '1000');
+INSERT INTO `friendgroup` VALUES ('3', '默认好友', '1001');
 
 -- ----------------------------
 -- Table structure for friends
@@ -61,6 +62,7 @@ INSERT INTO `friends` VALUES ('2', '1000', '1002', '二师兄', '1');
 INSERT INTO `friends` VALUES ('3', '1000', '1003', '三师兄', '1');
 INSERT INTO `friends` VALUES ('4', '1000', '1004', '隔壁老王', '2');
 INSERT INTO `friends` VALUES ('5', '1000', '1005', 'bug砖家', '2');
+INSERT INTO `friends` VALUES ('6', '1001', '1000', null, '3');
 
 -- ----------------------------
 -- Table structure for user
