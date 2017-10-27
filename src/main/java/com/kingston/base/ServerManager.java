@@ -74,6 +74,7 @@ public enum ServerManager {
 	public boolean registerSession(User user, IoSession session) {
 		session.setUser(user);
 		userId2Sessions.put(user.getUserId(), session);
+		session2UserIds.put(session, user.getUserId());
 
 		logger.info("[{}] registered...", user.getUserId());
 		return true;
@@ -82,16 +83,15 @@ public enum ServerManager {
 	/**
 	 *   注销用户通信渠道
 	 */
-	public void ungisterUserContext(Channel context ){
+	public void ungisterUserContext(Channel context, SessionCloseReason reason){
 		if(context  == null){
-
 			return;
 		}
 		IoSession session = ChannelUtils.getSessionBy(context);
 		Long userId = session2UserIds.remove(session);
 		userId2Sessions.remove(userId);
 		if (session != null) {
-			session.close(SessionCloseReason.OVER_TIME);
+			session.close(reason);
 		}
 	}
 

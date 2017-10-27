@@ -10,10 +10,12 @@ import com.kingston.logic.chat.message.req.ReqChatToUserPacket;
 import com.kingston.logic.chat.message.resp.ResChatToGroupPacket;
 import com.kingston.logic.chat.message.resp.ResChatToUserPacket;
 import com.kingston.logic.friend.message.ResFriendListPacket;
+import com.kingston.logic.friend.message.ResFriendLoginPacket;
+import com.kingston.logic.friend.message.ResFriendLogoutPacket;
 import com.kingston.logic.login.message.ReqHeartBeatPacket;
 import com.kingston.logic.login.message.ReqUserLoginPacket;
-import com.kingston.logic.login.message.ResUserLoginPacket;
 import com.kingston.logic.login.message.ResHeartBeatPacket;
+import com.kingston.logic.login.message.ResUserLoginPacket;
 import com.kingston.logic.user.message.ReqUserRegisterPacket;
 import com.kingston.logic.user.message.ResUserInfoMessage;
 import com.kingston.logic.user.message.ResUserRegisterPacket;
@@ -60,6 +62,10 @@ public enum PacketType {
 
 	/** 推送--好友列表 */
 	ResFriendList(5_200, ResFriendListPacket.class),
+	/** 推送--好友登录 */
+	ResFriendLogin(5_201, ResFriendLoginPacket.class),
+	/** 推送--好友下线 */
+	ResFriendLogout(5_202, ResFriendLogoutPacket.class),
 
 	;
 

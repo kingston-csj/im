@@ -1,7 +1,5 @@
 package com.kingston.logic.login;
 
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -10,8 +8,6 @@ import com.kingston.base.ServerManager;
 import com.kingston.data.dao.UserDao;
 import com.kingston.data.model.User;
 import com.kingston.logic.friend.FriendService;
-import com.kingston.logic.friend.message.ResFriendListPacket;
-import com.kingston.logic.friend.vo.FriendItemVo;
 import com.kingston.logic.login.message.ResUserLoginPacket;
 import com.kingston.logic.user.UserService;
 import com.kingston.net.ChannelUtils;
@@ -44,6 +40,7 @@ public class LoginService {
 
 	private void onLoginSucc(User user, IoSession session) {
 		ServerManager.INSTANCE.registerSession(user, session);
+		userService.addUser2Online(user.getUserId());
 
 		ResUserLoginPacket loginPact = new ResUserLoginPacket();
 		loginPact.setIsValid((byte)1);

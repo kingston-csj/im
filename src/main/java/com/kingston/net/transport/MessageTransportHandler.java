@@ -17,6 +17,7 @@ import com.kingston.logic.user.UserService;
 import com.kingston.logic.user.message.ReqUserRegisterPacket;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
+import com.kingston.net.SessionCloseReason;
 import com.kingston.net.message.AbstractPacket;
 import com.kingston.net.message.PacketManager;
 import com.kingston.net.message.PacketType;
@@ -31,7 +32,7 @@ import io.netty.handler.timeout.IdleStateEvent;
 public class MessageTransportHandler extends ChannelHandlerAdapter{
 
 	private final static Logger logger = LoggerFactory.getLogger(MessageTransportHandler.class);
-	
+
 	//客户端超时次数
 	private Map<ChannelHandlerContext,Integer> clientOvertimeMap = new ConcurrentHashMap<>();
 
@@ -42,7 +43,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 			logger.error("Duplicate session,IP=[{}]",ChannelUtils.getIp(ctx.channel()));
 		}
 	}
-	
+
 	@Override
 	public void channelRead(ChannelHandlerContext context,Object msg)
 			throws Exception{
@@ -51,7 +52,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 
 		final Channel channel = context.channel();
 		IoSession session = ChannelUtils.getSessionBy(channel);
-		
+
 		if (packet.getPacketType() == PacketType.ReqUserRegister) {
 			ReqUserRegisterPacket registerPact = (ReqUserRegisterPacket)packet;
 			UserService userService = SpringContext.getUserService();
@@ -63,7 +64,7 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 			loginMgr.validateLogin(channel,loginPact.getUserId(), loginPact.getUserPwd());
 			return ;
 		}
-		
+
 		if(validateSession(packet)){
 			PacketManager.INSTANCE.execPacket(session, packet);
 		}
@@ -94,8 +95,9 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 		logger.error("业务逻辑出错", cause);
 		cause.printStackTrace();
 		Channel channel = ctx.channel();
-		if(cause instanceof  IOException && channel.isActive()){
+		if(cause instanceof IOException && channel.isActive()){
 			logger.error("simpleclient"+channel.remoteAddress()+"异常");
+			SpringContext.getUserService().userLogout(channel, SessionCloseReason.NORMAL);
 			ctx.close();
 		}
 	}
@@ -115,8 +117,10 @@ public class MessageTransportHandler extends ChannelHandlerAdapter{
 //				}else{
 //					ServerManager.INSTANCE.ungisterUserContext(ctx.channel());
 //				}
-				ServerManager.INSTANCE.ungisterUserContext(ctx.channel());
-			} 
+				Channel channel = ctx.channel();
+				SpringContext.getUserService().userLogout(channel, SessionCloseReason.OVER_TIME);
+
+			}
 		}
 	}
 

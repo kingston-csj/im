@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.base.ServerManager;
+import com.kingston.base.SpringContext;
 import com.kingston.data.dao.UserDao;
 import com.kingston.data.model.User;
 import com.kingston.logic.GlobalConst;
@@ -15,6 +16,7 @@ import com.kingston.logic.user.message.ResUserRegisterPacket;
 import com.kingston.logic.util.IdService;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
+import com.kingston.net.SessionCloseReason;
 import com.kingston.util.ConcurrentHashSet;
 import com.kingston.util.LruHashMap;
 
@@ -34,6 +36,14 @@ public class UserService {
 	/** 在线用户列表　*/
 	private Set<Long> onlneUsers = new ConcurrentHashSet<>();
 
+
+	public void addUser2Online(long userId) {
+		this.onlneUsers.add(userId);
+	}
+
+	public void removeFromOnline(long userId) {
+		this.onlneUsers.remove(userId);
+	}
 
 	public boolean isOnlineUser(long userId) {
 		return this.onlneUsers.contains(userId);
@@ -81,5 +91,16 @@ public class UserService {
 
 		ServerManager.INSTANCE.sendPacketTo(user.getUserId(), response);
 	}
+
+	public void userLogout(Channel channel, SessionCloseReason reason) {
+		IoSession session = ChannelUtils.getSessionBy(channel);
+		long userId = session.getUser().getUserId();
+		SpringContext.getUserService().removeFromOnline(userId);
+		SpringContext.getFriendService().onUserLogout(userId);
+
+		ServerManager.INSTANCE.ungisterUserContext(channel, reason);
+	}
+
+
 
 }

@@ -12,6 +12,8 @@ import com.kingston.data.dao.FriendDao;
 import com.kingston.data.model.User;
 import com.kingston.data.view.FriendView;
 import com.kingston.logic.friend.message.ResFriendListPacket;
+import com.kingston.logic.friend.message.ResFriendLoginPacket;
+import com.kingston.logic.friend.message.ResFriendLogoutPacket;
 import com.kingston.logic.friend.vo.FriendItemVo;
 import com.kingston.logic.user.UserService;
 
@@ -28,6 +30,9 @@ public class FriendService {
 		List<FriendItemVo> result = new ArrayList<>();
 		List<FriendView> friends = friendDao.getMyFriends(userId);
 		for (FriendView f:friends) {
+			if (f.getUserId() == userId) {
+				continue;
+			}
 			FriendItemVo item = new FriendItemVo();
 			item.setGroup(f.getGroup());
 			item.setRemark(f.getRemark());
@@ -52,6 +57,32 @@ public class FriendService {
 		friendsPact.setFriends(myFriends);
 
 		ServerManager.INSTANCE.sendPacketTo(user, friendsPact);
+
+		onUserLogin(user);
+	}
+
+	public void onUserLogin(User user) {
+		List<FriendItemVo> myFriends = listMyFriends(user.getUserId());
+		ResFriendLoginPacket loginPact = new ResFriendLoginPacket();
+		loginPact.setFriendId(user.getUserId());
+		for (FriendItemVo friend:myFriends) {
+			long friendId = friend.getUserId();
+			if (userService.isOnlineUser(friendId)) {
+				ServerManager.INSTANCE.sendPacketTo(friendId, loginPact);
+			}
+		}
+	}
+
+	public void onUserLogout(long userId) {
+		List<FriendItemVo> myFriends = listMyFriends(userId);
+		ResFriendLogoutPacket logoutPact = new ResFriendLogoutPacket();
+		logoutPact.setFriendId(userId);
+		for (FriendItemVo friend:myFriends) {
+			long friendId = friend.getUserId();
+			if (userService.isOnlineUser(friendId)) {
+				ServerManager.INSTANCE.sendPacketTo(friendId, logoutPact);
+			}
+		}
 	}
 
 
