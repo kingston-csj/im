@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.base.ServerManager;
-import com.kingston.logic.chat.message.resp.ResChatToUserPacket;
+import com.kingston.logic.chat.message.res.ResChatToUserPacket;
 import com.kingston.net.IoSession;
 
 @Component

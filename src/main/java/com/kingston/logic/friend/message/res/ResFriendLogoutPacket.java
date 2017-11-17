@@ -1,4 +1,4 @@
-package com.kingston.logic.friend.message;
+package com.kingston.logic.friend.message.res;
 
 import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
@@ -7,10 +7,10 @@ import com.kingston.net.message.PacketType;
 import io.netty.buffer.ByteBuf;
 
 /**
- * 好友登录
+ * 好友注销
  * @author kingston
  */
-public class ResFriendLoginPacket extends AbstractPacket {
+public class ResFriendLogoutPacket extends AbstractPacket {
 
 	private long friendId;
 
@@ -24,7 +24,7 @@ public class ResFriendLoginPacket extends AbstractPacket {
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ResFriendLogin;
+		return PacketType.ResFriendLogout;
 	}
 
 	@Override

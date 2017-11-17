@@ -1,4 +1,4 @@
-package com.kingston.logic.user.message;
+package com.kingston.logic.user.message.req;
 
 import com.kingston.logic.GlobalConst;
 import com.kingston.net.IoSession;

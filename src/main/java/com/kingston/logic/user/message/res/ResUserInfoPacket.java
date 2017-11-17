@@ -1,4 +1,4 @@
-package com.kingston.logic.user.message;
+package com.kingston.logic.user.message.res;
 
 import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;
@@ -6,7 +6,7 @@ import com.kingston.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResUserInfoMessage extends AbstractPacket {
+public class ResUserInfoPacket extends AbstractPacket {
 
 	private long userId;
 	/** 账号昵称 */

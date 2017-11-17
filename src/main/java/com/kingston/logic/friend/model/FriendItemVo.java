@@ -1,4 +1,4 @@
-package com.kingston.logic.friend.vo;
+package com.kingston.logic.friend.model;
 
 import com.kingston.net.message.ByteBufBean;
 

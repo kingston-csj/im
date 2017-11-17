@@ -1,4 +1,4 @@
-package com.kingston.logic.login.message;
+package com.kingston.logic.login.message.req;
 
 import io.netty.buffer.ByteBuf;
 

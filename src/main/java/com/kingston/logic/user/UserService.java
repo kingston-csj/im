@@ -11,8 +11,8 @@ import com.kingston.base.SpringContext;
 import com.kingston.data.dao.UserDao;
 import com.kingston.data.model.User;
 import com.kingston.logic.GlobalConst;
-import com.kingston.logic.user.message.ResUserInfoMessage;
-import com.kingston.logic.user.message.ResUserRegisterPacket;
+import com.kingston.logic.user.message.res.ResUserInfoPacket;
+import com.kingston.logic.user.message.res.ResUserRegisterPacket;
 import com.kingston.logic.util.IdService;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
@@ -83,7 +83,7 @@ public class UserService {
 	}
 
 	public void refreshUserProfile(User user) {
-		ResUserInfoMessage response = new ResUserInfoMessage();
+		ResUserInfoPacket response = new ResUserInfoPacket();
 		response.setSex(user.getSex());
 		response.setUserId(user.getUserId());
 		response.setUserName(user.getUserName());

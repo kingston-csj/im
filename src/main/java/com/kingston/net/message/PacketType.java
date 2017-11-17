@@ -7,18 +7,18 @@ import java.util.Set;
 
 import com.kingston.logic.chat.message.req.ReqChatToGroupPacket;
 import com.kingston.logic.chat.message.req.ReqChatToUserPacket;
-import com.kingston.logic.chat.message.resp.ResChatToGroupPacket;
-import com.kingston.logic.chat.message.resp.ResChatToUserPacket;
-import com.kingston.logic.friend.message.ResFriendListPacket;
-import com.kingston.logic.friend.message.ResFriendLoginPacket;
-import com.kingston.logic.friend.message.ResFriendLogoutPacket;
-import com.kingston.logic.login.message.ReqHeartBeatPacket;
-import com.kingston.logic.login.message.ReqUserLoginPacket;
-import com.kingston.logic.login.message.ResHeartBeatPacket;
-import com.kingston.logic.login.message.ResUserLoginPacket;
-import com.kingston.logic.user.message.ReqUserRegisterPacket;
-import com.kingston.logic.user.message.ResUserInfoMessage;
-import com.kingston.logic.user.message.ResUserRegisterPacket;
+import com.kingston.logic.chat.message.res.ResChatToGroupPacket;
+import com.kingston.logic.chat.message.res.ResChatToUserPacket;
+import com.kingston.logic.friend.message.res.ResFriendListPacket;
+import com.kingston.logic.friend.message.res.ResFriendLoginPacket;
+import com.kingston.logic.friend.message.res.ResFriendLogoutPacket;
+import com.kingston.logic.login.message.req.ReqHeartBeatPacket;
+import com.kingston.logic.login.message.req.ReqUserLoginPacket;
+import com.kingston.logic.login.message.res.ResHeartBeatPacket;
+import com.kingston.logic.login.message.res.ResUserLoginPacket;
+import com.kingston.logic.user.message.req.ReqUserRegisterPacket;
+import com.kingston.logic.user.message.res.ResUserInfoPacket;
+import com.kingston.logic.user.message.res.ResUserRegisterPacket;
 
 public enum PacketType {
 
@@ -48,7 +48,7 @@ public enum PacketType {
     /** 推送--用户登录  */
 	ResUserLogin(3_201, ResUserLoginPacket.class),
 	/** 推送--玩家信息 */
-	ResUserInfo(3_202, ResUserInfoMessage.class),
+	ResUserInfo(3_202, ResUserInfoPacket.class),
 
 	/** 请求--单聊  */
 	ReqChatToUser(4_000, ReqChatToUserPacket.class),

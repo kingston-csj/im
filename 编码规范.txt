@@ -1,0 +1,8 @@
+业务逻辑统一写在 logic包下，不同业务用不包的子包进行管理
+包结构说明：
+message.req --客户端请求消息枚举
+message.res --服务端响应消息枚举
+model 		--各类vo,pojo结构体
+service     --业务主要处理者，同时需要在SpringContext里进行定义
+manager  	--只对相应service层提供各种辅助工具，不对其他业务服务
+

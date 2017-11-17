@@ -1,4 +1,4 @@
-package com.kingston.logic.chat.message.resp;
+package com.kingston.logic.chat.message.res;
 
 import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;

@@ -1,4 +1,4 @@
-package com.kingston.logic.user.message;
+package com.kingston.logic.user.message.res;
 
 import com.kingston.net.IoSession;
 import com.kingston.net.message.AbstractPacket;

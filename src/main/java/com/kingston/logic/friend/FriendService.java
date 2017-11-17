@@ -11,10 +11,10 @@ import com.kingston.base.ServerManager;
 import com.kingston.data.dao.FriendDao;
 import com.kingston.data.model.User;
 import com.kingston.data.view.FriendView;
-import com.kingston.logic.friend.message.ResFriendListPacket;
-import com.kingston.logic.friend.message.ResFriendLoginPacket;
-import com.kingston.logic.friend.message.ResFriendLogoutPacket;
-import com.kingston.logic.friend.vo.FriendItemVo;
+import com.kingston.logic.friend.message.res.ResFriendListPacket;
+import com.kingston.logic.friend.message.res.ResFriendLoginPacket;
+import com.kingston.logic.friend.message.res.ResFriendLogoutPacket;
+import com.kingston.logic.friend.model.FriendItemVo;
 import com.kingston.logic.user.UserService;
 
 @Component

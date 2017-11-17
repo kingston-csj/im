@@ -4,11 +4,12 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
+import com.kingston.base.Constants;
 import com.kingston.base.ServerManager;
 import com.kingston.data.dao.UserDao;
 import com.kingston.data.model.User;
 import com.kingston.logic.friend.FriendService;
-import com.kingston.logic.login.message.ResUserLoginPacket;
+import com.kingston.logic.login.message.res.ResUserLoginPacket;
 import com.kingston.logic.user.UserService;
 import com.kingston.net.ChannelUtils;
 import com.kingston.net.IoSession;
@@ -30,7 +31,7 @@ public class LoginService {
 		IoSession session = ChannelUtils.getSessionBy(channel);
 		ResUserLoginPacket resp = new ResUserLoginPacket();
 		if(user == null) {
-			resp.setAlertMsg("帐号或密码错误");
+			resp.setIsValid(Constants.FALSE);
 			ServerManager.INSTANCE.sendPacketTo(session, resp);
 			return;
 		}
@@ -43,8 +44,7 @@ public class LoginService {
 		userService.addUser2Online(user.getUserId());
 
 		ResUserLoginPacket loginPact = new ResUserLoginPacket();
-		loginPact.setIsValid((byte)1);
-		loginPact.setAlertMsg("登录成功");
+		loginPact.setIsValid(Constants.TRUE);
 		ServerManager.INSTANCE.sendPacketTo(session, loginPact);
 
 		userService.refreshUserProfile(user);

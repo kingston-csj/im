@@ -15,6 +15,7 @@ import com.kingston.logic.user.UserService;
 import com.kingston.logic.util.IdService;
 
 public class SpringContext implements ApplicationContextAware {
+
 	/** spring容器上下文 */
 	private static ApplicationContext applicationContext = null;
 
@@ -65,7 +66,7 @@ public class SpringContext implements ApplicationContextAware {
 
 	@Resource
 	public void setIdService(IdService idService) {
-		this.idService = idService;
+		SpringContext.idService = idService;
 	}
 
 	public final static IdService getIdService() {
