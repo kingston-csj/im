@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
-	xmlns:tx="http://www.springframework.org/schema/tx" 
-	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xmlns:gorm="http://grails.org/schema/gorm"
-	xmlns:context="http://www.springframework.org/schema/context"
-	xsi:schemaLocation=
-	   "http://www.springframework.org/schema/beans 
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:gorm="http://grails.org/schema/gorm" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
 		http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
 		http://www.springframework.org/schema/lang 
 	    http://www.springframework.org/schema/lang/spring-lang-3.1.xsd
@@ -14,6 +11,12 @@
 		http://www.springframework.org/schema/context
 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		">
+
+	<bean id="serverConfig" class="com.kingston.ServerConfigs">
+		<property name="socketIp" value="${socket.serverIp}"></property>
+		<property name="socketPort" value="${socket.port}"></property>
+		<property name="httpPort" value="${http.port}"></property>
+	</bean>
 
 	<bean id="dataSource"
 		class="org.springframework.jdbc.datasource.DriverManagerDataSource">
@@ -30,19 +33,20 @@
 		<property name="mapperLocations"
 			value="classpath:com/kingston/data/mybatis/*Mapper.xml" />
 	</bean>
-	
+
 	<!-- 自动扫描所有dao并注入到spring容器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.kingston.data.dao" />
 	</bean>
-	
+
 	<!-- groovy热部署插件 -->
- 	<bean class="com.kingston.groovy.GroovyFactory">
- 	 	<property name="scriptRoot" value="groovy"/>
- 	 	<property name="refreshCheckDelay" value="10000"/>  
- 	</bean>   
-    <bean class="org.springframework.scripting.support.ScriptFactoryPostProcessor"/> 
-    
+	<bean class="com.kingston.groovy.GroovyFactory">
+		<property name="scriptRoot" value="groovy" />
+		<property name="refreshCheckDelay" value="10000" />
+	</bean>
+	<bean
+		class="org.springframework.scripting.support.ScriptFactoryPostProcessor" />
+
 
 	<!-- 注册spring上下文环境 -->
 	<bean id="context" class="com.kingston.base.SpringContext" />

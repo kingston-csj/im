@@ -8,6 +8,7 @@ import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 
+import com.kingston.ServerConfigs;
 import com.kingston.asyncdb.AysncDbService;
 import com.kingston.logic.chat.ChatService;
 import com.kingston.logic.friend.FriendService;
@@ -28,6 +29,8 @@ public class SpringContext implements ApplicationContextAware {
 	private static ChatService chatService;
 
 	private static IdService idService;
+	
+	private static ServerConfigs serverConfigs;
 
 	@Override
 	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -90,5 +93,14 @@ public class SpringContext implements ApplicationContextAware {
 	public final static ChatService getChatService() {
 		return chatService;
 	}
+	
+	@Resource
+	public void setServerConfigs(ServerConfigs serverConfigs) {
+		SpringContext.serverConfigs = serverConfigs;
+	}
 
+	public final static ServerConfigs getServerConfigs() {
+		return SpringContext.serverConfigs;
+	}
+	
 }
