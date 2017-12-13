@@ -12,7 +12,7 @@
 		http://www.springframework.org/schema/context/spring-context-2.5.xsd
 		">
 
-	<bean id="serverConfig" class="com.kingston.ServerConfigs">
+	<bean id="serverConfig" class="com.kingston.im.ServerConfigs">
 		<property name="socketIp" value="${socket.serverIp}"></property>
 		<property name="socketPort" value="${socket.port}"></property>
 		<property name="httpPort" value="${http.port}"></property>
@@ -36,7 +36,7 @@
 
 	<!-- 自动扫描所有dao并注入到spring容器 -->
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-		<property name="basePackage" value="com.kingston.data.dao" />
+		<property name="basePackage" value="com.kingston.im.data.dao" />
 	</bean>
 
 	<!-- groovy热部署插件 -->
