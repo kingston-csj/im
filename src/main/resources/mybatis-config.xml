@@ -5,8 +5,8 @@
 <configuration>
 	<!--别名申明 -->
 	<typeAliases>
-		<typeAlias type="com.kingston.data.model.User" alias="user" />
+		<typeAlias type="com.kingston.im.data.model.User" alias="user" />
 	</typeAliases>
-	
-	
+
+
 </configuration>
