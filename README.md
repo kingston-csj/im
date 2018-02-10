@@ -10,10 +10,10 @@
   *  Groovy业务代码热部署    
   *  通过http后台请求管理服务进程  
   *  用户数据的持久化  
+  *  使用独立线程池处理用户消息 　
 
   ### ToDoList  
   *  加入事件驱动机制   
-  *  处理用户消息的线程模型  
   *  异步处理用户数据的持久化  
   *  开发更多的交互功能       
 
@@ -22,7 +22,7 @@
   2. 新建数据库chat_room，导入根目录下的chat_room.sql   
   3. 在applicationContext.xml文件配置本地数据库连接属性，启动ServerStartup
   4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/chat_client  
-  5. 启动ClientStartup类, 即可看到登录界面
+  5. 启动ClientStartup类, 即可看到登录界面（临时密码为000）
 
 
   ### 部分客户端运行效果

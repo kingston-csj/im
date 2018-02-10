@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kingston.im.base.SpringContext;
+import com.kingston.im.dispatch.MessageTask;
 import com.kingston.im.net.message.AbstractPacket;
 import com.kingston.im.net.message.PacketManager;
 
@@ -31,13 +32,18 @@ public class IoHandler extends ChannelHandlerAdapter {
 	@Override
 	public void channelRead(ChannelHandlerContext context,Object msg)
 			throws Exception {
-		AbstractPacket  packet = (AbstractPacket)msg;
-		logger.info("receive pact, content is {}", packet.getClass().getSimpleName());
+		AbstractPacket message = (AbstractPacket)msg;
+		logger.info("receive pact, content is {}", message.getClass().getSimpleName());
 
 		final Channel channel = context.channel();
 		IoSession session = ChannelUtils.getSessionBy(channel);
 
-		PacketManager.INSTANCE.execPacket(session, packet);
+		// 不在io线程处理
+//		PacketManager.INSTANCE.execPacket(session, message);
+
+		// 扔到业务线程池处理
+		MessageTask cmdTask = MessageTask.valueOf(session.getDispatchKey(), session, message);
+		SpringContext.getMessageDispatcher().addMessageTask(cmdTask);
 	}
 
 	@Override
@@ -45,7 +51,6 @@ public class IoHandler extends ChannelHandlerAdapter {
 		logger.error("TCP closed...");
 		ctx.close(promise);
 	}
-
 
 	@Override
 	public void disconnect(ChannelHandlerContext ctx, ChannelPromise promise)
@@ -77,7 +82,6 @@ public class IoHandler extends ChannelHandlerAdapter {
 				logger.info("客户端读超时");
 				Channel channel = ctx.channel();
 				SpringContext.getUserService().userLogout(channel, SessionCloseReason.OVER_TIME);
-
 			}
 		}
 	}

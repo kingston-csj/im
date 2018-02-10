@@ -2,6 +2,7 @@ package com.kingston.im.net;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -19,6 +20,9 @@ public class IoSession {
 
 	private static final Logger logger = LoggerFactory.getLogger(IoSession.class);
 
+	/** distributeKey auto generator  */
+	private AtomicInteger dispatchKeyGenerator = new AtomicInteger();
+
 	/** 网络连接channel */
 	private Channel channel;
 
@@ -29,8 +33,13 @@ public class IoSession {
 
 	private boolean reconnected;
 
+	/** 业务分发索引 */
+	private int dispatchKey;
+
 	/** 拓展用，保存一些个人数据  */
 	private Map<String, Object> attrs = new HashMap<>();
+
+
 
 	public IoSession() {
 
@@ -39,6 +48,7 @@ public class IoSession {
 	public IoSession(Channel channel) {
 		this.channel = channel;
 		this.ipAddr = ChannelUtils.getIp(channel);
+		this.dispatchKey = dispatchKeyGenerator.getAndIncrement();
 	}
 
 	public void setUser(User user) {
@@ -47,6 +57,10 @@ public class IoSession {
 
 	public Channel getChannel() {
 		return channel;
+	}
+
+	public int getDispatchKey() {
+		return dispatchKey;
 	}
 
 	/**
