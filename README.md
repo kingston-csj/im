@@ -1,4 +1,4 @@
-# chat_server(仿QQ聊天室服务端)
+  ## im(仿QQ聊天室服务端)
 
   ### 主要使用的第三方技术  
   *  Netty，通信网关  
@@ -33,8 +33,9 @@
   ![](/screenshots/main.png "主界面")  
   　　
 
-  ### 栏目教程  
-  --> [csdn专栏博客](http://blog.csdn.net/column/details/16455.html)
+  ###  案例教程 
+  栏目教程 --> [csdn专栏博客](http://blog.csdn.net/column/details/16455.html)
+  wiki说明 --> [wiki](https://github.com/kingston-csj/im/wiki) 
   
   欢迎star/fork，欢迎学习/使用，期待一起贡献代码！！
 
