@@ -2,7 +2,7 @@
 <!DOCTYPE mapper
   PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.kingston.data.dao.UserDao">
+<mapper namespace="com.kingston.im.data.dao.UserDao">
 	<select id="findById" parameterType="java.lang.Long"
 		resultType="user">
 		select * from user where userId=#{userId}
@@ -15,7 +15,7 @@
 		select * from user where username=#{nickName}
 	</select>
 	<insert id="addUser" parameterType="user">
-		insert into user(userId,sex,userName,password) 
+		insert into user(userId,sex,userName,password)
 			values(#{userId},#{sex},#{userName},#{password})
 	</insert>
 	<update id="updateUser" parameterType="user">

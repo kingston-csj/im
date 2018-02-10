@@ -1,6 +1,5 @@
-package com.kingston.im.net.transport;
+package com.kingston.im.net;
 
-import java.io.IOException;
 import java.net.InetSocketAddress;
 
 import org.slf4j.Logger;
@@ -22,14 +21,14 @@ import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
 
 public class ChatServer {
-	
+
 	private Logger logger = LoggerFactory.getLogger(ChatServer.class);
 
 	//避免使用默认线程数参数
 	private EventLoopGroup bossGroup = new NioEventLoopGroup(1);
 	private	EventLoopGroup workerGroup = new NioEventLoopGroup(Runtime.getRuntime().availableProcessors());
 
-	public void bind(int port) throws IOException {
+	public void bind(int port) throws Exception {
 		logger.info("服务端已启动，正在监听用户的请求......");
 		try{
 			ServerBootstrap b = new ServerBootstrap();
@@ -42,7 +41,8 @@ public class ChatServer {
 					.sync();
 			f.channel().closeFuture().sync();
 		}catch(Exception e){
-			e.printStackTrace();
+			logger.error("", e);
+			throw e;
 		}finally{
 			bossGroup.shutdownGracefully();
 			workerGroup.shutdownGracefully();
@@ -58,7 +58,7 @@ public class ChatServer {
 				workerGroup.shutdownGracefully();
 			}
 		}catch(Exception e){
-
+			logger.error("", e);
 		}
 	}
 
@@ -71,7 +71,7 @@ public class ChatServer {
 			pipeline.addLast(new PacketEncoder());
 			//客户端300秒没收发包，便会触发UserEventTriggered事件到MessageTransportHandler
 			pipeline.addLast("idleStateHandler", new IdleStateHandler(0, 0, 300));
-			pipeline.addLast(new MessageTransportHandler());
+			pipeline.addLast(new IoHandler());
 		}
 	}
 

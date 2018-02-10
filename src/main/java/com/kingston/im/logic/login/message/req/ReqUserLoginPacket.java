@@ -1,10 +1,13 @@
 package com.kingston.im.logic.login.message.req;
 
+import com.kingston.im.base.SpringContext;
+import com.kingston.im.logic.login.LoginService;
 import com.kingston.im.net.IoSession;
 import com.kingston.im.net.message.AbstractPacket;
 import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.channel.Channel;
 
 public class ReqUserLoginPacket extends AbstractPacket {
 
@@ -30,11 +33,6 @@ public class ReqUserLoginPacket extends AbstractPacket {
 		return PacketType.ReqUserLogin;
 	}
 
-	@Override
-	public void execPacket(IoSession session) {
-
-	}
-
 	public String getUserPwd() {
 		return userPwd;
 	}
@@ -49,6 +47,13 @@ public class ReqUserLoginPacket extends AbstractPacket {
 
 	public void setUserId(long userId) {
 		this.userId = userId;
+	}
+
+	@Override
+	public void execPacket(IoSession session) {
+		Channel channel = session.getChannel();
+		LoginService loginMgr = SpringContext.getBean(LoginService.class);
+		loginMgr.validateLogin(channel, getUserId(), getUserPwd());
 	}
 
 }

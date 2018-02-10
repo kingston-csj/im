@@ -16,7 +16,7 @@ import io.netty.channel.Channel;
  * @author kingston
  */
 public class IoSession {
-	
+
 	private static final Logger logger = LoggerFactory.getLogger(IoSession.class);
 
 	/** 网络连接channel */
@@ -28,7 +28,7 @@ public class IoSession {
 	private String ipAddr;
 
 	private boolean reconnected;
-	
+
 	/** 拓展用，保存一些个人数据  */
 	private Map<String, Object> attrs = new HashMap<>();
 
@@ -40,11 +40,15 @@ public class IoSession {
 		this.channel = channel;
 		this.ipAddr = ChannelUtils.getIp(channel);
 	}
-	
+
 	public void setUser(User user) {
 		this.user = user;
 	}
-	
+
+	public Channel getChannel() {
+		return channel;
+	}
+
 	/**
 	 * 向客户端发送消息
 	 * @param packet
@@ -77,7 +81,7 @@ public class IoSession {
 	public User getUser() {
 		return user;
 	}
-	
+
 	public boolean isClose() {
 		if (channel == null) {
 			return true;
@@ -85,9 +89,9 @@ public class IoSession {
 		return !channel.isActive() ||
 			   !channel.isOpen();
 	}
-	
+
 	/**
-	 * 关闭session 
+	 * 关闭session
 	 * @param reason {@link SessionCloseReason}
 	 */
 	public void close(SessionCloseReason reason) {
