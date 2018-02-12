@@ -8,16 +8,14 @@ import org.slf4j.LoggerFactory;
 import com.kingston.im.base.SpringContext;
 import com.kingston.im.dispatch.MessageTask;
 import com.kingston.im.net.message.AbstractPacket;
-import com.kingston.im.net.message.PacketManager;
 
 import io.netty.channel.Channel;
-import io.netty.channel.ChannelHandlerAdapter;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelPromise;
+import io.netty.channel.ChannelInboundHandlerAdapter;
 import io.netty.handler.timeout.IdleState;
 import io.netty.handler.timeout.IdleStateEvent;
 
-public class IoHandler extends ChannelHandlerAdapter {
+public class IoHandler extends ChannelInboundHandlerAdapter  {
 
 	private final static Logger logger = LoggerFactory.getLogger(IoHandler.class);
 
@@ -44,19 +42,6 @@ public class IoHandler extends ChannelHandlerAdapter {
 		// 扔到业务线程池处理
 		MessageTask cmdTask = MessageTask.valueOf(session.getDispatchKey(), session, message);
 		SpringContext.getMessageDispatcher().addMessageTask(cmdTask);
-	}
-
-	@Override
-	public void close(ChannelHandlerContext ctx,ChannelPromise promise){
-		logger.error("TCP closed...");
-		ctx.close(promise);
-	}
-
-	@Override
-	public void disconnect(ChannelHandlerContext ctx, ChannelPromise promise)
-			throws Exception {
-		ctx.disconnect(promise);
-		logger.error("客户端关闭");
 	}
 
 	@Override
