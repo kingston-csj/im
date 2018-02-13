@@ -59,6 +59,10 @@ public class FriendView {
 		this.groupName = groupName;
 	}
 
-
+	@Override
+	public String toString() {
+		return "FriendView [userId=" + userId + ", userName=" + userName + ", remark=" + remark + ", signature="
+				+ signature + ", sex=" + sex + ", group=" + group + ", groupName=" + groupName + "]";
+	}
 
 }

@@ -15,18 +15,17 @@ import com.kingston.im.net.message.AbstractPacket;
 
 import io.netty.channel.Channel;
 
-public enum ServerManager {
+public enum SessionManager {
 
 	INSTANCE;
 
-	private Logger logger = LoggerFactory.getLogger(ServerManager.class);
+	private Logger logger = LoggerFactory.getLogger(SessionManager.class);
 
 	/** 缓存通信上下文环境对应的登录用户（主要用于服务） */
 	private Map<IoSession, Long> session2UserIds  = new ConcurrentHashMap<>();
 
 	/** 缓存用户id与对应的会话 */
 	private ConcurrentMap<Long, IoSession> userId2Sessions = new ConcurrentHashMap<>();
-
 
 
 	/**
@@ -61,10 +60,10 @@ public enum ServerManager {
 	/**
 	 *  向所有在线用户发送数据包
 	 */
-	public void sendPacketToAllUsers(AbstractPacket pact){
+	public void notifyToAllOnlineUsers(AbstractPacket pact) {
 		if(pact == null ) return;
 
-		userId2Sessions.values().forEach( (session) -> session.sendPacket(pact));
+		userId2Sessions.values().forEach( session -> session.sendPacket(pact));
 	}
 
 	public IoSession getSessionBy(long userId) {

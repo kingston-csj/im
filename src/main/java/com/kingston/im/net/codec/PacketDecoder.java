@@ -22,7 +22,10 @@ public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 
 	public Object decode(ChannelHandlerContext ctx, ByteBuf in) throws Exception {
 		ByteBuf frame = (ByteBuf) super.decode(ctx, in);
-		if(frame.readableBytes() <= 0) return null ;
+		if (frame == null) {
+			return null;
+		}
+		if(frame.readableBytes() <= 0) return null;
 
 		int packetType = frame.readInt();
 		AbstractPacket packet = PacketManager.INSTANCE.createNewPacket(packetType);

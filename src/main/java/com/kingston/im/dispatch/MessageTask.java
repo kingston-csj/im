@@ -16,7 +16,7 @@ public class MessageTask extends DispatchTask {
 	private AbstractPacket message;
 
 	public static MessageTask valueOf(int distributeKey,
-			IoSession session, AbstractPacket message) {
+				IoSession session, AbstractPacket message) {
 		MessageTask msgTask = new MessageTask();
 		msgTask.dispatchKey = distributeKey;
 		msgTask.session = session;
@@ -37,4 +37,5 @@ public class MessageTask extends DispatchTask {
 			logger.error("业务处理出现异常", e);
 		}
 	}
+
 }

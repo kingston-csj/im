@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.im.base.Constants;
-import com.kingston.im.base.ServerManager;
+import com.kingston.im.base.SessionManager;
 import com.kingston.im.data.dao.FriendDao;
 import com.kingston.im.data.model.User;
 import com.kingston.im.data.view.FriendView;
@@ -56,7 +56,7 @@ public class FriendService {
 		ResFriendListPacket friendsPact = new ResFriendListPacket();
 		friendsPact.setFriends(myFriends);
 
-		ServerManager.INSTANCE.sendPacketTo(user, friendsPact);
+		SessionManager.INSTANCE.sendPacketTo(user, friendsPact);
 
 		onUserLogin(user);
 	}
@@ -68,7 +68,7 @@ public class FriendService {
 		for (FriendItemVo friend:myFriends) {
 			long friendId = friend.getUserId();
 			if (userService.isOnlineUser(friendId)) {
-				ServerManager.INSTANCE.sendPacketTo(friendId, loginPact);
+				SessionManager.INSTANCE.sendPacketTo(friendId, loginPact);
 			}
 		}
 	}
@@ -80,7 +80,7 @@ public class FriendService {
 		for (FriendItemVo friend:myFriends) {
 			long friendId = friend.getUserId();
 			if (userService.isOnlineUser(friendId)) {
-				ServerManager.INSTANCE.sendPacketTo(friendId, logoutPact);
+				SessionManager.INSTANCE.sendPacketTo(friendId, logoutPact);
 			}
 		}
 	}

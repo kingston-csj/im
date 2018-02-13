@@ -15,7 +15,7 @@ public class IdService {
 	
 	private static AtomicInteger generator;
 	
-	public void initSedd(int initSeed) {
+	public void initSeed(int initSeed) {
 		
 	}
 

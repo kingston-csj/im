@@ -1,7 +1,6 @@
 package com.kingston.im.logic.user.message.req;
 
 import com.kingston.im.base.SpringContext;
-import com.kingston.im.logic.GlobalConst;
 import com.kingston.im.logic.user.UserService;
 import com.kingston.im.net.IoSession;
 import com.kingston.im.net.message.AbstractPacket;
@@ -12,7 +11,7 @@ import io.netty.channel.Channel;
 
 public class ReqUserRegisterPacket extends AbstractPacket {
 
-	/** 性别{@link GlobalConst#sex_of_boy} */
+	/** 性别{@link Constants#sex_of_boy} */
 	private byte sex;
 
 	private String nickName;

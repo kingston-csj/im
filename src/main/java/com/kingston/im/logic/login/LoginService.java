@@ -5,7 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.im.base.Constants;
-import com.kingston.im.base.ServerManager;
+import com.kingston.im.base.SessionManager;
 import com.kingston.im.data.dao.UserDao;
 import com.kingston.im.data.model.User;
 import com.kingston.im.logic.friend.FriendService;
@@ -32,7 +32,7 @@ public class LoginService {
 		ResUserLoginPacket resp = new ResUserLoginPacket();
 		if(user == null) {
 			resp.setIsValid(Constants.FALSE);
-			ServerManager.INSTANCE.sendPacketTo(session, resp);
+			SessionManager.INSTANCE.sendPacketTo(session, resp);
 			return;
 		}
 
@@ -40,12 +40,12 @@ public class LoginService {
 	}
 
 	private void onLoginSucc(User user, IoSession session) {
-		ServerManager.INSTANCE.registerSession(user, session);
+		SessionManager.INSTANCE.registerSession(user, session);
 		userService.addUser2Online(user.getUserId());
 
 		ResUserLoginPacket loginPact = new ResUserLoginPacket();
 		loginPact.setIsValid(Constants.TRUE);
-		ServerManager.INSTANCE.sendPacketTo(session, loginPact);
+		SessionManager.INSTANCE.sendPacketTo(session, loginPact);
 
 		userService.refreshUserProfile(user);
 

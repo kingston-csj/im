@@ -6,11 +6,11 @@ import java.util.Set;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import com.kingston.im.base.ServerManager;
+import com.kingston.im.base.Constants;
+import com.kingston.im.base.SessionManager;
 import com.kingston.im.base.SpringContext;
 import com.kingston.im.data.dao.UserDao;
 import com.kingston.im.data.model.User;
-import com.kingston.im.logic.GlobalConst;
 import com.kingston.im.logic.user.message.res.ResUserInfoPacket;
 import com.kingston.im.logic.user.message.res.ResUserRegisterPacket;
 import com.kingston.im.logic.util.IdService;
@@ -59,11 +59,11 @@ public class UserService {
 		User oldUser = userDao.findByName(nickName);
 		ResUserRegisterPacket response = new ResUserRegisterPacket();
 		if (oldUser != null) {
-			response.setResultCode(GlobalConst.FAILED);
+			response.setResultCode(Constants.FAILED);
 			response.setMessage("账号id已存在");
 		}else {
 			User newUser = createNewUser(sex, nickName, password);
-			response.setResultCode(GlobalConst.SUCC);
+			response.setResultCode(Constants.SUCC);
 			response.setMessage(String.valueOf(newUser.getUserId()));
 		}
 		session.sendPacket(response);
@@ -89,7 +89,7 @@ public class UserService {
 		response.setUserName(user.getUserName());
 		response.setSignature(user.getSignature());
 
-		ServerManager.INSTANCE.sendPacketTo(user.getUserId(), response);
+		SessionManager.INSTANCE.sendPacketTo(user.getUserId(), response);
 	}
 
 	public void userLogout(Channel channel, SessionCloseReason reason) {
@@ -98,7 +98,7 @@ public class UserService {
 		SpringContext.getUserService().removeFromOnline(userId);
 		SpringContext.getFriendService().onUserLogout(userId);
 
-		ServerManager.INSTANCE.ungisterUserContext(channel, reason);
+		SessionManager.INSTANCE.ungisterUserContext(channel, reason);
 	}
 
 

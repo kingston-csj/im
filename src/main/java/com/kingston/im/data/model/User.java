@@ -1,11 +1,9 @@
 package com.kingston.im.data.model;
 
-import com.kingston.im.logic.GlobalConst;
-
 public class User {
 
 	private long userId;
-	/** 性别{@link GlobalConst#sex_of_boy} */
+	/** 性别{@link Constants#sex_of_boy} */
 	private byte sex;
 	/** 用户名字 */
 	private String userName;

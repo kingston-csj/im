@@ -1,13 +1,13 @@
 package com.kingston.im;
 
 public class ServerConfigs {
-	
+
 	/**  服务器ip */
-	private String socketIp = "127.0.0.1";
+	private String socketIp;
 	/**  服务器端口 */
-	private int socketPort = 8080;
-	
-	private int httpPort = 10086;
+	private int socketPort;
+
+	private int httpPort;
 
 	public String getSocketIp() {
 		return socketIp;
@@ -32,5 +32,5 @@ public class ServerConfigs {
 	public void setHttpPort(int httpPort) {
 		this.httpPort = httpPort;
 	}
-	
+
 }

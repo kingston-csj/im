@@ -34,10 +34,15 @@
   　　
 
   ###  案例教程 
-  栏目教程 --> [csdn专栏博客](http://blog.csdn.net/column/details/16455.html)
-  wiki说明 --> [wiki](https://github.com/kingston-csj/im/wiki) 
-  
-  欢迎star/fork，欢迎学习/使用，期待一起贡献代码！！
+  栏目教程 --> [csdn专栏博客](http://blog.csdn.net/column/details/16455.html)  
+  wiki说明 --> [wiki](https://github.com/kingston-csj/im/wiki)
+   
+
+  ### 客户端源代码  
+  --> [客户端wechat](https://github.com/kingston-csj/wechat)
 
   ## 欢迎交流讨论
-  如果您发现bug，或者有任何疑问，请提交issue !! 
+  欢迎star/fork，欢迎学习/使用，期待一起贡献代码 !!  
+  如果您发现bug，或者有任何疑问，请提交issue !!   
+  
+
