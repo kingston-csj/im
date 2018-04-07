@@ -1,5 +1,6 @@
 package com.kingston.im.logic.login.message.res;
 
+import com.kingston.im.base.Constants;
 import com.kingston.im.net.IoSession;
 import com.kingston.im.net.message.AbstractPacket;
 import com.kingston.im.net.message.PacketType;
@@ -10,7 +11,14 @@ public class ResUserLoginPacket extends AbstractPacket{
 
 	private String alertMsg;
 	private byte isValid;
-	
+
+	public static ResUserLoginPacket valueOfFailed() {
+		ResUserLoginPacket response = new ResUserLoginPacket();
+		response.setIsValid(Constants.FAILED);
+
+		return response;
+	}
+
 	@Override
 	public void writeBody(ByteBuf buf) {
 		writeUTF8(buf, alertMsg);
@@ -31,7 +39,7 @@ public class ResUserLoginPacket extends AbstractPacket{
 	@Override
 	public void execPacket(IoSession session) {
 		// TODO Auto-generated method stub
-		
+
 	}
 
 	public String getAlertMsg() {

@@ -11,6 +11,7 @@ import org.springframework.context.ApplicationContextAware;
 import com.kingston.im.ServerConfigs;
 import com.kingston.im.asyncdb.AysncDbService;
 import com.kingston.im.dispatch.MessageDispatcher;
+import com.kingston.im.listener.EventDispatcher;
 import com.kingston.im.logic.chat.ChatService;
 import com.kingston.im.logic.friend.FriendService;
 import com.kingston.im.logic.user.UserService;
@@ -32,6 +33,8 @@ public class SpringContext implements ApplicationContextAware {
 	private static IdService idService;
 
 	private static MessageDispatcher messageDispatcher;
+
+	private static EventDispatcher eventDispatcher;
 
 	private static ServerConfigs serverConfigs;
 
@@ -105,6 +108,16 @@ public class SpringContext implements ApplicationContextAware {
 	public final static MessageDispatcher getMessageDispatcher() {
 		return messageDispatcher;
 	}
+
+	@Resource
+	public void setEventDispatcher(EventDispatcher eventDispatcher) {
+		SpringContext.eventDispatcher = eventDispatcher;
+	}
+
+	public final static EventDispatcher getEventDispatcher() {
+		return eventDispatcher;
+	}
+
 
 	@Resource
 	public void setServerConfigs(ServerConfigs serverConfigs) {

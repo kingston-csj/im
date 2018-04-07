@@ -1,14 +1,14 @@
 package com.kingston.im.logic.login;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.im.base.Constants;
 import com.kingston.im.base.SessionManager;
-import com.kingston.im.data.dao.UserDao;
+import com.kingston.im.base.SpringContext;
 import com.kingston.im.data.model.User;
-import com.kingston.im.logic.friend.FriendService;
+import com.kingston.im.listener.EventType;
+import com.kingston.im.logic.login.event.UserLoginEvent;
 import com.kingston.im.logic.login.message.res.ResUserLoginPacket;
 import com.kingston.im.logic.user.UserService;
 import com.kingston.im.net.ChannelUtils;
@@ -20,19 +20,14 @@ import io.netty.channel.Channel;
 public class LoginService {
 
 	@Autowired
-	private UserDao userDao;
-	@Autowired
-	private FriendService friendService;
-	@Autowired
 	private UserService userService;
 
 	public void validateLogin(Channel channel, long userId, String password) {
-		User user = validate(userId, password);
+		User user = userService.queryUser(userId, password);
 		IoSession session = ChannelUtils.getSessionBy(channel);
-		ResUserLoginPacket resp = new ResUserLoginPacket();
-		if(user == null) {
-			resp.setIsValid(Constants.FALSE);
-			SessionManager.INSTANCE.sendPacketTo(session, resp);
+		if (user == null) {
+			SessionManager.INSTANCE.sendPacketTo(session,
+					ResUserLoginPacket.valueOfFailed());
 			return;
 		}
 
@@ -41,31 +36,14 @@ public class LoginService {
 
 	private void onLoginSucc(User user, IoSession session) {
 		SessionManager.INSTANCE.registerSession(user, session);
-		userService.addUser2Online(user.getUserId());
+		userService.addUser2Online(user);
 
 		ResUserLoginPacket loginPact = new ResUserLoginPacket();
 		loginPact.setIsValid(Constants.TRUE);
 		SessionManager.INSTANCE.sendPacketTo(session, loginPact);
 
-		userService.refreshUserProfile(user);
-
-		friendService.refreshUserFriends(user);
-	}
-
-	/**
-	 *  验证帐号密码是否一致
-	 */
-	private User validate(long userId, String password){
-		if (userId <= 0 || StringUtils.isEmpty(password)) {
-			return null;
-		}
-		User user = userDao.findById(userId);
-		if (user != null &&
-			user.getPassword().equals(password)) {
-			return user;
-		}
-
-		return null;
+		SpringContext.getEventDispatcher().fireEvent(
+				new UserLoginEvent(EventType.LOGIN, user.getUserId()));
 	}
 
 }

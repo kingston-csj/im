@@ -3,6 +3,7 @@ package com.kingston.im.logic.user;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -37,8 +38,9 @@ public class UserService {
 	private Set<Long> onlneUsers = new ConcurrentHashSet<>();
 
 
-	public void addUser2Online(long userId) {
-		this.onlneUsers.add(userId);
+	public void addUser2Online(User user) {
+		this.onlneUsers.add(user.getUserId());
+		this.lruUsers.put(user.getUserId(), user);
 	}
 
 	public void removeFromOnline(long userId) {
@@ -47,6 +49,23 @@ public class UserService {
 
 	public boolean isOnlineUser(long userId) {
 		return this.onlneUsers.contains(userId);
+	}
+
+	public User getOnlineUser(long userId) {
+		return this.lruUsers.get(userId);
+	}
+
+	public User queryUser(long userId, String password) {
+		if (userId <= 0 || StringUtils.isEmpty(password)) {
+			return null;
+		}
+		User user = userDao.findById(userId);
+		if (user != null &&
+			user.getPassword().equals(password)) {
+			return user;
+		}
+
+		return null;
 	}
 
 	/**
