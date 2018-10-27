@@ -1,18 +1,24 @@
 package com.kingston.im;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.context.support.FileSystemXmlApplicationContext;
 
-import com.kingston.im.base.SpringContext;
+import com.kingston.im.base.ServerNode;
 import com.kingston.im.http.HttpServer;
 import com.kingston.im.net.ChatServer;
-import com.kingston.im.net.message.PacketType;
 
 public class ServerStartup {
 
+	private Logger logger = LoggerFactory.getLogger(getClass());
+
 	private static ConfigurableApplicationContext context;
 
-	private static HttpServer httpServer = new HttpServer();
+	private static List<ServerNode> serverNodes = new ArrayList<>();
 
 	public static void main(String[] args) throws Exception {
 
@@ -29,17 +35,26 @@ public class ServerStartup {
 	}
 
 	public void start() throws Exception {
-		PacketType.initPackets();
 		context = new FileSystemXmlApplicationContext("config/applicationContext.xml");
 
-		ServerConfigs serverConfigs = SpringContext.getServerConfigs();
-		httpServer.start(serverConfigs.getHttpPort());
-		new ChatServer().bind(serverConfigs.getSocketPort());
-	}
+		serverNodes.add(new ChatServer());
+		serverNodes.add(new HttpServer());
 
+		for (ServerNode node : serverNodes) {
+			node.init();
+			node.start();
+		}
+	}
 
 	public void stop() {
 		context.close();
+		for (ServerNode node : serverNodes) {
+			try {
+				node.shutDown();
+			} catch (Exception e) {
+				logger.error("", e);
+			}
+		}
 	}
 
 }

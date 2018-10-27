@@ -7,17 +7,23 @@ import com.kingston.im.net.IoSession;
 import com.kingston.im.net.message.AbstractPacket;
 import com.kingston.im.net.message.PacketManager;
 
-public class MessageTask extends DispatchTask {
+/**
+ * 玩家请求消息任务
+ * 
+ * @author kingston
+ *
+ */
+public class CmdTask extends DispatchTask {
 
-	private static Logger logger = LoggerFactory.getLogger(MessageTask.class);
+	private static Logger logger = LoggerFactory.getLogger(CmdTask.class);
 
 	private long userId;
 	private IoSession session;
 	private AbstractPacket message;
 
-	public static MessageTask valueOf(int distributeKey,
+	public static CmdTask valueOf(int distributeKey,
 				IoSession session, AbstractPacket message) {
-		MessageTask msgTask = new MessageTask();
+		CmdTask msgTask = new CmdTask();
 		msgTask.dispatchKey = distributeKey;
 		msgTask.session = session;
 		msgTask.message  = message;

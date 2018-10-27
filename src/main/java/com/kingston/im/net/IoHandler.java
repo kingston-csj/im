@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.kingston.im.base.SpringContext;
-import com.kingston.im.dispatch.MessageTask;
+import com.kingston.im.dispatch.CmdTask;
 import com.kingston.im.net.message.AbstractPacket;
 
 import io.netty.channel.Channel;
@@ -40,7 +40,7 @@ public class IoHandler extends ChannelInboundHandlerAdapter  {
 //		PacketManager.INSTANCE.execPacket(session, message);
 
 		// 扔到业务线程池处理
-		MessageTask cmdTask = MessageTask.valueOf(session.getDispatchKey(), session, message);
+		CmdTask cmdTask = CmdTask.valueOf(session.getDispatchKey(), session, message);
 		SpringContext.getMessageDispatcher().addMessageTask(cmdTask);
 	}
 

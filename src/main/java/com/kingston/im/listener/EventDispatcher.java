@@ -21,7 +21,6 @@ public class EventDispatcher {
 	@Autowired
 	private ListenerManager listenerMgr;
 
-
 	/** 事件类型与事件监听器列表的映射关系 */
 	private final Map<EventType, Set<Object>> observers = new HashMap<>();
 	/** 异步执行的事件队列 */

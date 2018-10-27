@@ -1,6 +1,5 @@
 package com.kingston.im.logic.chat;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.im.base.SessionManager;
@@ -9,9 +8,6 @@ import com.kingston.im.net.IoSession;
 
 @Component
 public class ChatService {
-	
-	@Autowired
-	private IChatInspector chatInspector;
 	
 	public void chat(IoSession fromUser, long toUserId, String content) {
 		IoSession toUser = SessionManager.INSTANCE.getSessionBy(toUserId);

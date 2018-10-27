@@ -7,7 +7,7 @@ import org.springframework.test.annotation.Rollback;
 import com.kingston.im.data.dao.UserDao;
 import com.kingston.im.data.model.User;
 
-public class UserDaoTest extends BaseTestCase {
+public class TestUserDao extends BaseTestCase {
 
 	@Autowired
 	private UserDao userDao;
