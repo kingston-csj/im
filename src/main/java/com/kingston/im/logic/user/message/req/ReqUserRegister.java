@@ -9,7 +9,7 @@ import com.kingston.im.net.message.PacketType;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
-public class ReqUserRegisterPacket extends AbstractPacket {
+public class ReqUserRegister extends AbstractPacket {
 
 	/** 性别{@link Constants#sex_of_boy} */
 	private byte sex;

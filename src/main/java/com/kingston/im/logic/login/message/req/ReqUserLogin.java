@@ -9,7 +9,7 @@ import com.kingston.im.net.message.PacketType;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.Channel;
 
-public class ReqUserLoginPacket extends AbstractPacket {
+public class ReqUserLogin extends AbstractPacket {
 
 	private long userId;
 	private String userPwd;

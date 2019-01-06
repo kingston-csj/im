@@ -7,13 +7,13 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResUserLoginPacket extends AbstractPacket{
+public class ResUserLogin extends AbstractPacket{
 
 	private String alertMsg;
 	private byte isValid;
 
-	public static ResUserLoginPacket valueOfFailed() {
-		ResUserLoginPacket response = new ResUserLoginPacket();
+	public static ResUserLogin valueOfFailed() {
+		ResUserLogin response = new ResUserLogin();
 		response.setIsValid(Constants.FAILED);
 
 		return response;

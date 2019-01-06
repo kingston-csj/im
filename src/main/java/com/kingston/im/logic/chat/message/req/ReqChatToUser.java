@@ -7,12 +7,12 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ReqChatToGroupPacket extends AbstractPacket {
-	
+public class ReqChatToUser extends AbstractPacket {
+
 	private long toUserId;
-	
+
 	private String content;
-	
+
 	public long getToUserId() {
 		return toUserId;
 	}
@@ -31,20 +31,21 @@ public class ReqChatToGroupPacket extends AbstractPacket {
 
 	@Override
 	public void writeBody(ByteBuf buf) {
-		// TODO Auto-generated method stub
-		
+		buf.writeLong(this.toUserId);
+		writeUTF8(buf, content);
+
 	}
 
 	@Override
 	public void readBody(ByteBuf buf) {
 		this.toUserId = buf.readLong();
 		this.content = readUTF8(buf);
-		
+
 	}
 
 	@Override
 	public PacketType getPacketType() {
-		return PacketType.ReqChatToGroup;
+		return PacketType.ReqChatToUser;
 	}
 
 	@Override

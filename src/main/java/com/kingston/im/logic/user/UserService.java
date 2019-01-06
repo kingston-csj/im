@@ -12,8 +12,8 @@ import com.kingston.im.base.SessionManager;
 import com.kingston.im.base.SpringContext;
 import com.kingston.im.data.dao.UserDao;
 import com.kingston.im.data.model.User;
-import com.kingston.im.logic.user.message.res.ResUserInfoPacket;
-import com.kingston.im.logic.user.message.res.ResUserRegisterPacket;
+import com.kingston.im.logic.user.message.res.ResUserInfo;
+import com.kingston.im.logic.user.message.res.ResUserRegister;
 import com.kingston.im.logic.util.IdService;
 import com.kingston.im.net.ChannelUtils;
 import com.kingston.im.net.IoSession;
@@ -76,7 +76,7 @@ public class UserService {
 	public void registerNewAccount(Channel channel, byte sex, String nickName, String password) {
 		IoSession session = ChannelUtils.getSessionBy(channel);
 		User oldUser = userDao.findByName(nickName);
-		ResUserRegisterPacket response = new ResUserRegisterPacket();
+		ResUserRegister response = new ResUserRegister();
 		if (oldUser != null) {
 			response.setResultCode(Constants.FAILED);
 			response.setMessage("账号id已存在");
@@ -102,7 +102,7 @@ public class UserService {
 	}
 
 	public void refreshUserProfile(User user) {
-		ResUserInfoPacket response = new ResUserInfoPacket();
+		ResUserInfo response = new ResUserInfo();
 		response.setSex(user.getSex());
 		response.setUserId(user.getUserId());
 		response.setUserName(user.getUserName());

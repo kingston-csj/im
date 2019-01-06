@@ -6,7 +6,7 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResUserInfoPacket extends AbstractPacket {
+public class ResUserInfo extends AbstractPacket {
 
 	private long userId;
 	/** 账号昵称 */

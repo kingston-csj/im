@@ -5,20 +5,22 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
-import com.kingston.im.logic.chat.message.req.ReqChatToGroupPacket;
-import com.kingston.im.logic.chat.message.req.ReqChatToUserPacket;
-import com.kingston.im.logic.chat.message.res.ResChatToGroupPacket;
-import com.kingston.im.logic.chat.message.res.ResChatToUserPacket;
-import com.kingston.im.logic.friend.message.res.ResFriendListPacket;
-import com.kingston.im.logic.friend.message.res.ResFriendLoginPacket;
-import com.kingston.im.logic.friend.message.res.ResFriendLogoutPacket;
-import com.kingston.im.logic.login.message.req.ReqHeartBeatPacket;
-import com.kingston.im.logic.login.message.req.ReqUserLoginPacket;
-import com.kingston.im.logic.login.message.res.ResHeartBeatPacket;
-import com.kingston.im.logic.login.message.res.ResUserLoginPacket;
-import com.kingston.im.logic.user.message.req.ReqUserRegisterPacket;
-import com.kingston.im.logic.user.message.res.ResUserInfoPacket;
-import com.kingston.im.logic.user.message.res.ResUserRegisterPacket;
+import com.kingston.im.logic.chat.message.req.ReqChatToGroup;
+import com.kingston.im.logic.chat.message.req.ReqChatToUser;
+import com.kingston.im.logic.chat.message.res.ResChatToGroup;
+import com.kingston.im.logic.chat.message.res.ResChatToUser;
+import com.kingston.im.logic.friend.message.res.ResFriendList;
+import com.kingston.im.logic.friend.message.res.ResFriendLogin;
+import com.kingston.im.logic.friend.message.res.ResFriendLogout;
+import com.kingston.im.logic.login.message.req.ReqHeartBeat;
+import com.kingston.im.logic.login.message.req.ReqUserLogin;
+import com.kingston.im.logic.login.message.res.ResHeartBeat;
+import com.kingston.im.logic.login.message.res.ResUserLogin;
+import com.kingston.im.logic.search.message.req.ReqSearchFriends;
+import com.kingston.im.logic.search.message.res.ResSearchFriends;
+import com.kingston.im.logic.user.message.req.ReqUserRegister;
+import com.kingston.im.logic.user.message.res.ResUserInfo;
+import com.kingston.im.logic.user.message.res.ResUserRegister;
 
 public enum PacketType {
 
@@ -34,39 +36,42 @@ public enum PacketType {
 	//------------------好友5----------------------------------
 
 	/** 请求--链接心跳包 */
-	ReqHeartBeat(1_000, ReqHeartBeatPacket.class),
+	ReqHeartBeat(1_000, ReqHeartBeat.class),
 	/** 推送--新用户注册  */
-	RespHeartBeat(1_200, ResHeartBeatPacket.class),
+	RespHeartBeat(1_200, ResHeartBeat.class),
 
 	/** 请求--新用户注册  */
-	ReqUserRegister(3_000, ReqUserRegisterPacket.class),
+	ReqUserRegister(3_000, ReqUserRegister.class),
 	/** 请求--请求--用户登陆  */
-	ReqUserLogin(3_001, ReqUserLoginPacket.class),
+	ReqUserLogin(3_001, ReqUserLogin.class),
 
 	/** 推送--新用户注册  */
-	ResUserRegister(3_200, ResUserRegisterPacket.class),
+	ResUserRegister(3_200, ResUserRegister.class),
     /** 推送--用户登录  */
-	ResUserLogin(3_201, ResUserLoginPacket.class),
+	ResUserLogin(3_201, ResUserLogin.class),
 	/** 推送--玩家信息 */
-	ResUserInfo(3_202, ResUserInfoPacket.class),
+	ResUserInfo(3_202, ResUserInfo.class),
 
 	/** 请求--单聊  */
-	ReqChatToUser(4_000, ReqChatToUserPacket.class),
+	ReqChatToUser(4_000, ReqChatToUser.class),
     /** 请求--群聊  */
-	ReqChatToGroup(4_001, ReqChatToGroupPacket.class),
+	ReqChatToGroup(4_001, ReqChatToGroup.class),
 
 	/** 推送--单聊 */
-	ResChatToUser(4_200, ResChatToUserPacket.class),
+	ResChatToUser(4_200, ResChatToUser.class),
 	/** 推送--群聊 */
-	ResChatToGroup(4_201, ResChatToGroupPacket.class),
+	ResChatToGroup(4_201, ResChatToGroup.class),
 
+	/** 请求－好友查询 */
+	ReqSearchFriends(5_000, ReqSearchFriends.class),
 	/** 推送--好友列表 */
-	ResFriendList(5_200, ResFriendListPacket.class),
+	ResFriendList(5_200, ResFriendList.class),
 	/** 推送--好友登录 */
-	ResFriendLogin(5_201, ResFriendLoginPacket.class),
+	ResFriendLogin(5_201, ResFriendLogin.class),
 	/** 推送--好友下线 */
-	ResFriendLogout(5_202, ResFriendLogoutPacket.class),
+	ResFriendLogout(5_202, ResFriendLogout.class),
 
+	ResSearchFriends(5_203, ResSearchFriends.class),
 	;
 
 	private int type;

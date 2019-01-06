@@ -14,6 +14,7 @@ import com.kingston.im.dispatch.MessageDispatcher;
 import com.kingston.im.listener.EventDispatcher;
 import com.kingston.im.logic.chat.ChatService;
 import com.kingston.im.logic.friend.FriendService;
+import com.kingston.im.logic.search.SearchService;
 import com.kingston.im.logic.user.UserService;
 import com.kingston.im.logic.util.IdService;
 
@@ -25,6 +26,9 @@ public class SpringContext implements ApplicationContextAware {
 	private static UserService userService;
 
 	private static FriendService friendService;
+
+	private static SearchService searchService;
+
 	/** 异步持久化服务 */
 	private static AysncDbService aysncDbService;
 
@@ -71,6 +75,15 @@ public class SpringContext implements ApplicationContextAware {
 
 	public final static FriendService getFriendService() {
 		return friendService;
+	}
+
+	@Resource
+	public void setSearchService(SearchService searchService) {
+		SpringContext.searchService = searchService;
+	}
+
+	public final static SearchService getSearchService() {
+		return searchService;
 	}
 
 	@Resource

@@ -10,7 +10,7 @@ import io.netty.buffer.ByteBuf;
  * 好友注销
  * @author kingston
  */
-public class ResFriendLogoutPacket extends AbstractPacket {
+public class ResFriendLogout extends AbstractPacket {
 
 	private long friendId;
 

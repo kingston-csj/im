@@ -9,7 +9,7 @@ import com.kingston.im.base.SpringContext;
 import com.kingston.im.data.model.User;
 import com.kingston.im.listener.EventType;
 import com.kingston.im.logic.login.event.UserLoginEvent;
-import com.kingston.im.logic.login.message.res.ResUserLoginPacket;
+import com.kingston.im.logic.login.message.res.ResUserLogin;
 import com.kingston.im.logic.user.UserService;
 import com.kingston.im.net.ChannelUtils;
 import com.kingston.im.net.IoSession;
@@ -27,7 +27,7 @@ public class LoginService {
 		IoSession session = ChannelUtils.getSessionBy(channel);
 		if (user == null) {
 			SessionManager.INSTANCE.sendPacketTo(session,
-					ResUserLoginPacket.valueOfFailed());
+					ResUserLogin.valueOfFailed());
 			return;
 		}
 
@@ -38,7 +38,7 @@ public class LoginService {
 		SessionManager.INSTANCE.registerSession(user, session);
 		userService.addUser2Online(user);
 
-		ResUserLoginPacket loginPact = new ResUserLoginPacket();
+		ResUserLogin loginPact = new ResUserLogin();
 		loginPact.setIsValid(Constants.TRUE);
 		SessionManager.INSTANCE.sendPacketTo(session, loginPact);
 

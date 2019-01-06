@@ -6,7 +6,7 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResUserRegisterPacket extends AbstractPacket {
+public class ResUserRegister extends AbstractPacket {
 	
 	private byte resultCode;
 	

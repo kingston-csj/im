@@ -6,7 +6,7 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ReqHeartBeatPacket extends AbstractPacket {
+public class ReqHeartBeat extends AbstractPacket {
 
 	@Override
 	public void writeBody(ByteBuf buf) {

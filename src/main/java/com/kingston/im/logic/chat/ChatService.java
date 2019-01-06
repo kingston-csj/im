@@ -3,7 +3,7 @@ package com.kingston.im.logic.chat;
 import org.springframework.stereotype.Component;
 
 import com.kingston.im.base.SessionManager;
-import com.kingston.im.logic.chat.message.res.ResChatToUserPacket;
+import com.kingston.im.logic.chat.message.res.ResChatToUser;
 import com.kingston.im.net.IoSession;
 
 @Component
@@ -19,7 +19,7 @@ public class ChatService {
 		}
 		
 		//双方都推送消息
-		ResChatToUserPacket response = new ResChatToUserPacket();
+		ResChatToUser response = new ResChatToUser();
 		response.setContent(content);
 		response.setFromUserId(fromUser.getUser().getUserId());
 		toUser.sendPacket(response);

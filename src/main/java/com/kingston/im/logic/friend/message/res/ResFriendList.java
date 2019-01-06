@@ -9,7 +9,7 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResFriendListPacket extends AbstractPacket {
+public class ResFriendList extends AbstractPacket {
 
 	private List<FriendItemVo> friends;
 

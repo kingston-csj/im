@@ -11,9 +11,9 @@ import com.kingston.im.base.SessionManager;
 import com.kingston.im.data.dao.FriendDao;
 import com.kingston.im.data.model.User;
 import com.kingston.im.data.view.FriendView;
-import com.kingston.im.logic.friend.message.res.ResFriendListPacket;
-import com.kingston.im.logic.friend.message.res.ResFriendLoginPacket;
-import com.kingston.im.logic.friend.message.res.ResFriendLogoutPacket;
+import com.kingston.im.logic.friend.message.res.ResFriendList;
+import com.kingston.im.logic.friend.message.res.ResFriendLogin;
+import com.kingston.im.logic.friend.message.res.ResFriendLogout;
 import com.kingston.im.logic.friend.model.FriendItemVo;
 import com.kingston.im.logic.user.UserService;
 
@@ -24,7 +24,6 @@ public class FriendService {
 	private FriendDao friendDao;
 	@Autowired
 	private UserService userService;
-
 
 	public List<FriendItemVo> listMyFriends(long userId) {
 		List<FriendItemVo> result = new ArrayList<>();
@@ -53,7 +52,7 @@ public class FriendService {
 
 	public void refreshUserFriends(User user) {
 		List<FriendItemVo> myFriends = listMyFriends(user.getUserId());
-		ResFriendListPacket friendsPact = new ResFriendListPacket();
+		ResFriendList friendsPact = new ResFriendList();
 		friendsPact.setFriends(myFriends);
 
 		SessionManager.INSTANCE.sendPacketTo(user, friendsPact);
@@ -63,7 +62,7 @@ public class FriendService {
 
 	public void onUserLogin(User user) {
 		List<FriendItemVo> myFriends = listMyFriends(user.getUserId());
-		ResFriendLoginPacket loginPact = new ResFriendLoginPacket();
+		ResFriendLogin loginPact = new ResFriendLogin();
 		loginPact.setFriendId(user.getUserId());
 		for (FriendItemVo friend:myFriends) {
 			long friendId = friend.getUserId();
@@ -75,7 +74,7 @@ public class FriendService {
 
 	public void onUserLogout(long userId) {
 		List<FriendItemVo> myFriends = listMyFriends(userId);
-		ResFriendLogoutPacket logoutPact = new ResFriendLogoutPacket();
+		ResFriendLogout logoutPact = new ResFriendLogout();
 		logoutPact.setFriendId(userId);
 		for (FriendItemVo friend:myFriends) {
 			long friendId = friend.getUserId();

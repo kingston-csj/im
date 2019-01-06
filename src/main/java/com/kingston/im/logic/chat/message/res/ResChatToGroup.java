@@ -6,22 +6,20 @@ import com.kingston.im.net.message.PacketType;
 
 import io.netty.buffer.ByteBuf;
 
-public class ResChatToUserPacket extends AbstractPacket {
-
-	private long fromUserId;
-
+public class ResChatToGroup extends AbstractPacket {
+	
 	private String content;
 
 	@Override
 	public void writeBody(ByteBuf buf) {
-		buf.writeLong(fromUserId);
-		writeUTF8(buf, content);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
 	public void readBody(ByteBuf buf) {
-		this.fromUserId = buf.readLong();
-		this.content = readUTF8(buf);
+		// TODO Auto-generated method stub
+		
 	}
 
 	@Override
@@ -34,25 +32,12 @@ public class ResChatToUserPacket extends AbstractPacket {
 		// TODO Auto-generated method stub
 	}
 
-	public long getFromUserId() {
-		return fromUserId;
-	}
-
-	public void setFromUserId(long fromUserId) {
-		this.fromUserId = fromUserId;
-	}
-
 	public String getContent() {
 		return content;
 	}
 
 	public void setContent(String content) {
 		this.content = content;
-	}
-
-	@Override
-	public String toString() {
-		return "ResChatToUserPacket [fromUserId=" + fromUserId + ", content=" + content + "]";
 	}
 
 }
