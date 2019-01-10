@@ -1,4 +1,4 @@
-package com.kingston.im.chat.util;
+package com.kingston.im.common.thread;
 
 import java.util.concurrent.ThreadFactory;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -8,28 +8,32 @@ import java.util.concurrent.atomic.AtomicInteger;
  * @author kingston
  */
 public class NamedThreadFactory implements ThreadFactory {
-	
+
 	private ThreadGroup threadGroup;
-	
+
 	private String groupName;
-	
+
+	private final boolean daemo;
+
 	private AtomicInteger idGenerator = new AtomicInteger(1);
-	
+
 	public NamedThreadFactory(String group) {
+		this(group, false);
+	}
+
+	public NamedThreadFactory(String group, boolean daemo) {
 		this.groupName = group;
+		this.daemo = daemo;
 	}
 
 	@Override
 	public Thread newThread(Runnable r) {
-		return new Thread(threadGroup, r, getNextThreadName());
+		String name = getNextThreadName();
+		Thread ret = new Thread(threadGroup, r, name, 0);
+		ret.setDaemon(daemo);
+		return ret;
 	}
-	
-	public Thread newDaemonThread(Runnable r) {
-		Thread t =  new Thread(threadGroup, r, getNextThreadName());
-		t.setDaemon(true);
-		return t;
-	}
-	
+
 	private String getNextThreadName() {
 		return this.groupName + "-thread-" + this.idGenerator.getAndIncrement();
 	}

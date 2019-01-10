@@ -18,8 +18,8 @@ import com.kingston.im.chat.logic.util.IdService;
 import com.kingston.im.chat.net.ChannelUtils;
 import com.kingston.im.chat.net.IoSession;
 import com.kingston.im.chat.net.SessionCloseReason;
-import com.kingston.im.chat.util.ConcurrentHashSet;
-import com.kingston.im.chat.util.LruHashMap;
+import com.kingston.im.common.utils.ConcurrentHashSet;
+import com.kingston.im.common.utils.LruHashMap;
 
 import io.netty.channel.Channel;
 

@@ -1,4 +1,4 @@
-package org.im.chat;
+package com.kingston.im.common;
 
 import junit.framework.Test;
 import junit.framework.TestCase;

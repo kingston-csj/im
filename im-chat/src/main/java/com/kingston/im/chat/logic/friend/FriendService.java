@@ -14,7 +14,7 @@ import com.kingston.im.chat.data.view.FriendView;
 import com.kingston.im.chat.logic.friend.message.res.ResFriendList;
 import com.kingston.im.chat.logic.friend.message.res.ResFriendLogin;
 import com.kingston.im.chat.logic.friend.message.res.ResFriendLogout;
-import com.kingston.im.chat.logic.friend.model.FriendItemVo;
+import com.kingston.im.chat.logic.friend.message.vo.FriendItemVo;
 import com.kingston.im.chat.logic.user.UserService;
 
 @Component

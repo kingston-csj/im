@@ -1,4 +1,4 @@
-package com.kingston.im.chat.logic.friend.model;
+package com.kingston.im.chat.logic.friend.message.vo;
 
 import com.kingston.im.chat.net.message.ByteBufBean;
 

@@ -1,8 +1,10 @@
-package com.kingston.im.chat.util;
+package com.kingston.im.common.utils;
 
 import java.util.LinkedHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
+
+import com.kingston.im.common.thread.ThreadSafe;
 
 /**
  * LruHashMap is an extension of Java's HashMap, which has a bounded size();
@@ -13,6 +15,7 @@ import java.util.concurrent.locks.ReentrantLock;
  *
  * @author kingston
  */
+@ThreadSafe
 public class LruHashMap<K, V> extends LinkedHashMap<K, V> {
 
     private static final long serialVersionUID = -5167631809472116969L;

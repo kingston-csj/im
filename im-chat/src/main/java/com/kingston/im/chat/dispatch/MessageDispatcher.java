@@ -7,7 +7,8 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.stereotype.Component;
 
-import com.kingston.im.chat.util.NamedThreadFactory;
+import com.kingston.im.common.thread.NamedThreadFactory;
+
 
 @Component
 public class MessageDispatcher {

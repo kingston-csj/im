@@ -2,7 +2,7 @@ package com.kingston.im.chat.logic.friend.message.res;
 
 import java.util.List;
 
-import com.kingston.im.chat.logic.friend.model.FriendItemVo;
+import com.kingston.im.chat.logic.friend.message.vo.FriendItemVo;
 import com.kingston.im.chat.net.IoSession;
 import com.kingston.im.chat.net.message.AbstractPacket;
 import com.kingston.im.chat.net.message.PacketType;

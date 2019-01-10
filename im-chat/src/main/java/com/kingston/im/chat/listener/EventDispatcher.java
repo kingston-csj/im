@@ -12,7 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.kingston.im.chat.logs.LoggerUtils;
-import com.kingston.im.chat.util.NamedThreadFactory;
+import com.kingston.im.common.thread.NamedThreadFactory;
 
 
 @Component
