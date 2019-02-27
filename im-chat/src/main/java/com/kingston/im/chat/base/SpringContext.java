@@ -2,11 +2,13 @@ package com.kingston.im.chat.base;
 
 import java.util.Collection;
 
+import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
+import org.springframework.stereotype.Component;
 
 import com.kingston.im.chat.ServerConfigs;
 import com.kingston.im.chat.asyncdb.AysncDbService;
@@ -18,10 +20,18 @@ import com.kingston.im.chat.logic.search.SearchService;
 import com.kingston.im.chat.logic.user.UserService;
 import com.kingston.im.chat.logic.util.IdService;
 
+@Component
 public class SpringContext implements ApplicationContextAware {
 
+	private static SpringContext self;
+	
 	/** spring容器上下文 */
 	private static ApplicationContext applicationContext = null;
+	
+	@PostConstruct
+	private void init() {
+		self = this;
+	}
 
 	private static UserService userService;
 

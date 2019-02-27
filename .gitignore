@@ -8,9 +8,10 @@ target/
 *.tar.gz
 
 # eclipse ignore
-.settings/
-.project
-.classpath
+**/.settings/
+*.project
+*.classpath
+**/.*prefs
 
 # idea ignore
 .idea/
