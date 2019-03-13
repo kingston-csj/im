@@ -13,7 +13,6 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.ConfigurableApplicationContext;
 
 import com.kingston.im.chat.base.ServerNode;
-import com.kingston.im.chat.base.SpringContext;
 import com.kingston.im.chat.http.HttpServer;
 import com.kingston.im.chat.net.ChatServer;
 
