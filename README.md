@@ -12,14 +12,14 @@
   *  使用独立线程池处理用户消息 　
 
   ### ToDoList  
-  *  改为分布式系统   
+  *  使用SpringCloud打造为分布式系统   
   *  在线/离线文件传输   
   *  异步处理用户数据的持久化  
-  *  开发更多的交互功能       
+  *  开发更多的交互功能        
 
   ### QuickStart  
   1. 安装git后，使用命令 git clone https://github.com/kingston-csj/chat_server  
-  2. 新建数据库chat_room，导入根目录下的chat_room.sql   
+  2. 新建数据库chat_room，导入im-chat/src/test/resources目录下的chat_room.sql   
   3. 在applicationContext.xml文件配置本地数据库连接属性，启动ServerStartup
   4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/chat_client  
   5. 启动ClientStartup类, 即可看到登录界面（临时密码为000）
