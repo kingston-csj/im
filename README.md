@@ -34,7 +34,7 @@
   　　
 
   ###  案例教程 
-  栏目教程 --> [csdn专栏博客](http://blog.csdn.net/column/details/16455.html)  
+  栏目教程 --> [csdn专栏博客](https://blog.csdn.net/littleschemer/article/category/9269527)  
   wiki说明 --> [wiki](https://github.com/kingston-csj/im/wiki)
    
 
