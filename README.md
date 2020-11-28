@@ -40,6 +40,11 @@
 
   ### 客户端源代码  
   --> [客户端wechat](https://github.com/kingston-csj/wechat)
+  
+  ## 请作者喝杯咖啡
+  如果您觉得有所收获，可以请作者喝杯咖啡。大家的支持，促使我不断改进优化，谢谢！  
+  ![](/screenshots/wx.png "微信收款码")
+  ![](/screenshots/zfb.jpg "支付宝收款码")
 
   ## 欢迎交流讨论
   欢迎star/fork，欢迎学习/使用，期待一起贡献代码 !!  
