@@ -1,14 +1,13 @@
 package com.kingston.im.chat.data.dao;
 
-import java.util.List;
-
+import com.kingston.im.chat.data.view.FriendView;
 import org.springframework.stereotype.Repository;
 
-import com.kingston.im.chat.data.view.FriendView;
+import java.util.List;
 
 @Repository
 public interface FriendDao {
 
-	public List<FriendView> getMyFriends(long userId);
+    List<FriendView> getMyFriends(long userId);
 
 }

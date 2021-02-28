@@ -1,9 +1,11 @@
 package com.kingston.im.chat.data.model;
 
+import com.kingston.im.chat.base.Constants;
+
 public class User {
 
 	private long userId;
-	/** 性别{@link Constants#sex_of_boy} */
+	/** 性别{@link Constants#SEX_OF_BOY} */
 	private byte sex;
 	/** 用户名字 */
 	private String userName;

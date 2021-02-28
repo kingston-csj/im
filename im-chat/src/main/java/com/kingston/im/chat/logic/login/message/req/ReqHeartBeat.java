@@ -24,7 +24,7 @@ public class ReqHeartBeat extends AbstractPacket {
 
 	@Override
 	public void execPacket(IoSession session) {
-		System.err.println("收到客户端的心跳包");
+//		System.err.println("收到客户端的心跳包");
 	}
 
 }

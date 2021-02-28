@@ -38,7 +38,6 @@ public class IoHandler extends ChannelInboundHandlerAdapter  {
 
 		// 不在io线程处理
 //		PacketManager.INSTANCE.execPacket(session, message);
-
 		// 扔到业务线程池处理
 		CmdTask cmdTask = CmdTask.valueOf(session.getDispatchKey(), session, message);
 		SpringContext.getMessageDispatcher().addMessageTask(cmdTask);

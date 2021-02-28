@@ -37,7 +37,6 @@ public class UserService {
 	/** 在线用户列表　*/
 	private Set<Long> onlneUsers = new ConcurrentHashSet<>();
 
-
 	public void addUser2Online(User user) {
 		this.onlneUsers.add(user.getUserId());
 		this.lruUsers.put(user.getUserId(), user);
@@ -70,29 +69,27 @@ public class UserService {
 
 	/**
 	 * 注册新账号
-	 * @param userId qq号码
 	 * @param nickName 昵称
 	 */
-	public void registerNewAccount(Channel channel, byte sex, String nickName, String password) {
+	public void registerNewAccount(Channel channel, byte sex, long nickName, String password) {
 		IoSession session = ChannelUtils.getSessionBy(channel);
-		User oldUser = userDao.findByName(nickName);
+		User oldUser = userDao.findById(nickName);
 		ResUserRegister response = new ResUserRegister();
 		if (oldUser != null) {
 			response.setResultCode(Constants.FAILED);
 			response.setMessage("账号id已存在");
 		}else {
-			User newUser = createNewUser(sex, nickName, password);
+			User newUser = createNewUser(nickName, sex, String.valueOf(nickName), password);
 			response.setResultCode(Constants.SUCC);
 			response.setMessage(String.valueOf(newUser.getUserId()));
 		}
 		session.sendPacket(response);
 	}
 
-	private User createNewUser(byte sex, String nickName, String password) {
-		int newId = idService.getNextId();
+	private User createNewUser(long userId, byte sex, String nickName, String password) {
 		User newUser = new User();
 		newUser.setSex(sex);
-		newUser.setUserId(newId);
+		newUser.setUserId(userId);
 		newUser.setUserName(nickName);
 		newUser.setPassword(password);
 

@@ -1,21 +1,20 @@
 package com.kingston.im.chat.data.dao;
 
-import org.springframework.stereotype.Repository;
-
 import com.kingston.im.chat.data.model.User;
+import org.springframework.stereotype.Repository;
 
 @Repository
 public interface UserDao {
-	
-	public int getMaxId();
 
-	public User findById(Long id);
-	
-	public User findByName(String nickName);
-	
-	public void addUser(User user);
-	
-	public void delUser(Integer id);
-	
-	public void updateUser(User user);
+    int getMaxId();
+
+    User findById(Long id);
+
+    User findByName(String nickName);
+
+    void addUser(User user);
+
+    void delUser(Integer id);
+
+    void updateUser(User user);
 }

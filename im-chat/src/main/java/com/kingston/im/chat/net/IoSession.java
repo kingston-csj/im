@@ -39,8 +39,6 @@ public class IoSession {
 	/** 拓展用，保存一些个人数据  */
 	private Map<String, Object> attrs = new HashMap<>();
 
-
-
 	public IoSession() {
 
 	}

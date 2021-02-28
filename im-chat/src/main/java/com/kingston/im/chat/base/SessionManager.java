@@ -27,7 +27,6 @@ public enum SessionManager {
 	/** 缓存用户id与对应的会话 */
 	private ConcurrentMap<Long, IoSession> userId2Sessions = new ConcurrentHashMap<>();
 
-
 	/**
 	 *  向单一在线用户发送数据包
 	 */
