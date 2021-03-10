@@ -5,7 +5,7 @@
 <configuration>
 	<!--别名申明 -->
 	<typeAliases>
-		<typeAlias type="com.kingston.im.chat.data.model.User" alias="user" />
+		<typeAlias type="pers.kinson.im.chat.data.model.User" alias="user" />
 	</typeAliases>
 
 

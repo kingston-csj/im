@@ -6,5 +6,5 @@ spring:
     driver-class-name: com.mysql.jdbc.Driver
 
 mybatis:
-  mapper-locations: classpath:com/kingston/im/chat/data/mybatis/*Mapper.xml
+  mapper-locations: classpath:pers/kinson/im/chat/data/mybatis/*Mapper.xml
   config-location: classpath:mybatis-config.xml

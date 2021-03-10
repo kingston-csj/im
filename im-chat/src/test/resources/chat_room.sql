@@ -1,17 +1,3 @@
-/*
-Navicat MySQL Data Transfer
-
-Source Server         : localhost
-Source Server Version : 50624
-Source Host           : localhost:3306
-Source Database       : chat_room
-
-Target Server Type    : MYSQL
-Target Server Version : 50624
-File Encoding         : 65001
-
-Date: 2018-04-20 23:01:25
-*/
 
 SET FOREIGN_KEY_CHECKS=0;
 
@@ -82,7 +68,7 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1000', 'kingston', '000', '1', '专业写Bug', null, null);
+INSERT INTO `user` VALUES ('1000', 'kinson', '000', '1', '专业写Bug', null, null);
 INSERT INTO `user` VALUES ('1001', 'hello', '000', '1', '我爱Java', null, null);
 INSERT INTO `user` VALUES ('1002', 'world', '000', '0', '我爱JavaFX', null, null);
 INSERT INTO `user` VALUES ('1003', '屌丝', '000', '1', '我不做游戏，我在做一个付费系统', null, null);
