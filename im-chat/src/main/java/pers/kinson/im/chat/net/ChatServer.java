@@ -1,17 +1,5 @@
 package pers.kinson.im.chat.net;
 
-import java.net.InetSocketAddress;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import pers.kinson.im.chat.ServerConfigs;
-import pers.kinson.im.chat.base.ServerNode;
-import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.net.codec.PacketDecoder;
-import pers.kinson.im.chat.net.codec.PacketEncoder;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
 import io.netty.channel.ChannelOption;
@@ -22,6 +10,15 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.handler.codec.LengthFieldPrepender;
 import io.netty.handler.timeout.IdleStateHandler;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pers.kinson.im.chat.ServerConfigs;
+import pers.kinson.im.chat.base.ServerNode;
+import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.net.codec.PacketDecoder;
+import pers.kinson.im.chat.net.codec.PacketEncoder;
+
+import java.net.InetSocketAddress;
 
 public class ChatServer implements ServerNode {
 
@@ -43,7 +40,6 @@ public class ChatServer implements ServerNode {
 	public void start() throws Exception {
 		logger.info("服务端已启动，正在监听用户的请求......");
 		// 协议初始化
-		PacketType.initPackets();
 		try {
 			ServerBootstrap b = new ServerBootstrap();
 			b.group(bossGroup, workerGroup).channel(NioServerSocketChannel.class)

@@ -1,10 +1,8 @@
 package pers.kinson.im.chat.logic.login.message.req;
 
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ReqHeartBeat extends AbstractPacket {
 
@@ -18,13 +16,8 @@ public class ReqHeartBeat extends AbstractPacket {
 	}
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ReqHeartBeat;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-//		System.err.println("收到客户端的心跳包");
+	public int getPacketId() {
+		return CmdConst.ReqHeartBeat;
 	}
 
 }

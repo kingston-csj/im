@@ -1,13 +1,8 @@
 package pers.kinson.im.chat.logic.login.message.req;
 
-import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.logic.login.LoginService;
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
-import io.netty.channel.Channel;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ReqUserLogin extends AbstractPacket {
 
@@ -29,8 +24,8 @@ public class ReqUserLogin extends AbstractPacket {
 	}
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ReqUserLogin;
+	public int getPacketId() {
+		return CmdConst.ReqUserLogin;
 	}
 
 	public String getUserPwd() {
@@ -49,11 +44,5 @@ public class ReqUserLogin extends AbstractPacket {
 		this.userId = userId;
 	}
 
-	@Override
-	public void execPacket(IoSession session) {
-		Channel channel = session.getChannel();
-		LoginService loginMgr = SpringContext.getBean(LoginService.class);
-		loginMgr.validateLogin(channel, getUserId(), getUserPwd());
-	}
 
 }

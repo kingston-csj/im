@@ -1,11 +1,8 @@
 package pers.kinson.im.chat.logic.chat.message.req;
 
-import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ReqChatToUser extends AbstractPacket {
 
@@ -44,13 +41,8 @@ public class ReqChatToUser extends AbstractPacket {
 	}
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ReqChatToUser;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-		SpringContext.getChatService().chat(session, toUserId, content);
+	public int getPacketId() {
+		return CmdConst.ReqChatToUser;
 	}
 
 }

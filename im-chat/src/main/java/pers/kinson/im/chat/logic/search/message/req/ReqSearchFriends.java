@@ -1,12 +1,9 @@
 package pers.kinson.im.chat.logic.search.message.req;
 
 
-import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ReqSearchFriends extends AbstractPacket {
 
@@ -14,8 +11,8 @@ public class ReqSearchFriends extends AbstractPacket {
 	private String key;
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ReqSearchFriends;
+	public int getPacketId() {
+		return CmdConst.ReqSearchFriends;
 	}
 
 	public void writeBody(ByteBuf buf) {
@@ -26,9 +23,11 @@ public class ReqSearchFriends extends AbstractPacket {
 		this.key = readUTF8(buf);
 	}
 
-	@Override
-	public void execPacket(IoSession session) {
-		SpringContext.getSearchService().search(session, key);
+	public String getKey() {
+		return key;
 	}
 
+	public void setKey(String key) {
+		this.key = key;
+	}
 }

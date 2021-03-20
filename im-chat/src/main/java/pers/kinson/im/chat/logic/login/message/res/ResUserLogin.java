@@ -1,11 +1,9 @@
 package pers.kinson.im.chat.logic.login.message.res;
 
-import pers.kinson.im.chat.base.Constants;
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.base.Constants;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ResUserLogin extends AbstractPacket {
 
@@ -15,7 +13,6 @@ public class ResUserLogin extends AbstractPacket {
 	public static ResUserLogin valueOfFailed() {
 		ResUserLogin response = new ResUserLogin();
 		response.setIsValid(Constants.FAILED);
-
 		return response;
 	}
 
@@ -32,14 +29,8 @@ public class ResUserLogin extends AbstractPacket {
 	}
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ResUserLogin;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-		// TODO Auto-generated method stub
-
+	public int getPacketId() {
+		return CmdConst.ResUserLogin;
 	}
 
 	public String getAlertMsg() {

@@ -1,10 +1,8 @@
 package pers.kinson.im.chat.logic.user.message.res;
 
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ResUserInfo extends AbstractPacket {
 
@@ -17,14 +15,8 @@ public class ResUserInfo extends AbstractPacket {
 	private String signature;
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ResUserInfo;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-		// TODO Auto-generated method stub
-
+	public int getPacketId() {
+		return CmdConst.ResUserInfo;
 	}
 
 	@Override

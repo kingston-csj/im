@@ -9,7 +9,7 @@ import java.io.ByteArrayOutputStream;
 import java.util.zip.GZIPInputStream;
 
 import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketManager;
+import pers.kinson.im.chat.net.message.MessageRouter;
 
 public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 
@@ -28,7 +28,7 @@ public class PacketDecoder extends LengthFieldBasedFrameDecoder{
 		if(frame.readableBytes() <= 0) return null;
 
 		int packetType = frame.readInt();
-		AbstractPacket packet = PacketManager.INSTANCE.createNewPacket(packetType);
+		AbstractPacket packet = MessageRouter.INSTANCE.createNewPacket(packetType);
 		boolean useCompression = packet.isUseCompression();
 		ByteBuf realBuf = decompression(frame,useCompression);
 		packet.readBody(realBuf);

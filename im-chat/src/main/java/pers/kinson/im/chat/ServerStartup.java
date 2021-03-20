@@ -10,6 +10,7 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pers.kinson.im.chat.net.message.MessageRouter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -49,6 +50,8 @@ public class ServerStartup implements CommandLineRunner {
             node.init();
             node.start();
         }
+
+        MessageRouter.INSTANCE.toString();
     }
 
     public void stop() {

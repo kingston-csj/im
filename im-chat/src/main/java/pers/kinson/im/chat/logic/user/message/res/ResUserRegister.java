@@ -1,10 +1,8 @@
 package pers.kinson.im.chat.logic.user.message.res;
 
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
 public class ResUserRegister extends AbstractPacket {
 	
@@ -39,17 +37,11 @@ public class ResUserRegister extends AbstractPacket {
 	public void readBody(ByteBuf buf) {
 		this.resultCode = buf.readByte();
 		this.message = readUTF8(buf);
-		
 	}
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ResUserRegister;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-		// TODO Auto-generated method stub
+	public int getPacketId() {
+		return CmdConst.ResUserRegister;
 	}
 
 	@Override
@@ -57,6 +49,4 @@ public class ResUserRegister extends AbstractPacket {
 		return "ResUserRegisterPacket [resultCode=" + resultCode + ", message=" + message + "]";
 	}
 	
-	
-
 }

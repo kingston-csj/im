@@ -1,21 +1,19 @@
 package pers.kinson.im.chat.logic.friend.message.res;
 
-import java.util.List;
-
-import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
 import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
+import pers.kinson.im.chat.net.message.AbstractPacket;
+
+import java.util.List;
 
 public class ResFriendList extends AbstractPacket {
 
 	private List<FriendItemVo> friends;
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ResFriendList;
+	public int getPacketId() {
+		return CmdConst.ResFriendList;
 	}
 
 	public List<FriendItemVo> getFriends() {
@@ -24,12 +22,6 @@ public class ResFriendList extends AbstractPacket {
 
 	public void setFriends(List<FriendItemVo> friends) {
 		this.friends = friends;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-		// TODO Auto-generated method stub
-
 	}
 
 	@Override
@@ -44,7 +36,6 @@ public class ResFriendList extends AbstractPacket {
 	@Override
 	public void readBody(ByteBuf buf) {
 		// TODO Auto-generated method stub
-
 	}
 
 }

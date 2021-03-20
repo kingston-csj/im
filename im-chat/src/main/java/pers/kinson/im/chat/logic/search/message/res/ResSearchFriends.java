@@ -1,22 +1,20 @@
 package pers.kinson.im.chat.logic.search.message.res;
 
+import io.netty.buffer.ByteBuf;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.logic.search.message.vo.RecommendFriendItem;
+import pers.kinson.im.chat.net.message.AbstractPacket;
+
 import java.util.ArrayList;
 import java.util.List;
-
-import pers.kinson.im.chat.logic.search.message.vo.RecommendFriendItem;
-import pers.kinson.im.chat.net.IoSession;
-import pers.kinson.im.chat.net.message.AbstractPacket;
-import pers.kinson.im.chat.net.message.PacketType;
-
-import io.netty.buffer.ByteBuf;
 
 public class ResSearchFriends extends AbstractPacket {
 
 	private List<RecommendFriendItem> friends;
 
 	@Override
-	public PacketType getPacketType() {
-		return PacketType.ResSearchFriends;
+	public int getPacketId() {
+		return CmdConst.ResSearchFriends;
 	}
 
 	@Override
@@ -44,12 +42,6 @@ public class ResSearchFriends extends AbstractPacket {
 
 	public void setFriends(List<RecommendFriendItem> friends) {
 		this.friends = friends;
-	}
-
-	@Override
-	public void execPacket(IoSession session) {
-		// TODO Auto-generated method stub
-
 	}
 
 }
