@@ -1,5 +1,21 @@
+/*
+ Navicat MySQL Data Transfer
 
-SET FOREIGN_KEY_CHECKS=0;
+ Source Server         : localhost
+ Source Server Type    : MySQL
+ Source Server Version : 50641
+ Source Host           : localhost:3306
+ Source Schema         : chat_room
+
+ Target Server Type    : MySQL
+ Target Server Version : 50641
+ File Encoding         : 65001
+
+ Date: 19/04/2021 21:20:35
+*/
+
+SET NAMES utf8mb4;
+SET FOREIGN_KEY_CHECKS = 0;
 
 -- ----------------------------
 -- Table structure for friendgroup
@@ -17,9 +33,11 @@ CREATE TABLE `friendgroup` (
 -- ----------------------------
 -- Records of friendgroup
 -- ----------------------------
-INSERT INTO `friendgroup` VALUES ('1', '我的好友', '1000');
-INSERT INTO `friendgroup` VALUES ('2', '程序猿展览馆', '1000');
-INSERT INTO `friendgroup` VALUES ('3', '默认好友', '1001');
+BEGIN;
+INSERT INTO `friendgroup` VALUES (1, '我的好友', 1000);
+INSERT INTO `friendgroup` VALUES (2, '程序猿展览馆', 1000);
+INSERT INTO `friendgroup` VALUES (3, '默认好友', 1001);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for friends
@@ -43,12 +61,14 @@ CREATE TABLE `friends` (
 -- ----------------------------
 -- Records of friends
 -- ----------------------------
-INSERT INTO `friends` VALUES ('1', '1000', '1001', '大师兄', '1');
-INSERT INTO `friends` VALUES ('2', '1000', '1002', '二师兄', '1');
-INSERT INTO `friends` VALUES ('3', '1000', '1003', '三师兄', '1');
-INSERT INTO `friends` VALUES ('4', '1000', '1004', '隔壁老王', '2');
-INSERT INTO `friends` VALUES ('5', '1000', '1005', 'bug砖家', '2');
-INSERT INTO `friends` VALUES ('6', '1001', '1000', null, '3');
+BEGIN;
+INSERT INTO `friends` VALUES (1, 1000, 1001, '大师兄', 1);
+INSERT INTO `friends` VALUES (2, 1000, 1002, '二师兄', 1);
+INSERT INTO `friends` VALUES (3, 1000, 1003, '三师兄', 1);
+INSERT INTO `friends` VALUES (4, 1000, 1004, '隔壁老王', 2);
+INSERT INTO `friends` VALUES (5, 1000, 1005, 'bug砖家', 2);
+INSERT INTO `friends` VALUES (6, 1001, 1000, NULL, 3);
+COMMIT;
 
 -- ----------------------------
 -- Table structure for user
@@ -68,9 +88,14 @@ CREATE TABLE `user` (
 -- ----------------------------
 -- Records of user
 -- ----------------------------
-INSERT INTO `user` VALUES ('1000', 'kinson', '000', '1', '专业写Bug', null, null);
-INSERT INTO `user` VALUES ('1001', 'hello', '000', '1', '我爱Java', null, null);
-INSERT INTO `user` VALUES ('1002', 'world', '000', '0', '我爱JavaFX', null, null);
-INSERT INTO `user` VALUES ('1003', '屌丝', '000', '1', '我不做游戏，我在做一个付费系统', null, null);
-INSERT INTO `user` VALUES ('1004', '我心飞扬', '000', '1', '把你放在 我心、最柔软的 地方', null, null);
-INSERT INTO `user` VALUES ('1005', '金刚互撸娃', '000', '1', '写代码，我很快乐~', null, null);
+BEGIN;
+INSERT INTO `user` VALUES (1000, 'kinsn', '$apr1$1000$2DYl/guO0EHY9CRoXROrE0', 1, '专业写Bug', NULL, NULL);
+INSERT INTO `user` VALUES (1001, 'hello', '$apr1$1000$2DYl/guO0EHY9CRoXROrE0', 1, '我爱Java', NULL, NULL);
+INSERT INTO `user` VALUES (1002, 'world', '$apr1$1000$2DYl/guO0EHY9CRoXROrE0', 0, '我爱JavaFX', NULL, NULL);
+INSERT INTO `user` VALUES (1003, '屌丝', '$apr1$1000$2DYl/guO0EHY9CRoXROrE0', 1, '我不做游戏，我在做一个付费系统', NULL, NULL);
+INSERT INTO `user` VALUES (1004, '我心飞扬', '$apr1$1000$2DYl/guO0EHY9CRoXROrE0', 1, '把你放在 我心、最柔软的 地方', NULL, NULL);
+INSERT INTO `user` VALUES (1005, '金刚互撸娃', '$apr1$1000$2DYl/guO0EHY9CRoXROrE0', 1, '写代码，我很快乐~', NULL, NULL);
+INSERT INTO `user` VALUES (2021, '2021', '$apr1$2021$2g52Q2tQTm6ODFxeZA6jL0', 0, NULL, NULL, NULL);
+COMMIT;
+
+SET FOREIGN_KEY_CHECKS = 1;
