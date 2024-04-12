@@ -6,27 +6,16 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>pers.kinson</groupId>
-		<artifactId>chatserver</artifactId>
-		<version>1.0.0</version>
+		<artifactId>im</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<artifactId>im-common</artifactId>
 	<name>im-common</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 	</properties>
 
-	<dependencies>
-		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<scope>test</scope>
-		</dependency>
-		<dependency>
-			<groupId>org.slf4j</groupId>
-			<artifactId>slf4j-api</artifactId>
-		</dependency>
-	</dependencies>
 </project>

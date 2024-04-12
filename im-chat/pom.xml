@@ -6,14 +6,14 @@
 	<modelVersion>4.0.0</modelVersion>
 	<parent>
 		<groupId>pers.kinson</groupId>
-		<artifactId>chatserver</artifactId>
-		<version>1.0.0</version>
+		<artifactId>im</artifactId>
+		<version>${revision}</version>
+		<relativePath>../pom.xml</relativePath>
 	</parent>
 
 	<groupId>pers.kinson.im</groupId>
 	<artifactId>im-chat</artifactId>
 	<name>im-chat</name>
-	<url>http://maven.apache.org</url>
 
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
@@ -40,6 +40,7 @@
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
+			<version>5.1.6</version>
 		</dependency>
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
@@ -56,15 +57,12 @@
 			<artifactId>commons-lang3</artifactId>
 		</dependency>
 
-		<!-- https://mvnrepository.com/artifact/commons-io/commons-io -->
 		<dependency>
 			<groupId>commons-io</groupId>
 			<artifactId>commons-io</artifactId>
 		</dependency>
 
 
-		<!-- groovy脚本 -->
-		<!-- https://mvnrepository.com/artifact/org.codehaus.groovy/groovy-all -->
 		<dependency>
 			<groupId>org.codehaus.groovy</groupId>
 			<artifactId>groovy-all</artifactId>
