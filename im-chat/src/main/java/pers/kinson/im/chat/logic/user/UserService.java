@@ -58,7 +58,7 @@ public class UserService {
 		if (userId <= 0 || StringUtils.isEmpty(password)) {
 			return null;
 		}
-		User user = userDao.findById(userId);
+		User user = userDao.selectById(userId);
 		if (user != null &&
 			user.getPassword().equals(password)) {
 			return user;
@@ -69,17 +69,17 @@ public class UserService {
 
 	/**
 	 * 注册新账号
-	 * @param nickName 昵称
+	 * @param userId 昵称
 	 */
-	public void registerNewAccount(Channel channel, byte sex, long nickName, String password) {
+	public void registerNewAccount(Channel channel, byte sex, long userId, String password) {
 		IoSession session = ChannelUtils.getSessionBy(channel);
-		User oldUser = userDao.findById(nickName);
+		User oldUser = userDao.selectById(userId);
 		ResUserRegister response = new ResUserRegister();
 		if (oldUser != null) {
 			response.setResultCode(Constants.FAILED);
 			response.setMessage("账号id已存在");
 		}else {
-			User newUser = createNewUser(nickName, sex, String.valueOf(nickName), password);
+			User newUser = createNewUser(userId, sex, String.valueOf(userId), password);
 			response.setResultCode(Constants.SUCC);
 			response.setMessage(String.valueOf(newUser.getUserId()));
 		}
@@ -93,7 +93,7 @@ public class UserService {
 		newUser.setUserName(nickName);
 		newUser.setPassword(password);
 
-		userDao.addUser(newUser);
+		userDao.insert(newUser);
 
 		return newUser;
 	}
@@ -116,7 +116,6 @@ public class UserService {
 
 		SessionManager.INSTANCE.ungisterUserContext(channel, reason);
 	}
-
 
 
 }

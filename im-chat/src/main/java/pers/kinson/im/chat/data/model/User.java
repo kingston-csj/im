@@ -1,9 +1,13 @@
 package pers.kinson.im.chat.data.model;
 
+import com.baomidou.mybatisplus.annotation.TableId;
+import com.baomidou.mybatisplus.annotation.TableName;
 import pers.kinson.im.chat.base.Constants;
 
+@TableName(value = "user")
 public class User {
 
+	@TableId()
 	private long userId;
 	/** 性别{@link Constants#SEX_OF_BOY} */
 	private byte sex;

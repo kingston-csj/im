@@ -14,8 +14,7 @@ public class TestUserDao extends BaseTestCase {
 
 	@Test
 	public void testSelect() throws Exception {
-
-		User user = userDao.findById(1L);
+		User user = userDao.selectById(1L);
 		System.out.println(user.getUserName());
 	}
 
@@ -26,14 +25,14 @@ public class TestUserDao extends BaseTestCase {
 		user.setUserId(2);
 		user.setUserName("Tom");
 		user.setPassword("sdf");
-		userDao.addUser(user);
+		userDao.insert(user);
 
 	}
 
 	@Test
 	@Rollback(false)
 	public void testDel() {
-		userDao.delUser(29);
+		userDao.deleteById(29);
 	}
 
 	@Test
@@ -41,7 +40,7 @@ public class TestUserDao extends BaseTestCase {
 		User user = new User();
 		user.setUserId(1);
 		user.setUserName("Mary");
-		userDao.updateUser(user);
+		userDao.updateById(user);
 	}
 
 }
