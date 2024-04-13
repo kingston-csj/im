@@ -1,10 +1,11 @@
 package pers.kinson.im.chat.logic.search.message.req;
 
 
-import io.netty.buffer.ByteBuf;
+import lombok.Data;
 import pers.kinson.im.chat.logic.CmdConst;
 import pers.kinson.im.chat.net.message.AbstractPacket;
 
+@Data
 public class ReqSearchFriends extends AbstractPacket {
 
 	/** 昵称或qq号 */
@@ -15,19 +16,4 @@ public class ReqSearchFriends extends AbstractPacket {
 		return CmdConst.ReqSearchFriends;
 	}
 
-	public void writeBody(ByteBuf buf) {
-		writeUTF8(buf, key);
-	}
-
-	public void readBody(ByteBuf buf) {
-		this.key = readUTF8(buf);
-	}
-
-	public String getKey() {
-		return key;
-	}
-
-	public void setKey(String key) {
-		this.key = key;
-	}
 }

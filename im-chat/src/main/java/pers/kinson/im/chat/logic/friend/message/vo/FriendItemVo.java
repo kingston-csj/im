@@ -1,10 +1,11 @@
 package pers.kinson.im.chat.logic.friend.message.vo;
 
-import pers.kinson.im.chat.net.message.ByteBufBean;
+import lombok.Data;
+import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.chat.net.message.AbstractPacket;
 
-import io.netty.buffer.ByteBuf;
-
-public class FriendItemVo extends ByteBufBean {
+@Data
+public class FriendItemVo extends AbstractPacket {
 
 	private long userId;
 	/** 在线状态 {@link Constants#online_status} */
@@ -22,77 +23,9 @@ public class FriendItemVo extends ByteBufBean {
 	/** 分组备注 */
 	private String groupName;
 
-	public long getUserId() {
-		return userId;
-	}
-	public void setUserId(long userId) {
-		this.userId = userId;
-	}
-	public String getUserName() {
-		return userName;
-	}
-	public void setUserName(String userName) {
-		this.userName = userName;
-	}
-	public String getRemark() {
-		return remark;
-	}
-	public void setRemark(String remarks) {
-		this.remark = remarks;
-	}
-	public String getSignature() {
-		return signature;
-	}
-	public void setSignature(String signature) {
-		this.signature = signature;
-	}
-	public byte getSex() {
-		return sex;
-	}
-	public void setSex(byte sex) {
-		this.sex = sex;
-	}
-	public int getGroup() {
-		return group;
-	}
-	public void setGroup(int group) {
-		this.group = group;
-	}
-	public String getGroupName() {
-		return groupName;
-	}
-	public void setGroupName(String groupName) {
-		this.groupName = groupName;
-	}
-	public byte getOnline() {
-		return online;
-	}
-	public void setOnline(byte online) {
-		this.online = online;
-	}
-
 	@Override
-	public void writeBody(ByteBuf buf) {
-		buf.writeLong(userId);
-		writeUTF8(buf, userName);
-		buf.writeByte(online);
-		writeUTF8(buf, remark);
-		writeUTF8(buf, signature);
-		buf.writeByte(sex);
-		buf.writeInt(group);
-		writeUTF8(buf, groupName);
-	}
-
-	@Override
-	public void readBody(ByteBuf buf) {
-		this.userId = buf.readLong();
-		this.userName = readUTF8(buf);
-		this.online = buf.readByte();
-		this.remark = readUTF8(buf);
-		this.signature = readUTF8(buf);
-		this.sex = buf.readByte();
-		this.group = buf.readInt();
-		this.groupName = readUTF8(buf);
+	public int getPacketId() {
+		return CmdConst.FriendVo;
 	}
 
 	@Override

@@ -9,4 +9,4 @@ mybatis-plus:
   mapper-locations: classpath:pers/kinson/im/chat/data/mybatis/*Mapper.xml
   configuration:
     #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
-    map-underscore-to-camel-case: true
+    map-underscore-to-camel-case: false

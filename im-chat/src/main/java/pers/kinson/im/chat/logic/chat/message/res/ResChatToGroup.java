@@ -1,23 +1,15 @@
 package pers.kinson.im.chat.logic.chat.message.res;
 
 import io.netty.buffer.ByteBuf;
+import lombok.Data;
 import pers.kinson.im.chat.logic.CmdConst;
 import pers.kinson.im.chat.net.message.AbstractPacket;
 
+
+@Data
 public class ResChatToGroup extends AbstractPacket {
 	
 	private String content;
-
-	@Override
-	public void writeBody(ByteBuf buf) {
-		// TODO Auto-generated method stub
-		
-	}
-
-	@Override
-	public void readBody(ByteBuf buf) {
-		// TODO Auto-generated method stub
-	}
 
 	@Override
 	public int getPacketId() {

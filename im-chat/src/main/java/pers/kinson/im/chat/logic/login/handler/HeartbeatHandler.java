@@ -9,6 +9,5 @@ public class HeartbeatHandler extends MessageHandler<ReqHeartBeat> {
 
     @Override
     public void action(IoSession session, ReqHeartBeat E) {
-        System.err.println("收到客户端的心跳包");
     }
 }

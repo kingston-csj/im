@@ -5,6 +5,7 @@ import java.util.Collection;
 import javax.annotation.PostConstruct;
 import javax.annotation.Resource;
 
+import jforgame.codec.MessageCodec;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -23,132 +24,148 @@ import pers.kinson.im.chat.logic.util.IdService;
 @Component
 public class SpringContext implements ApplicationContextAware {
 
-	private static SpringContext self;
-	
-	/** spring容器上下文 */
-	private static ApplicationContext applicationContext = null;
-	
-	@PostConstruct
-	private void init() {
-		self = this;
-	}
+    private static SpringContext self;
 
-	private static UserService userService;
+    /**
+     * spring容器上下文
+     */
+    private static ApplicationContext applicationContext = null;
 
-	private static FriendService friendService;
+    @PostConstruct
+    private void init() {
+        self = this;
+    }
 
-	private static SearchService searchService;
+    private static UserService userService;
 
-	/** 异步持久化服务 */
-	private static AysncDbService aysncDbService;
+    private static FriendService friendService;
 
-	private static ChatService chatService;
+    private static SearchService searchService;
 
-	private static IdService idService;
+    /**
+     * 异步持久化服务
+     */
+    private static AysncDbService aysncDbService;
 
-	private static MessageDispatcher messageDispatcher;
+    private static ChatService chatService;
 
-	private static EventDispatcher eventDispatcher;
+    private static IdService idService;
 
-	private static ServerConfigs serverConfigs;
+    private static MessageDispatcher messageDispatcher;
 
-	@Override
-	public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
-		SpringContext.applicationContext = applicationContext;
-	}
+    private static EventDispatcher eventDispatcher;
 
-	public final static <T> T getBean(Class<T> clazz) {
-		return applicationContext.getBean(clazz);
-	}
+    private static ServerConfigs serverConfigs;
 
-	public final static <T> Collection<T> getBeansOfType(Class<T> clazz) {
-		return applicationContext.getBeansOfType(clazz).values();
-	}
+    private static MessageCodec messageCodec;
 
-	public final static <T> T getBean(String name, Class<T> requiredType) {
-		return applicationContext.getBean(name, requiredType);
-	}
+    @Override
+    public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
+        SpringContext.applicationContext = applicationContext;
+    }
 
-	@Resource
-	public void setUserService(UserService userService) {
-		SpringContext.userService = userService;
-	}
+    public static <T> T getBean(Class<T> clazz) {
+        return applicationContext.getBean(clazz);
+    }
 
-	public final static UserService getUserService() {
-		return userService;
-	}
+    public static <T> Collection<T> getBeansOfType(Class<T> clazz) {
+        return applicationContext.getBeansOfType(clazz).values();
+    }
 
-	@Resource
-	public void setFriendService(FriendService friendService) {
-		SpringContext.friendService = friendService;
-	}
+    public static <T> T getBean(String name, Class<T> requiredType) {
+        return applicationContext.getBean(name, requiredType);
+    }
 
-	public final static FriendService getFriendService() {
-		return friendService;
-	}
+    @Resource
+    public void setUserService(UserService userService) {
+        SpringContext.userService = userService;
+    }
 
-	@Resource
-	public void setSearchService(SearchService searchService) {
-		SpringContext.searchService = searchService;
-	}
+    public static UserService getUserService() {
+        return userService;
+    }
 
-	public final static SearchService getSearchService() {
-		return searchService;
-	}
+    @Resource
+    public void setFriendService(FriendService friendService) {
+        SpringContext.friendService = friendService;
+    }
 
-	@Resource
-	public void setIdService(IdService idService) {
-		SpringContext.idService = idService;
-	}
+    public static FriendService getFriendService() {
+        return friendService;
+    }
 
-	public final static IdService getIdService() {
-		return idService;
-	}
+    @Resource
+    public void setSearchService(SearchService searchService) {
+        SpringContext.searchService = searchService;
+    }
 
-	@Resource
-	public void setAysncDbService(AysncDbService aysncDbService) {
-		SpringContext.aysncDbService = aysncDbService;
-	}
+    public static SearchService getSearchService() {
+        return searchService;
+    }
 
-	public static AysncDbService getAysncDbService() {
-		return aysncDbService;
-	}
+    @Resource
+    public void setIdService(IdService idService) {
+        SpringContext.idService = idService;
+    }
 
-	@Resource
-	public void setChatService(ChatService chatService) {
-		SpringContext.chatService = chatService;
-	}
+    public static IdService getIdService() {
+        return idService;
+    }
 
-	public final static ChatService getChatService() {
-		return chatService;
-	}
+    @Resource
+    public void setAysncDbService(AysncDbService aysncDbService) {
+        SpringContext.aysncDbService = aysncDbService;
+    }
 
-	@Resource
-	public void setMessageDispatcher(MessageDispatcher messageDispatcher) {
-		SpringContext.messageDispatcher = messageDispatcher;
-	}
+    public static AysncDbService getAysncDbService() {
+        return aysncDbService;
+    }
 
-	public final static MessageDispatcher getMessageDispatcher() {
-		return messageDispatcher;
-	}
+    @Resource
+    public void setChatService(ChatService chatService) {
+        SpringContext.chatService = chatService;
+    }
 
-	@Resource
-	public void setEventDispatcher(EventDispatcher eventDispatcher) {
-		SpringContext.eventDispatcher = eventDispatcher;
-	}
+    public static ChatService getChatService() {
+        return chatService;
+    }
 
-	public final static EventDispatcher getEventDispatcher() {
-		return eventDispatcher;
-	}
+    @Resource
+    public void setMessageDispatcher(MessageDispatcher messageDispatcher) {
+        SpringContext.messageDispatcher = messageDispatcher;
+    }
+
+    public static MessageDispatcher getMessageDispatcher() {
+        return messageDispatcher;
+    }
+
+    @Resource
+    public void setEventDispatcher(EventDispatcher eventDispatcher) {
+        SpringContext.eventDispatcher = eventDispatcher;
+    }
+
+    public static EventDispatcher getEventDispatcher() {
+        return eventDispatcher;
+    }
 
 
-	@Resource
-	public void setServerConfigs(ServerConfigs serverConfigs) {
-		SpringContext.serverConfigs = serverConfigs;
-	}
+    @Resource
+    public void setServerConfigs(ServerConfigs serverConfigs) {
+        SpringContext.serverConfigs = serverConfigs;
+    }
 
-	public final static ServerConfigs getServerConfigs() {
-		return SpringContext.serverConfigs;
-	}
+    public static ServerConfigs getServerConfigs() {
+        return SpringContext.serverConfigs;
+    }
+
+    @Resource
+    public void setMessageCodec(MessageCodec messageCodec) {
+        SpringContext.messageCodec = messageCodec;
+    }
+
+    public static MessageCodec getMessageCodec() {
+        return messageCodec;
+    }
+
 
 }
