@@ -22,7 +22,7 @@ public class TestUserDao extends BaseTestCase {
 	@Test
 	public void testAdd() {
 		User user = new User();
-		user.setUserId(2);
+		user.setUserId(2L);
 		user.setUserName("Tom");
 		user.setPassword("sdf");
 		userDao.insert(user);
@@ -38,7 +38,7 @@ public class TestUserDao extends BaseTestCase {
 	@Test
 	public void testUpdate() {
 		User user = new User();
-		user.setUserId(1);
+		user.setUserId(1L);
 		user.setUserName("Mary");
 		userDao.updateById(user);
 	}

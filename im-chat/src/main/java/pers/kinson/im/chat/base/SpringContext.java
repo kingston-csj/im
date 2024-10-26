@@ -2,9 +2,9 @@ package pers.kinson.im.chat.base;
 
 import java.util.Collection;
 
-import javax.annotation.PostConstruct;
-import javax.annotation.Resource;
 
+import jakarta.annotation.PostConstruct;
+import jakarta.annotation.Resource;
 import jforgame.codec.MessageCodec;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;

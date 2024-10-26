@@ -16,7 +16,6 @@ import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
-@MapperScan("pers.kinson.im.chat.data.dao")
 public class ServerStartup implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

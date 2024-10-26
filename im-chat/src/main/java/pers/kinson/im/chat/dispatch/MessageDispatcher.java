@@ -3,11 +3,11 @@ package pers.kinson.im.chat.dispatch;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import javax.annotation.PostConstruct;
 
+import jakarta.annotation.PostConstruct;
+import jforgame.commons.thread.NamedThreadFactory;
 import org.springframework.stereotype.Component;
 
-import pers.kinson.im.common.thread.NamedThreadFactory;
 
 
 @Component

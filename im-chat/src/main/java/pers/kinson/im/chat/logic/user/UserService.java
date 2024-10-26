@@ -3,6 +3,8 @@ package pers.kinson.im.chat.logic.user;
 import java.util.Map;
 import java.util.Set;
 
+import jforgame.commons.ds.ConcurrentHashSet;
+import jforgame.commons.ds.LruHashMap;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
@@ -18,8 +20,6 @@ import pers.kinson.im.chat.logic.util.IdService;
 import pers.kinson.im.chat.net.ChannelUtils;
 import pers.kinson.im.chat.net.IoSession;
 import pers.kinson.im.chat.net.SessionCloseReason;
-import pers.kinson.im.common.utils.ConcurrentHashSet;
-import pers.kinson.im.common.utils.LruHashMap;
 
 import io.netty.channel.Channel;
 

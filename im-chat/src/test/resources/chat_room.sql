@@ -5,7 +5,7 @@
  Source Server Type    : MySQL
  Source Server Version : 80300
  Source Host           : localhost:3306
- Source Schema         : chat_room
+ Source Schema         : im
 
  Target Server Type    : MySQL
  Target Server Version : 80300
