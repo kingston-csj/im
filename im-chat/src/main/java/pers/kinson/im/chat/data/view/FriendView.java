@@ -1,5 +1,8 @@
 package pers.kinson.im.chat.data.view;
 
+import lombok.Data;
+
+@Data
 public class FriendView {
 
     private long userId;
@@ -23,67 +26,5 @@ public class FriendView {
      * 分组备注
      */
     private String groupName;
-
-    public long getUserId() {
-        return userId;
-    }
-
-    public void setUserId(long userId) {
-        this.userId = userId;
-    }
-
-    public String getUserName() {
-        return userName;
-    }
-
-    public void setUserName(String userName) {
-        this.userName = userName;
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remarks) {
-        this.remark = remarks;
-    }
-
-    public String getSignature() {
-        return signature;
-    }
-
-    public void setSignature(String signature) {
-        this.signature = signature;
-    }
-
-    public byte getSex() {
-        return sex;
-    }
-
-    public void setSex(byte sex) {
-        this.sex = sex;
-    }
-
-    public int getGroup() {
-        return group;
-    }
-
-    public void setGroup(int group) {
-        this.group = group;
-    }
-
-    public String getGroupName() {
-        return groupName;
-    }
-
-    public void setGroupName(String groupName) {
-        this.groupName = groupName;
-    }
-
-    @Override
-    public String toString() {
-        return "FriendView [userId=" + userId + ", userName=" + userName + ", remark=" + remark + ", signature="
-                + signature + ", sex=" + sex + ", group=" + group + ", groupName=" + groupName + "]";
-    }
 
 }

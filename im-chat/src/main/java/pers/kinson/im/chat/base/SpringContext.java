@@ -6,6 +6,7 @@ import java.util.Collection;
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
 import jforgame.codec.MessageCodec;
+import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
@@ -36,27 +37,36 @@ public class SpringContext implements ApplicationContextAware {
         self = this;
     }
 
+    @Getter
     private static UserService userService;
 
+    @Getter
     private static FriendService friendService;
 
+    @Getter
     private static SearchService searchService;
 
     /**
      * 异步持久化服务
      */
+    @Getter
     private static AysncDbService aysncDbService;
 
+    @Getter
     private static ChatService chatService;
 
+    @Getter
     private static IdService idService;
 
+    @Getter
     private static MessageDispatcher messageDispatcher;
 
+    @Getter
     private static EventDispatcher eventDispatcher;
 
     private static ServerConfigs serverConfigs;
 
+    @Getter
     private static MessageCodec messageCodec;
 
     @Override
@@ -81,17 +91,9 @@ public class SpringContext implements ApplicationContextAware {
         SpringContext.userService = userService;
     }
 
-    public static UserService getUserService() {
-        return userService;
-    }
-
     @Resource
     public void setFriendService(FriendService friendService) {
         SpringContext.friendService = friendService;
-    }
-
-    public static FriendService getFriendService() {
-        return friendService;
     }
 
     @Resource
@@ -99,17 +101,9 @@ public class SpringContext implements ApplicationContextAware {
         SpringContext.searchService = searchService;
     }
 
-    public static SearchService getSearchService() {
-        return searchService;
-    }
-
     @Resource
     public void setIdService(IdService idService) {
         SpringContext.idService = idService;
-    }
-
-    public static IdService getIdService() {
-        return idService;
     }
 
     @Resource
@@ -117,17 +111,9 @@ public class SpringContext implements ApplicationContextAware {
         SpringContext.aysncDbService = aysncDbService;
     }
 
-    public static AysncDbService getAysncDbService() {
-        return aysncDbService;
-    }
-
     @Resource
     public void setChatService(ChatService chatService) {
         SpringContext.chatService = chatService;
-    }
-
-    public static ChatService getChatService() {
-        return chatService;
     }
 
     @Resource
@@ -135,17 +121,9 @@ public class SpringContext implements ApplicationContextAware {
         SpringContext.messageDispatcher = messageDispatcher;
     }
 
-    public static MessageDispatcher getMessageDispatcher() {
-        return messageDispatcher;
-    }
-
     @Resource
     public void setEventDispatcher(EventDispatcher eventDispatcher) {
         SpringContext.eventDispatcher = eventDispatcher;
-    }
-
-    public static EventDispatcher getEventDispatcher() {
-        return eventDispatcher;
     }
 
 
@@ -161,10 +139,6 @@ public class SpringContext implements ApplicationContextAware {
     @Resource
     public void setMessageCodec(MessageCodec messageCodec) {
         SpringContext.messageCodec = messageCodec;
-    }
-
-    public static MessageCodec getMessageCodec() {
-        return messageCodec;
     }
 
 

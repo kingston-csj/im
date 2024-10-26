@@ -18,10 +18,10 @@
   *  开发更多的交互功能        
 
   ### QuickStart  
-  1. 安装git后，使用命令 git clone https://github.com/kingston-csj/chat_server  
+  1. 安装git后，使用命令 git clone https://github.com/kingston-csj/im 
   2. 新建数据库chat_room，导入im-chat/src/test/resources目录下的chat_room.sql   
   3. 在applicationContext.xml文件配置本地数据库连接属性，启动ServerStartup
-  4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/chat_client  
+  4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/wechat
   5. 启动ClientStartup类, 即可看到登录界面（临时密码为000）
 
 
@@ -41,11 +41,6 @@
   ### 客户端源代码  
   --> [客户端wechat](https://github.com/kingston-csj/wechat)
   
-  ## 请作者喝杯咖啡
-  如果您觉得有所收获，可以请作者喝杯咖啡。大家的支持，促使我不断改进优化，谢谢！  
-  ![](/screenshots/wx.png "微信收款码")
-  ![](/screenshots/zfb.jpg "支付宝收款码")
-
   ## 欢迎交流讨论
   欢迎star/fork，欢迎学习/使用，期待一起贡献代码 !!  
   如果您发现bug，或者有任何疑问，请提交issue !!   

@@ -1,6 +1,7 @@
 package pers.kinson.im.chat.logic.search;
 
 import java.util.ArrayList;
+import java.util.LinkedList;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -20,10 +21,11 @@ public class SearchService {
 	private SearchDao searchDao;
 
 	public void search(IoSession session, String key) {
-		List<FriendView> users = searchDao.queryByName(key);
+		List<FriendView> users = new LinkedList<>();
+		users.addAll(searchDao.queryByName(key));
+		users.addAll(searchDao.queryById(key));
 
 		List<RecommendFriendItem> vos = new ArrayList<>();
-
 		for (FriendView item : users) {
 			RecommendFriendItem vo = new RecommendFriendItem();
 			vo.setUserId(item.getUserId());

@@ -2,6 +2,10 @@ package pers.kinson.im.chat.logic;
 
 public interface CmdConst {
 
+    /*
+     * ------------------通用开始----------------------------
+     */
+
     /**
      * 请求--链接心跳包
      */
@@ -11,6 +15,13 @@ public interface CmdConst {
      * 推送--新用户注册
      */
     int RespHeartBeat = 1_200;
+
+    /**
+     * 推送--通用响应
+     */
+    int ResCommon = 1_201;
+
+
 
     /**
      * ·
@@ -53,10 +64,17 @@ public interface CmdConst {
      */
     int ResChatToGroup = 4_201;
 
+
+    /*
+     * ------------------好友开始----------------------------
+     */
+
     /**
      * 请求－好友查询
      */
     int ReqSearchFriends = 5_000;
+
+    int ReqApplyFriend = 5_001;
     /**
      * 推送--好友列表
      */
@@ -65,6 +83,7 @@ public interface CmdConst {
      * 推送--好友登录
      */
     int ResFriendLogin = 5_201;
+
     /**
      * 推送--好友下线
      */
@@ -74,4 +93,11 @@ public interface CmdConst {
 
     int FriendVo = 5_204;
     int RecommendFriendVO = 5_205;
+
+
+    /*
+     * ------------------好友结束----------------------------
+     */
+
+
 }

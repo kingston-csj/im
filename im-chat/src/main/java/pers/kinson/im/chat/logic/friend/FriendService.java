@@ -3,12 +3,15 @@ package pers.kinson.im.chat.logic.friend;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import pers.kinson.im.chat.base.Constants;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.data.dao.FriendDao;
+import pers.kinson.im.chat.data.model.FriendApply;
+import pers.kinson.im.chat.data.model.Friends;
 import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.data.view.FriendView;
 import pers.kinson.im.chat.logic.friend.message.res.ResFriendList;
@@ -24,6 +27,7 @@ public class FriendService {
 	private FriendDao friendDao;
 	@Autowired
 	private UserService userService;
+
 
 	public List<FriendItemVo> listMyFriends(long userId) {
 		List<FriendItemVo> result = new ArrayList<>();
@@ -48,6 +52,12 @@ public class FriendService {
 		}
 
 		return result;
+	}
+
+	public boolean isMyFriend(Long userId, Long targetId) {
+		Friends existed = friendDao.selectOne(new LambdaQueryWrapper<Friends>().eq(Friends::getUserId, userId)
+				.eq(Friends::getFriendId, targetId));
+		return existed != null;
 	}
 
 	public void refreshUserFriends(User user) {

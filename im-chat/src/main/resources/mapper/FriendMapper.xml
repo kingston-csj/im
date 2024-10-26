@@ -13,8 +13,8 @@
 		       fg.id AS `group`, fg.name AS groupName
 		FROM
 		friends f , friendgroup fg, user u
-		WHERE f.groupid = fg.id
-		  AND f.friendid = u.userId
-		  AND f.userid = #{userId}
+		WHERE f.groupId = fg.id
+		  AND f.friendId = u.userId
+		  AND f.userId = #{userId}
 	</select>
 </mapper>

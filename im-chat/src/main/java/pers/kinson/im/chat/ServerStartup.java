@@ -1,15 +1,13 @@
 package pers.kinson.im.chat;
 
-import pers.kinson.im.chat.base.ServerNode;
-import pers.kinson.im.chat.http.HttpServer;
-import pers.kinson.im.chat.net.ChatServer;
-import org.mybatis.spring.annotation.MapperScan;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import pers.kinson.im.chat.base.ServerNode;
+import pers.kinson.im.chat.net.ChatServer;
 import pers.kinson.im.chat.net.message.MessageRouter;
 
 import java.util.ArrayList;
@@ -43,7 +41,6 @@ public class ServerStartup implements CommandLineRunner {
 
     public void start() throws Exception {
         serverNodes.add(new ChatServer());
-        serverNodes.add(new HttpServer());
 
         for (ServerNode node : serverNodes) {
             node.init();

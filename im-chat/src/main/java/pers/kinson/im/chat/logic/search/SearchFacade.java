@@ -9,6 +9,4 @@ public class SearchFacade {
 	@Autowired
 	private SearchService searchService;
 
-
-
 }

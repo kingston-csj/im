@@ -1,9 +1,11 @@
 package pers.kinson.im.chat.net.message;
 
 import pers.kinson.im.chat.dispatch.MessageHandler;
+import pers.kinson.im.chat.logic.CmdConst;
 import pers.kinson.im.chat.logs.LoggerUtils;
 import pers.kinson.im.chat.net.IoSession;
 import pers.kinson.im.chat.util.ClassScanner;
+import pers.kinson.im.chat.core.HttpResult;
 
 import java.lang.reflect.Modifier;
 import java.util.Arrays;
@@ -30,6 +32,8 @@ public enum MessageRouter {
             }
         });
 
+        msgClazzs.put(CmdConst.ResCommon, HttpResult.class);
+
         Set<Class<?>> handlers = ClassScanner.listAllSubclasses("pers.kinson.im.chat", MessageHandler.class);
         handlers.forEach(c -> {
             try {
@@ -39,7 +43,7 @@ public enum MessageRouter {
                         if (method.getParameterTypes()[0] == IoSession.class) {
                             Class<?> secondParamType = method.getParameterTypes()[1];
                             if (AbstractPacket.class.isAssignableFrom(secondParamType)) {
-                                if (!Modifier.isAbstract(secondParamType.getModifiers()) ) {
+                                if (!Modifier.isAbstract(secondParamType.getModifiers())) {
                                     try {
                                         MessageHandler handler = (MessageHandler) c.newInstance();
                                         AbstractPacket packetObj = (AbstractPacket) secondParamType.newInstance();

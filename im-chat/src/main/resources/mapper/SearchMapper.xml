@@ -14,4 +14,12 @@
 		user u
 		WHERE u.userName LIKE concat(concat('%',#{userName}),'%')
 	</select>
+
+	<select id="queryById" parameterType="java.lang.String"
+			resultMap="userView">
+		SELECT u.userId, u.sex, u.userName, u.signature
+		FROM
+		user u
+		WHERE u.userId = #{userId}
+	</select>
 </mapper>
