@@ -1,11 +1,12 @@
 package pers.kinson.im.chat.core;
 
+import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.chat.logic.CmdConst;
-import pers.kinson.im.chat.net.message.AbstractPacket;
 
 @Data
-public class HttpResult extends AbstractPacket {
+@MessageMeta(cmd =  CmdConst.ResCommon)
+public class HttpResult {
 
     /**
      * 0表示成功，非0代表错误
@@ -40,9 +41,5 @@ public class HttpResult extends AbstractPacket {
         return r;
     }
 
-    @Override
-    public int getPacketId() {
-        return CmdConst.ResCommon;
-    }
 
 }

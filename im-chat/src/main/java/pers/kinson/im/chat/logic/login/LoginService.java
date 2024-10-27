@@ -1,5 +1,6 @@
 package pers.kinson.im.chat.logic.login;
 
+import jforgame.socket.share.IdSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -12,7 +13,6 @@ import pers.kinson.im.chat.logic.login.event.UserLoginEvent;
 import pers.kinson.im.chat.logic.login.message.res.ResUserLogin;
 import pers.kinson.im.chat.logic.user.UserService;
 import pers.kinson.im.chat.net.ChannelUtils;
-import pers.kinson.im.chat.net.IoSession;
 
 import io.netty.channel.Channel;
 
@@ -24,7 +24,7 @@ public class LoginService {
 
 	public void validateLogin(Channel channel, long userId, String password) {
 		User user = userService.queryUser(userId, password);
-		IoSession session = ChannelUtils.getSessionBy(channel);
+		IdSession session = ChannelUtils.getSessionBy(channel);
 		if (user == null) {
 			SessionManager.INSTANCE.sendPacketTo(session,
 					ResUserLogin.valueOfFailed());
@@ -34,7 +34,7 @@ public class LoginService {
 		onLoginSucc(user, session);
 	}
 
-	private void onLoginSucc(User user, IoSession session) {
+	private void onLoginSucc(User user, IdSession session) {
 		SessionManager.INSTANCE.registerSession(user, session);
 		userService.addUser2Online(user);
 

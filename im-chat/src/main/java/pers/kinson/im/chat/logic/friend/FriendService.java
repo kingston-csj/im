@@ -1,16 +1,11 @@
 package pers.kinson.im.chat.logic.friend;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
 import pers.kinson.im.chat.base.Constants;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.data.dao.FriendDao;
-import pers.kinson.im.chat.data.model.FriendApply;
 import pers.kinson.im.chat.data.model.Friends;
 import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.data.view.FriendView;
@@ -19,6 +14,9 @@ import pers.kinson.im.chat.logic.friend.message.res.ResFriendLogin;
 import pers.kinson.im.chat.logic.friend.message.res.ResFriendLogout;
 import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
 import pers.kinson.im.chat.logic.user.UserService;
+
+import java.util.ArrayList;
+import java.util.List;
 
 @Component
 public class FriendService {

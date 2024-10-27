@@ -1,19 +1,15 @@
 package pers.kinson.im.chat.logic.search.message.req;
 
 
+import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.chat.logic.CmdConst;
-import pers.kinson.im.chat.net.message.AbstractPacket;
 
 @Data
-public class ReqSearchFriends extends AbstractPacket {
+@MessageMeta(cmd = CmdConst.ReqSearchFriends)
+public class ReqSearchFriends {
 
 	/** 昵称或qq号 */
 	private String key;
-
-	@Override
-	public int getPacketId() {
-		return CmdConst.ReqSearchFriends;
-	}
 
 }

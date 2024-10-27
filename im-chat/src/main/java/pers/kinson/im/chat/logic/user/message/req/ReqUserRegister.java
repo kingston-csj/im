@@ -1,12 +1,13 @@
 package pers.kinson.im.chat.logic.user.message.req;
 
+import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.chat.base.Constants;
 import pers.kinson.im.chat.logic.CmdConst;
-import pers.kinson.im.chat.net.message.AbstractPacket;
 
 @Data
-public class ReqUserRegister extends AbstractPacket {
+@MessageMeta(cmd = CmdConst.ReqUserRegister)
+public class ReqUserRegister {
 
     private long userId;
     /**
@@ -17,10 +18,5 @@ public class ReqUserRegister extends AbstractPacket {
     private String nickName;
 
     private String password;
-
-    @Override
-    public int getPacketId() {
-        return CmdConst.ReqUserRegister;
-    }
 
 }

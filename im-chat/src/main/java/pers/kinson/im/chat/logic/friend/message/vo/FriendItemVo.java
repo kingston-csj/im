@@ -1,11 +1,12 @@
 package pers.kinson.im.chat.logic.friend.message.vo;
 
+import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.chat.logic.CmdConst;
-import pers.kinson.im.chat.net.message.AbstractPacket;
 
 @Data
-public class FriendItemVo extends AbstractPacket {
+@MessageMeta(cmd = CmdConst.FriendVo)
+public class FriendItemVo {
 
 	private long userId;
 	/** 在线状态 {@link Constants#online_status} */
@@ -22,16 +23,5 @@ public class FriendItemVo extends AbstractPacket {
 	private int group;
 	/** 分组备注 */
 	private String groupName;
-
-	@Override
-	public int getPacketId() {
-		return CmdConst.FriendVo;
-	}
-
-	@Override
-	public String toString() {
-		return "FriendItemVo [userId=" + userId + ", online=" + online + ", userName=" + userName + ", remark=" + remark
-				+ ", signature=" + signature + ", sex=" + sex + ", group=" + group + ", groupName=" + groupName + "]";
-	}
 
 }

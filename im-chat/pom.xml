@@ -31,6 +31,10 @@
             <groupId>io.github.jforgame</groupId>
             <artifactId>jforgame-codec-struct</artifactId>
         </dependency>
+        <dependency>
+            <groupId>io.github.jforgame</groupId>
+            <artifactId>jforgame-socket-netty</artifactId>
+        </dependency>
 
         <dependency>
             <groupId>io.netty</groupId>

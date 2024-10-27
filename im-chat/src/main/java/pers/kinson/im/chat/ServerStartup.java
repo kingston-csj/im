@@ -1,14 +1,13 @@
 package pers.kinson.im.chat;
 
+import jforgame.socket.share.ServerNode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
-import pers.kinson.im.chat.base.ServerNode;
-import pers.kinson.im.chat.net.ChatServer;
-import pers.kinson.im.chat.net.message.MessageRouter;
+import pers.kinson.im.chat.base.SpringContext;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -40,20 +39,13 @@ public class ServerStartup implements CommandLineRunner {
     }
 
     public void start() throws Exception {
-        serverNodes.add(new ChatServer());
-
-        for (ServerNode node : serverNodes) {
-            node.init();
-            node.start();
-        }
-
-        MessageRouter.INSTANCE.toString();
+        SpringContext.getBean(jforgame.socket.share.ServerNode.class).start();
     }
 
     public void stop() {
         for (ServerNode node : serverNodes) {
             try {
-                node.shutDown();
+                node.shutdown();
             } catch (Exception e) {
                 logger.error("", e);
             }

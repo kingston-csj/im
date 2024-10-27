@@ -1,21 +1,17 @@
 package pers.kinson.im.chat.logic.friend.message.res;
 
+import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.chat.logic.CmdConst;
 import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
-import pers.kinson.im.chat.net.message.AbstractPacket;
 
 import java.util.List;
 
 @Data
-public class ResFriendList extends AbstractPacket {
+@MessageMeta(cmd = CmdConst.ResFriendList)
+public class ResFriendList {
 
 	private List<FriendItemVo> friends;
-
-	@Override
-	public int getPacketId() {
-		return CmdConst.ResFriendList;
-	}
 
 
 }

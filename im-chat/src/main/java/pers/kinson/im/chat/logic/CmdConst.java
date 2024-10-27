@@ -93,6 +93,7 @@ public interface CmdConst {
 
     int FriendVo = 5_204;
     int RecommendFriendVO = 5_205;
+    int ResApplyFriend = 5_206;
 
 
     /*

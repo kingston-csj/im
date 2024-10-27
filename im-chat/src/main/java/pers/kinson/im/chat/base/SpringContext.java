@@ -1,26 +1,24 @@
 package pers.kinson.im.chat.base;
 
-import java.util.Collection;
-
-
 import jakarta.annotation.PostConstruct;
 import jakarta.annotation.Resource;
-import jforgame.codec.MessageCodec;
 import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
-
 import pers.kinson.im.chat.ServerConfigs;
 import pers.kinson.im.chat.asyncdb.AysncDbService;
-import pers.kinson.im.chat.dispatch.MessageDispatcher;
 import pers.kinson.im.chat.listener.EventDispatcher;
 import pers.kinson.im.chat.logic.chat.ChatService;
 import pers.kinson.im.chat.logic.friend.FriendService;
 import pers.kinson.im.chat.logic.search.SearchService;
 import pers.kinson.im.chat.logic.user.UserService;
 import pers.kinson.im.chat.logic.util.IdService;
+
+import java.lang.annotation.Annotation;
+import java.util.Collection;
+import java.util.Map;
 
 @Component
 public class SpringContext implements ApplicationContextAware {
@@ -59,15 +57,9 @@ public class SpringContext implements ApplicationContextAware {
     private static IdService idService;
 
     @Getter
-    private static MessageDispatcher messageDispatcher;
-
-    @Getter
     private static EventDispatcher eventDispatcher;
 
     private static ServerConfigs serverConfigs;
-
-    @Getter
-    private static MessageCodec messageCodec;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -84,6 +76,10 @@ public class SpringContext implements ApplicationContextAware {
 
     public static <T> T getBean(String name, Class<T> requiredType) {
         return applicationContext.getBean(name, requiredType);
+    }
+
+    public static Map<String, Object> getBeansWithAnnotation(Class<? extends Annotation> annotationType) {
+        return applicationContext.getBeansWithAnnotation(annotationType);
     }
 
     @Resource
@@ -117,11 +113,6 @@ public class SpringContext implements ApplicationContextAware {
     }
 
     @Resource
-    public void setMessageDispatcher(MessageDispatcher messageDispatcher) {
-        SpringContext.messageDispatcher = messageDispatcher;
-    }
-
-    @Resource
     public void setEventDispatcher(EventDispatcher eventDispatcher) {
         SpringContext.eventDispatcher = eventDispatcher;
     }
@@ -135,11 +126,5 @@ public class SpringContext implements ApplicationContextAware {
     public static ServerConfigs getServerConfigs() {
         return SpringContext.serverConfigs;
     }
-
-    @Resource
-    public void setMessageCodec(MessageCodec messageCodec) {
-        SpringContext.messageCodec = messageCodec;
-    }
-
 
 }

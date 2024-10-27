@@ -17,7 +17,7 @@
         <netty.version>4.1.107.Final</netty.version>
         <spring-boot.version>3.0.9</spring-boot.version>
         <mybatis-plus.version>3.5.8</mybatis-plus.version>
-        <jforgame.version>1.1.0</jforgame.version>
+        <jforgame.version>2.0.0</jforgame.version>
         <lombok.version>1.18.30</lombok.version>
     </properties>
 
@@ -57,6 +57,11 @@
             <dependency>
                 <groupId>io.github.jforgame</groupId>
                 <artifactId>jforgame-commons</artifactId>
+                <version>${jforgame.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.jforgame</groupId>
+                <artifactId>jforgame-socket-netty</artifactId>
                 <version>${jforgame.version}</version>
             </dependency>
             <dependency>
