@@ -2,11 +2,18 @@ package pers.kinson.im.chat.data.model;
 
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
-import pers.kinson.im.chat.base.Constants;
+import lombok.NoArgsConstructor;
+
+import java.util.Date;
 
 @TableName(value = "friends")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class Friends {
 
     @TableId()
@@ -17,5 +24,9 @@ public class Friends {
     private Long friendId;
 
     private Long groupId;
+
+    private String remark;
+
+    private Date date;
 
 }

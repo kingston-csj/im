@@ -19,10 +19,11 @@
 
   ### QuickStart  
   1. 安装git后，使用命令 git clone https://github.com/kingston-csj/im 
-  2. 新建数据库chat_room，导入im-chat/src/test/resources目录下的chat_room.sql   
+  2. 新建数据库im，导入im-chat/src/test/resources目录下的chat_room.sql   
   3. 在applicationContext.xml文件配置本地数据库连接属性，启动ServerStartup
   4. 另起新目录，下载客户端代码 git clone https://github.com/kingston-csj/wechat
-  5. 启动ClientStartup类, 即可看到登录界面（临时密码为000）
+  5. 启动ClientStartup类, 即可看到登录界面（临时密码为000）  
+     (多人聊天，需要开启多个ClientStartup客户端即可)
 
 
   ### 部分客户端运行效果

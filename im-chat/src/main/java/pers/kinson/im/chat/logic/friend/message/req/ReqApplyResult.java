@@ -4,15 +4,13 @@ import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Getter;
 import lombok.Setter;
 import pers.kinson.im.common.constants.CmdConst;
-
 @Getter
 @Setter
-@MessageMeta(cmd = CmdConst.ReqApplyFriend)
-public class ReqApplyFriend  {
+@MessageMeta(cmd = CmdConst.ReqApplyResult)
+public class ReqApplyResult {
 
-    private Long from;
+    private Long applyId;
 
-    private Long to;
+    private byte status;
 
-    private String remark;
 }

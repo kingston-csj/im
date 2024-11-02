@@ -2,9 +2,8 @@ package pers.kinson.im.chat.logic.login.message.res;
 
 import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
-import pers.kinson.im.chat.base.Constants;
-import pers.kinson.im.chat.logic.CmdConst;
-
+import pers.kinson.im.common.constants.CommonStatus;
+import pers.kinson.im.common.constants.CmdConst;
 
 @Data
 @MessageMeta(cmd =  CmdConst.ResUserLogin)
@@ -15,7 +14,7 @@ public class ResUserLogin   {
 
     public static ResUserLogin valueOfFailed() {
         ResUserLogin response = new ResUserLogin();
-        response.setIsValid(Constants.FAILED);
+        response.setIsValid(CommonStatus.FAILED);
         return response;
     }
 

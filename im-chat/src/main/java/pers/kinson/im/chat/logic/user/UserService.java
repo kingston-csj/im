@@ -2,7 +2,11 @@ package pers.kinson.im.chat.logic.user;
 
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ConcurrentMap;
 
+import jakarta.annotation.PostConstruct;
+import jforgame.commons.NumberUtil;
 import jforgame.commons.ds.ConcurrentHashSet;
 import jforgame.commons.ds.LruHashMap;
 import jforgame.socket.share.IdSession;
@@ -10,7 +14,6 @@ import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pers.kinson.im.chat.base.Constants;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.UserDao;
@@ -21,6 +24,7 @@ import pers.kinson.im.chat.logic.util.IdService;
 import pers.kinson.im.chat.net.ChannelUtils;
 
 import io.netty.channel.Channel;
+import pers.kinson.im.common.constants.CommonStatus;
 
 @Component
 public class UserService {
@@ -39,6 +43,15 @@ public class UserService {
      * 在线用户列表
      */
     private Set<Long> onlneUsers = new ConcurrentHashSet<>();
+
+    private ConcurrentMap<Long, String> userIdNameMapper = new ConcurrentHashMap<>();
+
+    @PostConstruct
+    private void init() {
+        userDao.selectIdAndNameList().forEach(e->{
+            userIdNameMapper.put(e.getUserId(), e.getUserName());
+        });
+    }
 
     public void addUser2Online(User user) {
         this.onlneUsers.add(user.getUserId());
@@ -80,11 +93,11 @@ public class UserService {
         User oldUser = userDao.selectById(userId);
         ResUserRegister response = new ResUserRegister();
         if (oldUser != null) {
-            response.setResultCode(Constants.FAILED);
+            response.setResultCode(CommonStatus.FAILED);
             response.setMessage("账号id已存在");
         } else {
             User newUser = createNewUser(userId, sex, String.valueOf(userId), password);
-            response.setResultCode(Constants.SUCC);
+            response.setResultCode(CommonStatus.SUCC);
             response.setMessage(String.valueOf(newUser.getUserId()));
         }
         session.send(response);
@@ -114,12 +127,14 @@ public class UserService {
 
     public void userLogout(Channel channel) {
         IdSession session = ChannelUtils.getSessionBy(channel);
-        long userId = ((User) session.getAttribute("USER")).getUserId();
+        Long userId = NumberUtil.longValue(session.getId());
         SpringContext.getUserService().removeFromOnline(userId);
         SpringContext.getFriendService().onUserLogout(userId);
 
         SessionManager.INSTANCE.ungisterUserContext(channel);
     }
 
-
+    public String getUserName(Long userId) {
+        return userIdNameMapper.get(userId);
+    }
 }

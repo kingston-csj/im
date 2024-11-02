@@ -21,7 +21,7 @@ public class FriendView {
     /**
      * 所属好友分组
      */
-    private int group;
+    private int groupId;
     /**
      * 分组备注
      */

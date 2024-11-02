@@ -11,7 +11,7 @@ import pers.kinson.im.chat.ServerConfigs;
 import pers.kinson.im.chat.asyncdb.AysncDbService;
 import pers.kinson.im.chat.listener.EventDispatcher;
 import pers.kinson.im.chat.logic.chat.ChatService;
-import pers.kinson.im.chat.logic.friend.FriendService;
+import pers.kinson.im.chat.logic.friend.service.FriendService;
 import pers.kinson.im.chat.logic.search.SearchService;
 import pers.kinson.im.chat.logic.user.UserService;
 import pers.kinson.im.chat.logic.util.IdService;

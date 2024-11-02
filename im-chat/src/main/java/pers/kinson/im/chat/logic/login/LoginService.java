@@ -4,7 +4,7 @@ import jforgame.socket.share.IdSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-import pers.kinson.im.chat.base.Constants;
+import pers.kinson.im.common.constants.CommonStatus;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.model.User;
@@ -39,7 +39,7 @@ public class LoginService {
 		userService.addUser2Online(user);
 
 		ResUserLogin loginPact = new ResUserLogin();
-		loginPact.setIsValid(Constants.TRUE);
+		loginPact.setIsValid(CommonStatus.TRUE);
 		SessionManager.INSTANCE.sendPacketTo(session, loginPact);
 
 		SpringContext.getEventDispatcher().fireEvent(

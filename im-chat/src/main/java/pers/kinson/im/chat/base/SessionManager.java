@@ -74,6 +74,7 @@ public enum SessionManager {
 
     public boolean registerSession(User user, IdSession session) {
         session.setAttribute("USER", user);
+        session.setAttribute("ID", user.getUserId());
         userId2Sessions.put(user.getUserId(), session);
         session2UserIds.put(session, user.getUserId());
 

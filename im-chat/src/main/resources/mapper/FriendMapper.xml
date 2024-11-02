@@ -9,12 +9,21 @@
 
 	<select id="getMyFriends" parameterType="java.lang.Long"
 		resultMap="friendView">
-		SELECT u.userId, u.sex, u.userName, f.remark, u.signature,
-		       fg.id AS `group`, fg.name AS groupName
+		SELECT
+            u.userId,
+            u.sex,
+            u.userName,
+            f.remark,
+            u.signature,
+            COALESCE(fg.id, '') AS groupId,
+            COALESCE(fg.name, '') AS groupName,
+            COALESCE(fg.sort, '') AS groupSort
 		FROM
-		friends f , friendgroup fg, user u
-		WHERE f.groupId = fg.id
-		  AND f.friendId = u.userId
-		  AND f.userId = #{userId}
+            friends f
+            LEFT JOIN friendGroup fg ON f.groupId = fg.id
+            LEFT JOIN user u ON f.friendId = u.userId
+		WHERE
+		    f.userId = #{userId}
+        ORDER BY fg.sort DESC
 	</select>
 </mapper>

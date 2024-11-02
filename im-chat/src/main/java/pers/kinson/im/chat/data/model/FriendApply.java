@@ -34,7 +34,7 @@ public class FriendApply {
     private Date date;
 
     /**
-     * 1拒绝，2通过
+     * 处理状态 {@link pers.kinson.im.common.constants.CommonStatus#APPLY_STATUS_YES}
      */
     private byte status;
 

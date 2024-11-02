@@ -1,5 +1,6 @@
 package pers.kinson.im.chat.logic.chat;
 
+import jforgame.commons.NumberUtil;
 import jforgame.socket.share.IdSession;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.chat.base.SessionManager;
@@ -21,7 +22,8 @@ public class ChatService {
         //双方都推送消息
         ResChatToUser response = new ResChatToUser();
         response.setContent(content);
-        response.setFromUserId(((User) fromUser.getAttribute("USER")).getUserId());
+        response.setFromUserId(NumberUtil.longValue(fromUser.getId()));
+        response.setToUserId(toUserId);
         toUser.send(response);
 
         fromUser.send(response);

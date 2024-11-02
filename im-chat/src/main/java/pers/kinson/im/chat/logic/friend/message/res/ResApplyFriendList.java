@@ -2,15 +2,13 @@ package pers.kinson.im.chat.logic.friend.message.res;
 
 import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
-import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
+import pers.kinson.im.chat.logic.friend.message.vo.FriendApplyVo;
 import pers.kinson.im.common.constants.CmdConst;
 import java.util.List;
 
 @Data
-@MessageMeta(cmd = CmdConst.ResFriendList)
-public class ResFriendList {
+@MessageMeta(cmd = CmdConst.ResApplyFriendList)
+public class ResApplyFriendList {
 
-	private List<FriendItemVo> friends;
-
-
+    List<FriendApplyVo> records;
 }

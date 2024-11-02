@@ -7,12 +7,7 @@ import pers.kinson.im.common.constants.CmdConst;
 
 @Getter
 @Setter
-@MessageMeta(cmd = CmdConst.ReqApplyFriend)
-public class ReqApplyFriend  {
+@MessageMeta(cmd = CmdConst.ReqApplyFriendList)
+public class ReqApplyFriendList {
 
-    private Long from;
-
-    private Long to;
-
-    private String remark;
 }

@@ -7,6 +7,9 @@
 		resultType="pers.kinson.im.chat.data.model.User">
 		select * from user where userId=#{userId}
 	</select>
+	<select id="selectIdAndNameList" resultType="pers.kinson.im.chat.logic.user.bo.UserProfile">
+		select userId, userName from user
+	</select>
 	<select id="getMaxId" resultType="java.lang.Integer">
 		select max(userid) from user
 	</select>

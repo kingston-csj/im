@@ -2,10 +2,10 @@ package pers.kinson.im.chat.core;
 
 import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
-import pers.kinson.im.chat.logic.CmdConst;
+import pers.kinson.im.common.constants.CmdConst;
 
 @Data
-@MessageMeta(cmd =  CmdConst.ResCommon)
+@MessageMeta(cmd = CmdConst.ResCommon)
 public class HttpResult {
 
     /**
@@ -22,7 +22,6 @@ public class HttpResult {
      * 真正的消息，格式由业务自行定义
      */
     private String data;
-
 
 
     public static HttpResult ok(String data) {
