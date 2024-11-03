@@ -1,4 +1,4 @@
-package pers.kinson.im.chat.logic.user.bo;
+package pers.kinson.im.chat.logic.user.io;
 
 import lombok.Data;
 

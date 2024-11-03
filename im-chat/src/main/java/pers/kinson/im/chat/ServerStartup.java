@@ -7,12 +7,14 @@ import org.springframework.boot.Banner;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.context.annotation.ComponentScan;
 import pers.kinson.im.chat.base.SpringContext;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @SpringBootApplication
+@ComponentScan({"pers.kinson.im"})
 public class ServerStartup implements CommandLineRunner {
 
     private Logger logger = LoggerFactory.getLogger(getClass());

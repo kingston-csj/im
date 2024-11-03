@@ -8,6 +8,12 @@ import pers.kinson.im.common.constants.CmdConst;
 public class ResUserInfo {
 
     private long userId;
+
+    /**
+     * 头像地址
+     */
+    private String avatar;
+
     /**
      * 账号昵称
      */

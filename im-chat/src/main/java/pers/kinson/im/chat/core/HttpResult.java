@@ -30,6 +30,12 @@ public class HttpResult {
         return r;
     }
 
+    public static HttpResult fail(int code) {
+        HttpResult r = new HttpResult();
+        r.setCode(code);
+        return r;
+    }
+
     public static HttpResult ok() {
         return new HttpResult();
     }

@@ -23,7 +23,7 @@ public class LoginService {
 	private UserService userService;
 
 	public void validateLogin(Channel channel, long userId, String password) {
-		User user = userService.queryUser(userId, password);
+		User user = userService.validateUser(userId, password);
 		IdSession session = ChannelUtils.getSessionBy(channel);
 		if (user == null) {
 			SessionManager.INSTANCE.sendPacketTo(session,

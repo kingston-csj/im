@@ -25,6 +25,7 @@ import pers.kinson.im.chat.net.ChannelUtils;
 
 import io.netty.channel.Channel;
 import pers.kinson.im.common.constants.CommonStatus;
+import pers.kinson.im.oss.OssService;
 
 @Component
 public class UserService {
@@ -70,7 +71,7 @@ public class UserService {
         return this.lruUsers.get(userId);
     }
 
-    public User queryUser(long userId, String password) {
+    public User validateUser(long userId, String password) {
         if (userId <= 0 || StringUtils.isEmpty(password)) {
             return null;
         }
@@ -121,6 +122,7 @@ public class UserService {
         response.setUserId(user.getUserId());
         response.setUserName(user.getUserName());
         response.setSignature(user.getSignature());
+        response.setAvatar(SpringContext.getBean(OssService.class).fullOssPath(user.getAvatar()));
 
         SessionManager.INSTANCE.sendPacketTo(user.getUserId(), response);
     }
@@ -136,5 +138,9 @@ public class UserService {
 
     public String getUserName(Long userId) {
         return userIdNameMapper.get(userId);
+    }
+
+    public void saveUser(User user) {
+        userDao.updateById(user);
     }
 }

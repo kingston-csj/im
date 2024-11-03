@@ -11,3 +11,13 @@ mybatis-plus:
   configuration:
     #    log-impl: org.apache.ibatis.logging.stdout.StdOutImpl
     mapUnderscoreToCamelCase: false
+
+
+# s3配置
+s3:
+  type: minio
+  endpoint: http://192.168.0.121:9000
+  accessKey: pKZzDFNoJ4rwRKOsDgCQ
+  secretKey: iRyB20GkRrUk65Ymr0qbpN2jbHck7eYMcQULTrAy
+  bucketName: database
+  region: us-east-1

@@ -15,6 +15,11 @@ public class User {
      * 性别{@link CommonStatus#SEX_OF_BOY}
      */
     private byte sex;
+
+    /**
+     * 头像cdn地址
+     */
+    private String avatar;
     /**
      * 用户名字
      */
