@@ -21,7 +21,7 @@
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <minio.version>8.5.9</minio.version>
-        <amazons3.version>1.12.203</amazons3.version>
+        <amazons3.version>1.12.261</amazons3.version>
     </properties>
 
     <modules>
