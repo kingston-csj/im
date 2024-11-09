@@ -1,0 +1,66 @@
+package pers.kinson.im.chat.logic.discussion.facade;
+
+import jforgame.commons.NumberUtil;
+import jforgame.socket.share.IdSession;
+import jforgame.socket.share.annotation.MessageRoute;
+import jforgame.socket.share.annotation.RequestHandler;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import pers.kinson.im.chat.base.SessionManager;
+import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.core.HttpResult;
+import pers.kinson.im.chat.data.model.User;
+import pers.kinson.im.chat.listener.EventType;
+import pers.kinson.im.chat.listener.annotation.EventHandler;
+import pers.kinson.im.chat.logic.discussion.message.req.ReqCreateDiscussion;
+import pers.kinson.im.chat.logic.discussion.message.req.ReqJoinDiscussion;
+import pers.kinson.im.chat.logic.discussion.message.req.ReqViewDiscussionList;
+import pers.kinson.im.chat.logic.discussion.message.res.ResViewDiscussionList;
+import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
+import pers.kinson.im.chat.logic.discussion.service.DiscussionService;
+import pers.kinson.im.chat.logic.login.event.UserLoginEvent;
+
+import java.util.List;
+
+@Component
+@MessageRoute
+public class DiscussionFacade {
+
+    @Autowired
+    DiscussionService discussionService;
+
+    @RequestHandler
+    public ResViewDiscussionList reqViewGroupList(IdSession session, int index, ReqViewDiscussionList req) {
+        Long userId = NumberUtil.longValue(session.getId());
+        List<DiscussionGroupVo> discussionGroupVos = discussionService.listAllDiscussion(userId);
+        ResViewDiscussionList response = new ResViewDiscussionList();
+        response.setGroups(discussionGroupVos);
+
+        return response;
+    }
+
+    @RequestHandler
+    public HttpResult reqCreate(IdSession session, ReqCreateDiscussion req) {
+        Long userId = NumberUtil.longValue(session.getId());
+        int code = discussionService.create(userId, req.getMembers(), "随便吧");
+        return HttpResult.valueOf(code);
+    }
+
+    @RequestHandler
+    public HttpResult reqJoin(IdSession session, ReqJoinDiscussion req) {
+        Long userId = NumberUtil.longValue(session.getId());
+        int code = discussionService.join(userId, req.getDiscussionId());
+        return HttpResult.valueOf(code);
+    }
+
+    @EventHandler(value = {EventType.LOGIN})
+    public void onUserLogin(UserLoginEvent loginEvent) {
+        long userId = loginEvent.getUserId();
+        User user = SpringContext.getUserService().getOnlineUser(userId);
+        List<DiscussionGroupVo> discussionGroupVos = discussionService.listAllDiscussion(userId);
+        ResViewDiscussionList response = new ResViewDiscussionList();
+        response.setGroups(discussionGroupVos);
+        SessionManager.INSTANCE.sendPacketTo(user, response);
+    }
+
+}

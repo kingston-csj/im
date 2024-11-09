@@ -60,7 +60,7 @@ class UserAvatarHandler implements UploadResourceHandler {
 
         FileUploadService fileService = SpringContext.getBean(FileUploadService.class);
         Pair<String, String> urls = fileService.uploadResource(fileVo);
-        user.setAvatar(urls.getFirst());
+        user.setAvatar(urls.getSecond());
         SpringContext.getUserService().saveUser(user);
 
         return ResUploadFile.builder()

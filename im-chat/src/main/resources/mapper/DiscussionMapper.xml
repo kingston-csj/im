@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.kinson.im.chat.data.dao.FriendDao">
+
+    <resultMap id="groupView" type="pers.kinson.im.chat.data.view.DiscussionGroupView">
+    </resultMap>
+
+    <select id="getMyGroups" parameterType="java.lang.Long"
+            resultMap="groupView">
+        SELECT d.id,d.name
+        FROM discussion AS d , discussionMember AS m
+        WHERE d.id = m.discussionId AND m.userId = #{userId}
+    </select>
+</mapper>

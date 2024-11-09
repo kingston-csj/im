@@ -5,8 +5,8 @@ import java.util.HashMap;
 import java.util.Map;
 
 import org.springframework.stereotype.Component;
+import pers.kinson.im.common.logger.LoggerUtil;
 
-import pers.kinson.im.chat.logs.LoggerUtils;
 
 @Component
 public class ListenerManager {
@@ -34,7 +34,7 @@ public class ListenerManager {
 			Method method = signature2Handler.get(getKey(handler, event.getEventType()));
 			method.invoke(handler, event);
 		} catch (Exception e) {
-			LoggerUtils.error("", e);
+			LoggerUtil.error("", e);
 		}
 	}
 

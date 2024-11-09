@@ -40,7 +40,11 @@
             <groupId>io.github.jforgame</groupId>
             <artifactId>jforgame-socket-netty</artifactId>
         </dependency>
-
+        <dependency>
+            <groupId>com.googlecode.concurrentlinkedhashmap</groupId>
+            <artifactId>concurrentlinkedhashmap-lru</artifactId>
+            <version>1.4.2</version>
+        </dependency>
         <dependency>
             <groupId>io.netty</groupId>
             <artifactId>netty-all</artifactId>

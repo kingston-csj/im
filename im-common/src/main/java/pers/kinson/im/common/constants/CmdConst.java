@@ -48,6 +48,10 @@ public interface CmdConst {
      */
     int ResUserInfo = 3_202;
 
+
+
+
+
     /**
      * 请求--单聊
      */
@@ -56,6 +60,18 @@ public interface CmdConst {
      * 请求--群聊
      */
     int ReqChatToGroup = 4_001;
+    /**
+     * 请求--创建讨论组
+     */
+    int ReqCreateDiscussion = 4_002;
+    /**
+     * 请求--加入讨论组
+     */
+    int ReqJoinDiscussion = 4_003;
+
+    int ReqViewDiscussionList = 4_004;
+    int DiscussionGroupVo = 4_005;
+    int ReqViewDiscussionMembers = 4_006;
 
     /**
      * 推送--单聊
@@ -66,6 +82,7 @@ public interface CmdConst {
      */
     int ResChatToGroup = 4_201;
 
+    int ResViewDiscussionList = 4_202;
 
     /*
      * ------------------好友开始----------------------------

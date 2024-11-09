@@ -4,7 +4,6 @@ import jforgame.commons.NumberUtil;
 import jforgame.socket.share.IdSession;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.chat.base.SessionManager;
-import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.logic.chat.message.res.ResChatToUser;
 
 @Component

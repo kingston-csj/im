@@ -12,7 +12,7 @@ import pers.kinson.im.chat.logic.login.event.UserLoginEvent;
 
 @Component
 @MessageRoute
-public class FriendFacade {
+public class FriendSocketFacade {
 
     @Autowired
     private FriendService friendService;

@@ -11,8 +11,7 @@ import jakarta.annotation.PostConstruct;
 import jforgame.commons.thread.NamedThreadFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
-
-import pers.kinson.im.chat.logs.LoggerUtils;
+import pers.kinson.im.common.logger.LoggerUtil;
 
 
 @Component
@@ -71,7 +70,7 @@ public class EventDispatcher {
 				try{
 					listenerMgr.fireEvent(listener, event);
 				}catch(Exception e){
-					LoggerUtils.error("triggerEvent failed", e);;  //防止其中一个listener报异常而中断其他逻辑
+					LoggerUtil.error("triggerEvent failed", e);;  //防止其中一个listener报异常而中断其他逻辑
 				}
 			});
 		}

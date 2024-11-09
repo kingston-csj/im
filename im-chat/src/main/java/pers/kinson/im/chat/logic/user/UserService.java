@@ -133,7 +133,7 @@ public class UserService {
         SpringContext.getUserService().removeFromOnline(userId);
         SpringContext.getFriendService().onUserLogout(userId);
 
-        SessionManager.INSTANCE.ungisterUserContext(channel);
+        SessionManager.INSTANCE.unregisterUserContext(channel);
     }
 
     public String getUserName(Long userId) {

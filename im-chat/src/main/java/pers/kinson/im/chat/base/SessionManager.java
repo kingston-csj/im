@@ -72,20 +72,19 @@ public enum SessionManager {
         return this.userId2Sessions.get(userId);
     }
 
-    public boolean registerSession(User user, IdSession session) {
+    public void registerSession(User user, IdSession session) {
         session.setAttribute("USER", user);
         session.setAttribute("ID", user.getUserId());
         userId2Sessions.put(user.getUserId(), session);
         session2UserIds.put(session, user.getUserId());
 
         logger.info("[{}] registered...", user.getUserId());
-        return true;
     }
 
     /**
      * 注销用户通信渠道
      */
-    public void ungisterUserContext(Channel context) {
+    public void unregisterUserContext(Channel context) {
         if (context == null) {
             return;
         }
