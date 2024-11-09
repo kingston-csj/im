@@ -8,6 +8,11 @@ import pers.kinson.im.common.constants.CmdConst;
 @MessageMeta(cmd = CmdConst.ReqChatToGroup)
 public class ReqChatToGroup {
 
+    /**
+     * 频道
+     */
+    private byte channel;
+
     private long toUserId;
 
     private String content;

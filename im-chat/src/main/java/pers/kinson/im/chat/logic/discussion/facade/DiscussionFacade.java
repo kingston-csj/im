@@ -15,8 +15,11 @@ import pers.kinson.im.chat.listener.annotation.EventHandler;
 import pers.kinson.im.chat.logic.discussion.message.req.ReqCreateDiscussion;
 import pers.kinson.im.chat.logic.discussion.message.req.ReqJoinDiscussion;
 import pers.kinson.im.chat.logic.discussion.message.req.ReqViewDiscussionList;
+import pers.kinson.im.chat.logic.discussion.message.req.ReqViewDiscussionMembers;
 import pers.kinson.im.chat.logic.discussion.message.res.ResViewDiscussionList;
+import pers.kinson.im.chat.logic.discussion.message.res.ResViewDiscussionMembersList;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
+import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionMemberVo;
 import pers.kinson.im.chat.logic.discussion.service.DiscussionService;
 import pers.kinson.im.chat.logic.login.event.UserLoginEvent;
 
@@ -34,6 +37,17 @@ public class DiscussionFacade {
         Long userId = NumberUtil.longValue(session.getId());
         List<DiscussionGroupVo> discussionGroupVos = discussionService.listAllDiscussion(userId);
         ResViewDiscussionList response = new ResViewDiscussionList();
+        response.setGroups(discussionGroupVos);
+
+        return response;
+    }
+
+    @RequestHandler
+    public ResViewDiscussionMembersList reqViewGroupList(IdSession session, int index, ReqViewDiscussionMembers req) {
+        Long userId = NumberUtil.longValue(session.getId());
+        List<DiscussionMemberVo> discussionGroupVos = discussionService.listGroupMembers(req.getDiscussionId());
+        ResViewDiscussionMembersList response = new ResViewDiscussionMembersList();
+        response.setDiscussionId(req.getDiscussionId());
         response.setGroups(discussionGroupVos);
 
         return response;

@@ -20,9 +20,12 @@ import pers.kinson.im.chat.data.model.DiscussionMember;
 import pers.kinson.im.chat.data.model.FriendApply;
 import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.logic.discussion.message.res.ResNotifyMessage;
+import pers.kinson.im.chat.logic.discussion.message.res.ResViewDiscussionMembersList;
 import pers.kinson.im.chat.logic.discussion.message.vo.ChatMessage;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
+import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionMemberVo;
 import pers.kinson.im.chat.mapstruct.DiscussionMapper;
+import pers.kinson.im.chat.mapstruct.DiscussionMemberMapper;
 import pers.kinson.im.common.constants.I18nConstants;
 
 import java.util.Arrays;
@@ -31,6 +34,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
+import java.util.stream.Collectors;
 
 @Service
 public class DiscussionService {
@@ -137,4 +141,9 @@ public class DiscussionService {
         return discussionDao.getMyGroups(userId).stream().map(DiscussionMapper.INSTANCE::toVo).toList();
     }
 
+    public List<DiscussionMemberVo> listGroupMembers(Long discussionId) {
+        List<DiscussionMember> members = memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getDiscussionId, discussionId));
+        return members.stream().map(DiscussionMemberMapper.INSTANCE::toVo).collect(Collectors.toList());
+
+    }
 }

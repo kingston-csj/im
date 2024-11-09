@@ -70,7 +70,7 @@ public interface CmdConst {
     int ReqJoinDiscussion = 4_003;
 
     int ReqViewDiscussionList = 4_004;
-    int DiscussionGroupVo = 4_005;
+
     int ReqViewDiscussionMembers = 4_006;
 
     /**
@@ -83,6 +83,9 @@ public interface CmdConst {
     int ResChatToGroup = 4_201;
 
     int ResViewDiscussionList = 4_202;
+    int DiscussionGroupVo = 4_203;
+    int DiscussionGroupMemberVo = 4_204;
+    int ResViewDiscussionMembers = 4_205;
 
     /*
      * ------------------好友开始----------------------------
