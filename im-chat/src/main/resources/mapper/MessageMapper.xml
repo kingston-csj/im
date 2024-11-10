@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.kinson.im.chat.data.dao.MessageDao">
+    <resultMap id="messageView" type="pers.kinson.im.chat.data.model.Message">
+    </resultMap>
+    <select id="fetchNew"
+            resultMap="messageView">
+        SELECT * FROM message
+        WHERE
+        channel = #{0}
+        AND receiver = #{1}
+        AND seq > #{2}
+    </select>
+</mapper>

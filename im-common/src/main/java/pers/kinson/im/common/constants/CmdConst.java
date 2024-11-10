@@ -73,6 +73,8 @@ public interface CmdConst {
 
     int ReqViewDiscussionMembers = 4_006;
 
+    int ReqFetchNewMessage = 4_007;
+
     /**
      * 推送--单聊
      */
@@ -86,6 +88,11 @@ public interface CmdConst {
     int DiscussionGroupVo = 4_203;
     int DiscussionGroupMemberVo = 4_204;
     int ResViewDiscussionMembers = 4_205;
+
+    int ResNewMessageNotify = 4_206;
+    int ChatMessageVo = 4_207;
+
+    int ResNewMessage = 4_208;
 
     /*
      * ------------------好友开始----------------------------

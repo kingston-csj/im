@@ -1,13 +1,28 @@
 package pers.kinson.im.chat.logic.chat;
 
+import jakarta.annotation.PostConstruct;
 import jforgame.commons.NumberUtil;
 import jforgame.socket.share.IdSession;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.chat.base.SessionManager;
+import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResChatToUser;
+import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
+
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Component
 public class ChatService {
+
+
+    Map<Byte, ChatChannelHandler> handlers = new HashMap<>();
+
+    public void init() {
+        SpringContext.getBeansOfType(ChatChannelHandler.class).forEach(e -> handlers.put(e.channelType(), e));
+    }
 
     public void chat(IdSession fromUser, long toUserId, String content) {
         IdSession toUser = SessionManager.INSTANCE.getSessionBy(toUserId);
@@ -30,6 +45,19 @@ public class ChatService {
 
     private boolean checkDirtyWords(String content) {
         return true;
+    }
+
+
+    public void chatToChannel(Long sender, byte channel, long toUserId, String content) {
+        ChatChannelHandler handler = handlers.get(channel);
+        MessageContent chatMessage = new MessageContent();
+        chatMessage.setContent(content);
+        handler.send(sender, ""+toUserId, chatMessage);
+    }
+
+    public List<ChatMessage> fetchNewMessage(Long receiver, byte channel, String target, long maxSeq) {
+        ChatChannelHandler handler = handlers.get(channel);
+        return handler.pullMessages(receiver, target, maxSeq);
     }
 
 }

@@ -1,6 +1,6 @@
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/im
+    url: jdbc:mysql://localhost:3306/chat_room
     username: root
     password: 123456
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -17,7 +17,7 @@ mybatis-plus:
 s3:
   type: minio
   endpoint: http://192.168.0.121:9000
-  accessKey: pKZzDFNoJ4rwRKOsDgCQ
-  secretKey: iRyB20GkRrUk65Ymr0qbpN2jbHck7eYMcQULTrAy
+  accessKey: QSXuqy3vFNXgfq4a2kGx
+  secretKey: Pzv8TuyZePl9O8hQHBXkyjD7UpIgWkoNGqMsOrI2
   bucketName: database
   region: us-east-1

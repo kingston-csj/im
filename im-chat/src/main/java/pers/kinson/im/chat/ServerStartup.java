@@ -9,6 +9,7 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.logic.chat.ChatService;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +43,8 @@ public class ServerStartup implements CommandLineRunner {
 
     public void start() throws Exception {
         SpringContext.getBean(jforgame.socket.share.ServerNode.class).start();
+
+        SpringContext.getBean(ChatService.class).init();
     }
 
     public void stop() {

@@ -21,4 +21,7 @@ public class Discussion {
     private Long creatorId;
 
     private Date createdDate;
+
+    private Long maxSeq;
+
 }
