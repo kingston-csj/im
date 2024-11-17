@@ -33,4 +33,9 @@ public class User {
      */
     private String signature;
 
+    /**
+     * 点对点聊天seq
+     */
+    private long chatMaxSeq;
+
 }

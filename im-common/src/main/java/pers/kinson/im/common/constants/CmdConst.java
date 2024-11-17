@@ -74,6 +74,7 @@ public interface CmdConst {
     int ReqViewDiscussionMembers = 4_006;
 
     int ReqFetchNewMessage = 4_007;
+    int ReqMarkNewMessage = 4_008;
 
     /**
      * 推送--单聊

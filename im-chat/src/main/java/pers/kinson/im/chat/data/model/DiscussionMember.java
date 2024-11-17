@@ -20,6 +20,8 @@ public class DiscussionMember {
 
     private Long discussionId;
 
+    private long maxSeq;
+
     /**
      * 群里昵称
      */

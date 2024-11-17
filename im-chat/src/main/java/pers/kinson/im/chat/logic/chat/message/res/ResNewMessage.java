@@ -13,7 +13,7 @@ public class ResNewMessage {
 
     private byte channel;
 
-    private String topic;
+    private long topic;
 
     private List<ChatMessage> messages;
 }

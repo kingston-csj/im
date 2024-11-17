@@ -51,10 +51,10 @@ public class ChatService {
         ChatChannelHandler handler = handlers.get(channel);
         MessageContent chatMessage = new MessageContent();
         chatMessage.setContent(content);
-        handler.send(sender, ""+toUserId, chatMessage);
+        handler.send(sender, toUserId, chatMessage);
     }
 
-    public List<ChatMessage> fetchNewMessage(Long receiver, byte channel, String target, long maxSeq) {
+    public List<ChatMessage> fetchNewMessage(Long receiver, byte channel, long target, long maxSeq) {
         ChatChannelHandler handler = handlers.get(channel);
         return handler.pullMessages(receiver, target, maxSeq);
     }

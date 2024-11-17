@@ -10,5 +10,5 @@ public class ResNewMessageNotify {
 
     private byte channel;
 
-    private String topic;
+    private long topic;
 }

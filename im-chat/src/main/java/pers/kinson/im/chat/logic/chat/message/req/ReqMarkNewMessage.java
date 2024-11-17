@@ -5,8 +5,8 @@ import lombok.Data;
 import pers.kinson.im.common.constants.CmdConst;
 
 @Data
-@MessageMeta(cmd = CmdConst.ReqFetchNewMessage)
-public class ReqFetchNewMessage {
+@MessageMeta(cmd = CmdConst.ReqMarkNewMessage)
+public class ReqMarkNewMessage {
 
     private byte channel;
 

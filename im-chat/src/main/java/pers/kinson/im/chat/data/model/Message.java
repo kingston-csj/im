@@ -34,7 +34,7 @@ public class Message {
     /**
      * 频道不同，接收者引用不同
      */
-    private String receiver;
+    private Long receiver;
 
     private Long sender;
 

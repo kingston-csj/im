@@ -9,5 +9,5 @@ import java.util.List;
 @Repository
 public interface MessageDao extends BaseMapper<Message> {
 
-    List<Message> fetchNew(byte channelType, String receiver, long maxSeq);
+    List<Message> fetchNew(byte channelType, long receiver, long maxSeq);
 }

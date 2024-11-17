@@ -18,6 +18,7 @@ import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionMemberVo;
 import pers.kinson.im.chat.mapstruct.DiscussionMapper;
 import pers.kinson.im.chat.mapstruct.DiscussionMemberMapper;
+import pers.kinson.im.common.constants.CommonStatus;
 import pers.kinson.im.common.constants.I18nConstants;
 
 import java.util.Date;
@@ -132,7 +133,13 @@ public class DiscussionService {
 
     public List<DiscussionMemberVo> listGroupMembers(Long discussionId) {
         List<DiscussionMember> members = memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getDiscussionId, discussionId));
-        return members.stream().map(DiscussionMemberMapper.INSTANCE::toVo).collect(Collectors.toList());
+        List<DiscussionMemberVo> memberVos = members.stream().map(DiscussionMemberMapper.INSTANCE::toVo).collect(Collectors.toList());
+        for (DiscussionMemberVo memberVo : memberVos) {
+            if (SpringContext.getUserService().isOnlineUser(memberVo.getUserId())) {
+                memberVo.setOnline(CommonStatus.ONLINE_STATUS);
+            }
+        }
+        return memberVos;
 
     }
 }

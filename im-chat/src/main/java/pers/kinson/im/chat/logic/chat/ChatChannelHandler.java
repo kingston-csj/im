@@ -8,13 +8,13 @@ import java.util.List;
 
 public interface ChatChannelHandler {
 
-    void send(Long senderId, String target, MessageContent content);
+    void send(Long senderId, Long target, MessageContent content);
 
-    void saveToDb(Long senderId, String target, MessageContent content);
+    void saveToDb(Long senderId, Long target, MessageContent content);
 
-    Collection<Long> receivers(Long senderId, String target);
+    Collection<Long> receivers(Long senderId, Long target);
 
-    List<ChatMessage> pullMessages(Long receiver, String target, long maxSeq);
+    List<ChatMessage> pullMessages(Long receiver, Long target, long maxSeq);
 
     /**
      * 频道类型 {@link pers.kinson.im.common.constants.Channels}

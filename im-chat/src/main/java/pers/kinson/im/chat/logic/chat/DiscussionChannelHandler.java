@@ -37,7 +37,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
 
 
     @Override
-    public void send(Long senderId, String target, MessageContent content) {
+    public void send(Long senderId, Long target, MessageContent content) {
         Long discussionId = NumberUtil.longValue(target);
         Discussion discussion = discussionDao.selectById(discussionId);
         if (discussion == null) {
@@ -47,12 +47,12 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
 
         ResNewMessageNotify notify = new ResNewMessageNotify();
         notify.setChannel(Channels.discussion);
-        notify.setTopic("" + discussionId);
+        notify.setTopic(discussionId);
         receivers(senderId, target).forEach(e -> SessionManager.INSTANCE.sendPacketTo(e, notify));
     }
 
     @Override
-    public void saveToDb(Long senderId, String target, MessageContent content) {
+    public void saveToDb(Long senderId, Long target, MessageContent content) {
         Long discussionId = NumberUtil.longValue(target);
         Discussion discussion = discussionDao.selectById(discussionId);
         Message message = new Message();
@@ -69,7 +69,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
     }
 
     @Override
-    public Collection<Long> receivers(Long senderId, String target) {
+    public Collection<Long> receivers(Long senderId, Long target) {
         Long discussionId = NumberUtil.longValue(target);
         Discussion discussion = discussionDao.selectById(discussionId);
         return memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getDiscussionId, discussionId))
@@ -77,7 +77,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
     }
 
     @Override
-    public List<ChatMessage> pullMessages(Long receiver, String target, long maxSeq) {
+    public List<ChatMessage> pullMessages(Long receiver, Long target, long maxSeq) {
         List<Message> newMessages = messageDao.fetchNew(channelType(), target, maxSeq);
         return newMessages.stream().map(e -> {
             ChatMessage vo = new ChatMessage();
