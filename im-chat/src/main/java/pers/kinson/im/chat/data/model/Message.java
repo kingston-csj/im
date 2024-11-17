@@ -1,5 +1,6 @@
 package pers.kinson.im.chat.data.model;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import lombok.AllArgsConstructor;
@@ -20,10 +21,8 @@ public class Message {
     public static byte TYPE_NORMAL  = 0;
 
 
-    @TableId()
+    @TableId(type = IdType.AUTO)
     private Long id;
-
-    private Long seq;
 
     private String content;
 

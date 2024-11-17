@@ -5,8 +5,8 @@ import lombok.Data;
 import pers.kinson.im.common.constants.CmdConst;
 
 @Data
-@MessageMeta(cmd = CmdConst.ReqChatToGroup)
-public class ReqChatToGroup {
+@MessageMeta(cmd = CmdConst.ReqChatToChannel)
+public class ReqChatToChannel {
 
     /**
      * 频道

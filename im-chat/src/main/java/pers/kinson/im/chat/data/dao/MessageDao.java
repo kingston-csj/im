@@ -10,4 +10,6 @@ import java.util.List;
 public interface MessageDao extends BaseMapper<Message> {
 
     List<Message> fetchNew(byte channelType, long receiver, long maxSeq);
+
+    List<Message> fetchNewPersonal(long receiver, long maxSeq);
 }

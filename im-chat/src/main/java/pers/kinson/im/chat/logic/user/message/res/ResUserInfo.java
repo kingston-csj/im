@@ -27,4 +27,9 @@ public class ResUserInfo {
      */
     private String signature;
 
+    /**
+     * 私聊消息最大流水号
+     */
+    private long chatMaxSeq;
+
 }

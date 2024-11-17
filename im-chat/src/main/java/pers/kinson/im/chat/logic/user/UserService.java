@@ -123,6 +123,7 @@ public class UserService {
         response.setUserName(user.getUserName());
         response.setSignature(user.getSignature());
         response.setAvatar(SpringContext.getBean(OssService.class).fullOssPath(user.getAvatar()));
+        response.setChatMaxSeq(user.getChatMaxSeq());
 
         SessionManager.INSTANCE.sendPacketTo(user.getUserId(), response);
     }

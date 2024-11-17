@@ -47,11 +47,11 @@ public class ChatService {
     }
 
 
-    public void chatToChannel(Long sender, byte channel, long toUserId, String content) {
+    public void chatToChannel(Long sender, byte channel, long target, String content) {
         ChatChannelHandler handler = handlers.get(channel);
         MessageContent chatMessage = new MessageContent();
         chatMessage.setContent(content);
-        handler.send(sender, toUserId, chatMessage);
+        handler.send(sender, target, chatMessage);
     }
 
     public List<ChatMessage> fetchNewMessage(Long receiver, byte channel, long target, long maxSeq) {

@@ -11,6 +11,15 @@
         WHERE
         channel = #{channelType}
         AND receiver = #{receiver}
-        AND seq > #{maxSeq}
+        AND id > #{maxSeq}
+    </select>
+
+    <select id="fetchNewPersonal"
+            resultMap="messageView">
+        SELECT * FROM message
+        WHERE
+        channel = 0
+        AND (receiver = #{receiver} OR sender = #{receiver})
+        AND id > #{maxSeq}
     </select>
 </mapper>

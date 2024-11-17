@@ -11,8 +11,7 @@ import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
 import pers.kinson.im.chat.data.model.DiscussionMember;
 import pers.kinson.im.chat.data.model.User;
-import pers.kinson.im.chat.logic.chat.message.req.ReqChatToGroup;
-import pers.kinson.im.chat.logic.chat.message.req.ReqChatToUser;
+import pers.kinson.im.chat.logic.chat.message.req.ReqChatToChannel;
 import pers.kinson.im.chat.logic.chat.message.req.ReqFetchNewMessage;
 import pers.kinson.im.chat.logic.chat.message.req.ReqMarkNewMessage;
 import pers.kinson.im.chat.logic.chat.message.res.ResNewMessage;
@@ -21,8 +20,6 @@ import pers.kinson.im.chat.logic.search.SearchService;
 import pers.kinson.im.common.constants.Channels;
 
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.ConcurrentMap;
 
 @Component
 @MessageRoute
@@ -35,12 +32,7 @@ public class ChatFacade {
     DiscussionMemberDao discussionMemberDao;
 
     @RequestHandler
-    public void reqChatToUser(IdSession session, ReqChatToUser req) {
-        SpringContext.getChatService().chat(session, req.getToUserId(), req.getContent());
-    }
-
-    @RequestHandler
-    public void reqChatToGroup(IdSession session, ReqChatToGroup req) {
+    public void reqChatToChannel(IdSession session, ReqChatToChannel req) {
         Long sender = NumberUtil.longValue(session.getId());
         SpringContext.getChatService().chatToChannel(sender, req.getChannel(), req.getToUserId(), req.getContent());
     }
@@ -59,7 +51,7 @@ public class ChatFacade {
 
     @RequestHandler
     public void reqMarkNewMessage(IdSession session, ReqMarkNewMessage req) {
-        Long receiver = NumberUtil.longValue(session.getId());
+        long receiver = NumberUtil.longValue(session.getId());
         if (req.getChannel() == Channels.person) {
             User user = SpringContext.getUserService().getOnlineUser(receiver);
             user.setChatMaxSeq(req.getMaxSeq());

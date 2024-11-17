@@ -17,12 +17,15 @@ import pers.kinson.im.common.constants.CmdConst;
 @MessageMeta(cmd = CmdConst.ChatMessageVo)
 public class ChatMessage {
 
-    private long seq;
+    private long id;
 
-    private Long userId;
+    private long senderId;
 
-    private String userName;
+    private String senderName;
 
+    private long receiverId;
+
+    private String receiverName;
 
     private byte type;
     private String json;
