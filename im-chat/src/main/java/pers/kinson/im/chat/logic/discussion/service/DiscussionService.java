@@ -1,22 +1,18 @@
 package pers.kinson.im.chat.logic.discussion.service;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
-import jforgame.commons.DateUtil;
 import jforgame.commons.TimeUtil;
 import jforgame.commons.ds.LazyCacheMap;
-import jforgame.socket.share.IdSession;
 import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
-import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.DiscussionDao;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
 import pers.kinson.im.chat.data.model.Discussion;
 import pers.kinson.im.chat.data.model.DiscussionMember;
 import pers.kinson.im.chat.data.model.User;
-import pers.kinson.im.chat.logic.discussion.message.res.ResNotifyMessage;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionMemberVo;
@@ -24,7 +20,6 @@ import pers.kinson.im.chat.mapstruct.DiscussionMapper;
 import pers.kinson.im.chat.mapstruct.DiscussionMemberMapper;
 import pers.kinson.im.common.constants.I18nConstants;
 
-import java.util.Collections;
 import java.util.Date;
 import java.util.List;
 import java.util.concurrent.ConcurrentHashMap;
@@ -112,25 +107,24 @@ public class DiscussionService {
         return 0;
     }
 
-    public int newMessage(Long userId, Long discussionId, String content) {
-        Discussion discussion = discussionDao.selectById(discussionId);
-        if (discussion == null) {
-            return I18nConstants.COMMON_NOT_FOUND;
-        }
-        ResNotifyMessage notify = new ResNotifyMessage();
-        ChatMessage message = ChatMessage.builder().userId(userId).userName(SpringContext.getUserService().getUserName(userId))
-                .content(content).date(DateUtil.format(new Date())).build();
-        notify.setDiscussionId(discussionId);
-        notify.setMessages(Collections.singletonList(message));
-
-        memberDao.selectList(new LambdaQueryWrapper<>()).stream().filter(e -> SpringContext.getUserService().isOnlineUser(e.getUserId()))
-                .forEach(e -> {
-                    IdSession session = SessionManager.INSTANCE.getSessionBy(e.getUserId());
-                    session.send(notify);
-                });
-
-        return 0;
-    }
+//    public int newMessage(Long userId, Long discussionId, String content) {
+//        Discussion discussion = discussionDao.selectById(discussionId);
+//        if (discussion == null) {
+//            return I18nConstants.COMMON_NOT_FOUND;
+//        }
+//        ResNotifyMessage notify = new ResNotifyMessage();
+//        ChatMessage message = ChatMessage.builder().userId(userId).userName(SpringContext.getUserService().getUserName(userId))
+//                .content(content).date(DateUtil.format(new Date())).build();
+//        notify.setDiscussionId(discussionId);
+//
+//        memberDao.selectList(new LambdaQueryWrapper<>()).stream().filter(e -> SpringContext.getUserService().isOnlineUser(e.getUserId()))
+//                .forEach(e -> {
+//                    IdSession session = SessionManager.INSTANCE.getSessionBy(e.getUserId());
+//                    session.send(notify);
+//                });
+//
+//        return 0;
+//    }
 
     public List<DiscussionGroupVo> listAllDiscussion(Long userId) {
         return discussionDao.getMyGroups(userId).stream().map(DiscussionMapper.INSTANCE::toVo).toList();

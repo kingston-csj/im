@@ -11,5 +11,9 @@ import java.util.List;
 @MessageMeta(cmd = CmdConst.ResNewMessage)
 public class ResNewMessage {
 
+    private byte channel;
+
+    private String topic;
+
     private List<ChatMessage> messages;
 }

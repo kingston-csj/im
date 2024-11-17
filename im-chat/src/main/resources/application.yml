@@ -21,3 +21,7 @@ s3:
   secretKey: Pzv8TuyZePl9O8hQHBXkyjD7UpIgWkoNGqMsOrI2
   bucketName: database
   region: us-east-1
+
+
+socket:
+  port: 9090

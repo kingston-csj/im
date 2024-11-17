@@ -54,11 +54,6 @@ public enum SessionManager {
         }
     }
 
-    public void sendPacketTo(Channel channel, Object pact) {
-        if (pact == null || channel == null) return;
-        channel.writeAndFlush(pact);
-    }
-
     /**
      * 向所有在线用户发送数据包
      */

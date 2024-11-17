@@ -10,5 +10,7 @@ public class DiscussionGroupVo {
 
     private Long id;
 
+    private long maxSeq;
+
     private String name;
 }

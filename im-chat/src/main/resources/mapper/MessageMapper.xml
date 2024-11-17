@@ -9,8 +9,8 @@
             resultMap="messageView">
         SELECT * FROM message
         WHERE
-        channel = #{0}
-        AND receiver = #{1}
-        AND seq > #{2}
+        channel = #{channelType}
+        AND receiver = #{receiver}
+        AND seq > #{maxSeq}
     </select>
 </mapper>

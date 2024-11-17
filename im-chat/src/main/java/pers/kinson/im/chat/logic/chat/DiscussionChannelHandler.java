@@ -6,6 +6,7 @@ import jforgame.commons.JsonUtil;
 import jforgame.commons.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.DiscussionDao;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
@@ -14,6 +15,7 @@ import pers.kinson.im.chat.data.model.Discussion;
 import pers.kinson.im.chat.data.model.DiscussionMember;
 import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
+import pers.kinson.im.chat.logic.chat.message.res.ResNewMessageNotify;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 import pers.kinson.im.common.constants.Channels;
 
@@ -41,6 +43,12 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         if (discussion == null) {
             return;
         }
+        saveToDb(senderId, target, content);
+
+        ResNewMessageNotify notify = new ResNewMessageNotify();
+        notify.setChannel(Channels.discussion);
+        notify.setTopic("" + discussionId);
+        receivers(senderId, target).forEach(e -> SessionManager.INSTANCE.sendPacketTo(e, notify));
     }
 
     @Override
@@ -51,16 +59,20 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         message.setChannel(channelType());
         message.setDate(new Date());
         message.setSender(senderId);
-        discussion.setMaxSeq(discussion.getMaxSeq() + 1);
+        message.setReceiver(target);
+        long currId = NumberUtil.longValue(discussion.getMaxSeq());
+        discussion.setMaxSeq(currId + 1);
+        discussionDao.updateById(discussion);
         message.setSeq(discussion.getMaxSeq());
         message.setContent(JsonUtil.object2String(content));
+        messageDao.insert(message);
     }
 
     @Override
     public Collection<Long> receivers(Long senderId, String target) {
         Long discussionId = NumberUtil.longValue(target);
         Discussion discussion = discussionDao.selectById(discussionId);
-        return memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getId, discussion))
+        return memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getDiscussionId, discussionId))
                 .stream().map(DiscussionMember::getUserId).collect(Collectors.toList());
     }
 
@@ -69,7 +81,9 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         List<Message> newMessages = messageDao.fetchNew(channelType(), target, maxSeq);
         return newMessages.stream().map(e -> {
             ChatMessage vo = new ChatMessage();
-            vo.setContent(e.getContent());
+            vo.setSeq(e.getSeq());
+            vo.setType(e.getType());
+            vo.setJson(e.getContent());
             vo.setDate(DateUtil.format(e.getDate()));
             vo.setUserId(e.getSender());
             vo.setUserName(SpringContext.getUserService().getUserName(e.getSender()));
