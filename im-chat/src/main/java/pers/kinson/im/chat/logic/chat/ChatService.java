@@ -23,25 +23,6 @@ public class ChatService {
         SpringContext.getBeansOfType(ChatChannelHandler.class).forEach(e -> handlers.put(e.channelType(), e));
     }
 
-    public void chat(IdSession fromUser, long toUserId, String content) {
-        IdSession toUser = SessionManager.INSTANCE.getSessionBy(toUserId);
-        if (fromUser == null || toUser == null) {
-            return;
-        }
-        if (!checkDirtyWords(content)) {
-            return;
-        }
-
-        //双方都推送消息
-        ResChatToUser response = new ResChatToUser();
-        response.setContent(content);
-        response.setFromUserId(NumberUtil.longValue(fromUser.getId()));
-        response.setToUserId(toUserId);
-        toUser.send(response);
-
-        fromUser.send(response);
-    }
-
     private boolean checkDirtyWords(String content) {
         return true;
     }

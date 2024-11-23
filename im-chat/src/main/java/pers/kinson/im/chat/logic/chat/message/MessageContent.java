@@ -5,14 +5,12 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MessageContent {
+public abstract class MessageContent {
 
 
     /**
      * 冗余字段，减少参数传递
      */
     private byte type;
-
-    private String content;
 
 }

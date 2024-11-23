@@ -44,6 +44,7 @@ public class PersonalChannelHandler implements ChatChannelHandler {
     public void saveToDb(Long senderId, Long target, MessageContent content) {
         Message message = new Message();
         message.setChannel(channelType());
+        message.setType(content.getType());
         message.setDate(new Date());
         message.setSender(senderId);
         message.setReceiver(target);

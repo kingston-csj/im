@@ -10,10 +10,10 @@
   *  好友搜索与添加
   *  点对点私聊(在线离线均可)
   *  讨论组  
+  *  聊天支持发送文件
 
   ### ToDoList  
   *  使用SpringCloud打造为分布式系统   
-  *  在线/离线文件传输   
   *  开发更多的交互功能        
 
   ### QuickStart  
@@ -34,8 +34,7 @@
   ![](/screenshots/main.png "主界面")  
 
   聊天界面  
-  ![](/screenshots/privateChat.png "单人聊天界面")  
-  ![](/screenshots/emoji.jpeg "表情包界面")
+  ![](/screenshots/privateChat.jpg "单人聊天界面")  
   
   讨论组界面  
   ![](/screenshots/discussion.jpg "讨论组界面")  　　

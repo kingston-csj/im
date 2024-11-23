@@ -8,4 +8,6 @@ public interface ContentType {
     byte text = 0;
 
     byte image = 1;
+
+    byte file = 2;
 }

@@ -9,7 +9,15 @@ public class ResUploadFile {
 
     private String id;
 
-    private String url;
+    /**
+     * 真正的cdn地址
+     */
+    private String cdnUrl;
+
+    /**
+     * 上传预签名地址
+     */
+    private String presignedUrl;
 
     private long time;
 

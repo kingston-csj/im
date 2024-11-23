@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class MediaMessageContent extends MessageContent {
+public abstract class MediaMessageContent extends MessageContent {
 
     /**
      * 文件云存储路径

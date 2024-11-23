@@ -76,12 +76,13 @@ public class AmazonS3Client implements S3Client {
     }
 
     @Override
-    public String generatePresignedUrl(String path) throws OssException {
+    public String generatePresignedUrl(String path, String contentType) throws OssException {
         long expiration = System.currentTimeMillis() + TimeUtil.MILLIS_PER_HOUR;
         try {
             GeneratePresignedUrlRequest request =
                     new GeneratePresignedUrlRequest(ossConfig.getBucketName(), path)
                             .withMethod(HttpMethod.PUT)
+                            .withContentType(contentType)
                             .withExpiration(new Date(expiration));
             return client.generatePresignedUrl(request).toString();
         } catch (Exception e) {

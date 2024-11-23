@@ -88,7 +88,7 @@ public class MinIoS3Client implements S3Client {
     }
 
     @Override
-    public String generatePresignedUrl(String path) throws OssException {
+    public String generatePresignedUrl(String path, String contentType) throws OssException {
         try {
             return minioClient.getPresignedObjectUrl(
                     GetPresignedObjectUrlArgs.builder()

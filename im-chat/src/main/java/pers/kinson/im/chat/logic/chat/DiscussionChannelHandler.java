@@ -56,12 +56,11 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         Long discussionId = NumberUtil.longValue(target);
         Discussion discussion = discussionDao.selectById(discussionId);
         Message message = new Message();
-        message.setId(message.getId());
         message.setChannel(channelType());
         message.setDate(new Date());
         message.setSender(senderId);
+        message.setType(content.getType());
         message.setReceiver(target);
-        message.setId(discussion.getMaxSeq());
         message.setContent(JsonUtil.object2String(content));
         messageDao.insert(message);
         discussion.setMaxSeq(message.getId());

@@ -34,5 +34,5 @@ public interface S3Client {
     /**
      * 生成客户端临时上传路径
      */
-    String generatePresignedUrl(String path) throws OssException;
+    String generatePresignedUrl(String path, String contentType) throws OssException;
 }

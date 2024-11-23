@@ -3,8 +3,11 @@ package pers.kinson.im.chat.logic.chat;
 import jakarta.annotation.PostConstruct;
 import jforgame.commons.JsonUtil;
 import org.springframework.stereotype.Service;
+import pers.kinson.im.chat.logic.chat.message.FileMessageContent;
+import pers.kinson.im.chat.logic.chat.message.ImageMessageContent;
 import pers.kinson.im.chat.logic.chat.message.MediaMessageContent;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
+import pers.kinson.im.chat.logic.chat.message.TextMessageContent;
 import pers.kinson.im.common.constants.ContentType;
 
 import java.util.HashMap;
@@ -17,8 +20,9 @@ public class MessageContentFactory {
 
     @PostConstruct
     public void init() {
-        mapper.put(ContentType.text, MessageContent.class);
-        mapper.put(ContentType.image, MediaMessageContent.class);
+        mapper.put(ContentType.text, TextMessageContent.class);
+        mapper.put(ContentType.image, ImageMessageContent.class);
+        mapper.put(ContentType.file, FileMessageContent.class);
     }
 
     public MessageContent parse(byte type, String json) {
