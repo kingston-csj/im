@@ -8,6 +8,9 @@ import lombok.Setter;
 public class MessageContent {
 
 
+    /**
+     * 冗余字段，减少参数传递
+     */
     private byte type;
 
     private String content;

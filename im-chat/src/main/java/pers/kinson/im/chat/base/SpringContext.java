@@ -11,6 +11,7 @@ import pers.kinson.im.chat.ServerConfigs;
 import pers.kinson.im.chat.asyncdb.AysncDbService;
 import pers.kinson.im.chat.listener.EventDispatcher;
 import pers.kinson.im.chat.logic.chat.ChatService;
+import pers.kinson.im.chat.logic.chat.MessageContentFactory;
 import pers.kinson.im.chat.logic.friend.service.FriendService;
 import pers.kinson.im.chat.logic.search.SearchService;
 import pers.kinson.im.chat.logic.user.UserService;
@@ -60,6 +61,9 @@ public class SpringContext implements ApplicationContextAware {
     private static EventDispatcher eventDispatcher;
 
     private static ServerConfigs serverConfigs;
+
+    @Getter
+    private static MessageContentFactory messageContentFactory;
 
     @Override
     public void setApplicationContext(ApplicationContext applicationContext) throws BeansException {
@@ -117,14 +121,14 @@ public class SpringContext implements ApplicationContextAware {
         SpringContext.eventDispatcher = eventDispatcher;
     }
 
-
     @Resource
     public void setServerConfigs(ServerConfigs serverConfigs) {
         SpringContext.serverConfigs = serverConfigs;
     }
 
-    public static ServerConfigs getServerConfigs() {
-        return SpringContext.serverConfigs;
+    @Resource
+    public void setMessageContentFactory(MessageContentFactory messageContentFactory) {
+        SpringContext.messageContentFactory = messageContentFactory;
     }
 
 }

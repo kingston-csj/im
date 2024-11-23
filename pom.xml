@@ -28,6 +28,7 @@
         <module>im-chat</module>
         <module>im-common</module>
         <module>im-oss</module>
+        <module>im-business</module>
     </modules>
 
     <repositories>

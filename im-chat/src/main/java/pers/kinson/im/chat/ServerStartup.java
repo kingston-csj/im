@@ -10,6 +10,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.context.annotation.ComponentScan;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.logic.chat.ChatService;
+import pers.kinson.im.chat.logic.script.EmojiScript;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -45,6 +46,9 @@ public class ServerStartup implements CommandLineRunner {
         SpringContext.getBean(jforgame.socket.share.ServerNode.class).start();
 
         SpringContext.getBean(ChatService.class).init();
+
+        // 首次执行——上传表情包
+        SpringContext.getBean(EmojiScript.class).updateEmojiResource();
     }
 
     public void stop() {

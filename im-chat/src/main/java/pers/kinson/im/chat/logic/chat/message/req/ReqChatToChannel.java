@@ -15,6 +15,11 @@ public class ReqChatToChannel {
 
     private long toUserId;
 
+    /**
+     * 消息类型{@link pers.kinson.im.common.constants.ContentType}
+     */
+    private byte contentType;
+
     private String content;
 
 }

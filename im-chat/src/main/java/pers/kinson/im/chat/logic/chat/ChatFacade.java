@@ -34,7 +34,7 @@ public class ChatFacade {
     @RequestHandler
     public void reqChatToChannel(IdSession session, ReqChatToChannel req) {
         Long sender = NumberUtil.longValue(session.getId());
-        SpringContext.getChatService().chatToChannel(sender, req.getChannel(), req.getToUserId(), req.getContent());
+        SpringContext.getChatService().chatToChannel(sender, req.getChannel(), req.getToUserId(), req.getContentType(), req.getContent());
     }
 
 

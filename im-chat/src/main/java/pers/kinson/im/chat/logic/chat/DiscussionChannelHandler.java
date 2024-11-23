@@ -38,7 +38,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
 
     @Override
     public void send(Long senderId, Long target, MessageContent content) {
-        Long discussionId = NumberUtil.longValue(target);
+        long discussionId = NumberUtil.longValue(target);
         Discussion discussion = discussionDao.selectById(discussionId);
         if (discussion == null) {
             return;

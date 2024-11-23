@@ -11,6 +11,8 @@ public enum FileTypes {
 
     AVATAR("avatar", "头像"),
 
+    EMOJI("emoji", "表情"),
+
     VIDEO("video", "视频"),
 
     SOUND("sound", "声音"),

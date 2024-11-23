@@ -47,10 +47,10 @@ public class ChatService {
     }
 
 
-    public void chatToChannel(Long sender, byte channel, long target, String content) {
+    public void chatToChannel(Long sender, byte channel, long target, byte contentType, String content) {
         ChatChannelHandler handler = handlers.get(channel);
-        MessageContent chatMessage = new MessageContent();
-        chatMessage.setContent(content);
+        MessageContent chatMessage = SpringContext.getMessageContentFactory().parse(contentType, content);
+        chatMessage.setType(contentType);
         handler.send(sender, target, chatMessage);
     }
 
