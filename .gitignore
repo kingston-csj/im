@@ -26,3 +26,4 @@ target/
 *.diff
 *.patch
 *.tmp
+/im-chat/src/main/resources/application-test.yml

@@ -69,6 +69,8 @@ public class MessageIoDispatcher extends ChainedMessageDispatcher {
         BaseGameTask task = new BaseGameTask() {
             @Override
             public void action() {
+                long userId = NumberUtil.longValue(session.getId());
+                SpringContext.getUserService().removeFromOnline(userId);
             }
         };
         task.setDispatchKey(session.hashCode());

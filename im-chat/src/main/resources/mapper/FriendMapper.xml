@@ -20,7 +20,7 @@
             COALESCE(fg.sort, '') AS groupSort
 		FROM
             friends f
-            LEFT JOIN friendGroup fg ON f.groupId = fg.id
+            LEFT JOIN friendgroup fg ON f.groupId = fg.id
             LEFT JOIN user u ON f.friendId = u.userId
 		WHERE
 		    f.userId = #{userId}

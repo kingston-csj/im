@@ -35,6 +35,7 @@ public class PersonalChannelHandler implements ChatChannelHandler {
         saveToDb(senderId, target, content);
 
         ResNewMessageNotify notify = new ResNewMessageNotify();
+        notify.setSenderId(senderId);
         notify.setChannel(Channels.person);
         notify.setTopic(target);
         receivers(senderId, target).forEach(e -> SessionManager.INSTANCE.sendPacketTo(e, notify));

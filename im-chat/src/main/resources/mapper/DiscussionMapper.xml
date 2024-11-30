@@ -10,7 +10,7 @@
     <select id="getMyGroups" parameterType="java.lang.Long"
             resultMap="groupView">
         SELECT d.id,d.name
-        FROM discussion AS d , discussionMember AS m
+        FROM discussion AS d , discussionmember AS m
         WHERE d.id = m.discussionId AND m.userId = #{userId}
     </select>
 </mapper>

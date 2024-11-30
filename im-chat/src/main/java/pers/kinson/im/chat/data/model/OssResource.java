@@ -10,7 +10,7 @@ import java.util.Date;
 /**
  * 好友申请
  */
-@TableName(value = "ossResource")
+@TableName(value = "ossresource")
 @Data
 public class OssResource {
 

@@ -128,15 +128,6 @@ public class UserService {
         SessionManager.INSTANCE.sendPacketTo(user.getUserId(), response);
     }
 
-    public void userLogout(Channel channel) {
-        IdSession session = ChannelUtils.getSessionBy(channel);
-        Long userId = NumberUtil.longValue(session.getId());
-        SpringContext.getUserService().removeFromOnline(userId);
-        SpringContext.getFriendService().onUserLogout(userId);
-
-        SessionManager.INSTANCE.unregisterUserContext(channel);
-    }
-
     public String getUserName(Long userId) {
         return userIdNameMapper.get(userId);
     }

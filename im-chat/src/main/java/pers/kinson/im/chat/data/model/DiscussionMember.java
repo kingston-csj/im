@@ -9,7 +9,7 @@ import java.util.Date;
 /**
  * 好友申请
  */
-@TableName(value = "discussionMember")
+@TableName(value = "discussionmember")
 @Data
 public class DiscussionMember {
 

@@ -11,8 +11,6 @@ import pers.kinson.im.chat.data.model.Friends;
 import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.data.view.FriendView;
 import pers.kinson.im.chat.logic.friend.message.res.ResFriendList;
-import pers.kinson.im.chat.logic.friend.message.res.ResFriendLogin;
-import pers.kinson.im.chat.logic.friend.message.res.ResFriendLogout;
 import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
 import pers.kinson.im.chat.logic.user.UserService;
 import pers.kinson.im.common.constants.CommonStatus;
@@ -47,6 +45,7 @@ public class FriendService {
 			item.setUserId(f.getUserId());
 			item.setUserName(f.getUserName());
 			item.setGroupName(f.getGroupName());
+			item.setHeadUrl("assets\\img\\head\\head.png");
 			if (userService.isOnlineUser(f.getUserId())) {
 				item.setOnline(CommonStatus.ONLINE_STATUS);
 			}
@@ -82,33 +81,6 @@ public class FriendService {
 		friendsPact.setFriends(myFriends);
 
 		SessionManager.INSTANCE.sendPacketTo(user, friendsPact);
-
-		onUserLogin(user);
 	}
-
-	public void onUserLogin(User user) {
-		List<FriendItemVo> myFriends = listMyFriends(user.getUserId());
-		ResFriendLogin loginPact = new ResFriendLogin();
-		loginPact.setFriendId(user.getUserId());
-		for (FriendItemVo friend:myFriends) {
-			long friendId = friend.getUserId();
-			if (userService.isOnlineUser(friendId)) {
-				SessionManager.INSTANCE.sendPacketTo(friendId, loginPact);
-			}
-		}
-	}
-
-	public void onUserLogout(long userId) {
-		List<FriendItemVo> myFriends = listMyFriends(userId);
-		ResFriendLogout logoutPact = new ResFriendLogout();
-		logoutPact.setFriendId(userId);
-		for (FriendItemVo friend:myFriends) {
-			long friendId = friend.getUserId();
-			if (userService.isOnlineUser(friendId)) {
-				SessionManager.INSTANCE.sendPacketTo(friendId, logoutPact);
-			}
-		}
-	}
-
 
 }

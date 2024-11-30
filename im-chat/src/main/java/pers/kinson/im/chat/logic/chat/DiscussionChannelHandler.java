@@ -89,6 +89,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         vo.setJson(e.getContent());
         vo.setDate(DateUtil.format(e.getDate()));
         vo.setSenderId(e.getSender());
+        vo.setReceiverId(e.getReceiver());
         vo.setSenderName(SpringContext.getUserService().getUserName(e.getSender()));
         return vo;
     }
