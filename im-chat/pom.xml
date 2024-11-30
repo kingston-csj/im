@@ -14,8 +14,6 @@
     <groupId>pers.kinson.im</groupId>
     <artifactId>im-chat</artifactId>
     <name>im-chat</name>
-
-
     <dependencies>
         <dependency>
             <groupId>pers.kinson</groupId>

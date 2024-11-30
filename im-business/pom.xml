@@ -6,7 +6,8 @@
     <parent>
         <groupId>pers.kinson</groupId>
         <artifactId>im</artifactId>
-        <version>1.0</version>
+        <version>${revision}</version>
+        <relativePath>../pom.xml</relativePath>
     </parent>
 
     <artifactId>im-business</artifactId>

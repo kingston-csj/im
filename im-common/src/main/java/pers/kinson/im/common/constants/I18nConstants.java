@@ -12,6 +12,7 @@ public interface I18nConstants {
     int COMMON_DATA_ERROR = 1008;     //数据格式异常（客户端数据不符合约定格式）
 
 
-    int FRIEND_APPLY_ALREADY = 2001; // 已申请，
-    int FRIEND_ALREADY = 2002; // 已经是基友啦，
+    int FRIEND_APPLY_ALREADY = 2001; // 已申请
+    int FRIEND_ALREADY = 2002; // 已经是基友啦
+    int CHAT_TRANSFER_TARGET_OFFLINE = 2003; // 对方离线，无法传输
 }

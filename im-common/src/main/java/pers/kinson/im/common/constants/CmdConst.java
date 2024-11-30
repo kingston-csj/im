@@ -77,9 +77,13 @@ public interface CmdConst {
     int ReqMarkNewMessage = 4_008;
 
     /**
-     * 推送--单聊
+     * 在线文件传输邀请
      */
-    int ResChatToUser = 4_200;
+    int ReqOnlineFileApply = 4_009;
+    int ReqOnlineFileAnswer = 4_010;
+    int ReqOnlineFileFinish = 4_011;
+
+
     /**
      * 推送--群聊
      */
@@ -94,6 +98,10 @@ public interface CmdConst {
     int ChatMessageVo = 4_207;
 
     int ResNewMessage = 4_208;
+
+    int ResOnlineFileApply = 4_209;
+    int ResModifyMessage = 4_210;
+    int PushBeginOnlineFileTransfer = 4_211;
 
     /*
      * ------------------好友开始----------------------------

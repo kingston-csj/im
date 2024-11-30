@@ -60,18 +60,21 @@ public class PersonalChannelHandler implements ChatChannelHandler {
     @Override
     public List<ChatMessage> pullMessages(Long receiver, Long target, long maxSeq) {
         List<Message> newMessages = messageDao.fetchNewPersonal(receiver, maxSeq);
-        return newMessages.stream().map(e -> {
-            ChatMessage vo = new ChatMessage();
-            vo.setId(e.getId());
-            vo.setType(e.getType());
-            vo.setJson(e.getContent());
-            vo.setDate(DateUtil.format(e.getDate()));
-            vo.setSenderId(e.getSender());
-            vo.setReceiverId(e.getReceiver());
-            vo.setReceiverName(SpringContext.getUserService().getUserName(e.getReceiver()));
-            vo.setSenderName(SpringContext.getUserService().getUserName(e.getSender()));
-            return vo;
-        }).collect(Collectors.toList());
+        return newMessages.stream().map(this::decorate).collect(Collectors.toList());
+    }
+
+    @Override
+    public ChatMessage decorate(Message e) {
+        ChatMessage vo = new ChatMessage();
+        vo.setId(e.getId());
+        vo.setType(e.getType());
+        vo.setJson(e.getContent());
+        vo.setDate(DateUtil.format(e.getDate()));
+        vo.setSenderId(e.getSender());
+        vo.setReceiverId(e.getReceiver());
+        vo.setReceiverName(SpringContext.getUserService().getUserName(e.getReceiver()));
+        vo.setSenderName(SpringContext.getUserService().getUserName(e.getSender()));
+        return vo;
     }
 
     @Override

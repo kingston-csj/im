@@ -4,6 +4,8 @@ import jforgame.commons.NumberUtil;
 import jforgame.commons.Triple;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.model.User;
+import pers.kinson.im.chat.logic.file.message.req.ReqUploadFile;
+import pers.kinson.im.chat.logic.file.message.res.ResUploadFile;
 import pers.kinson.im.chat.logic.user.UserService;
 import pers.kinson.im.common.constants.I18nConstants;
 import pers.kinson.im.common.exception.BusinessRequestException;

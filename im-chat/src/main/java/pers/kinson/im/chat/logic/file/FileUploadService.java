@@ -4,6 +4,8 @@ import jakarta.annotation.PostConstruct;
 import jforgame.commons.JsonUtil;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.chat.core.HttpResult;
+import pers.kinson.im.chat.logic.file.message.req.ReqUploadFile;
+import pers.kinson.im.chat.logic.file.message.res.ResUploadFile;
 import pers.kinson.im.common.constants.I18nConstants;
 import pers.kinson.im.common.logger.LoggerUtil;
 

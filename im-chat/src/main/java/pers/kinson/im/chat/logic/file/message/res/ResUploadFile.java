@@ -1,4 +1,4 @@
-package pers.kinson.im.chat.logic.file;
+package pers.kinson.im.chat.logic.file.message.res;
 
 import lombok.Builder;
 import lombok.Data;

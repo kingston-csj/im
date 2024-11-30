@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import pers.kinson.im.chat.core.HttpResult;
+import pers.kinson.im.chat.logic.file.message.req.ReqUploadFile;
 
 @Controller
 @RequestMapping("/file")

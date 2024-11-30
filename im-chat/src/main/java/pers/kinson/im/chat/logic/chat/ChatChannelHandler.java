@@ -1,5 +1,6 @@
 package pers.kinson.im.chat.logic.chat;
 
+import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 
@@ -21,4 +22,7 @@ public interface ChatChannelHandler {
      * @return
      */
     byte channelType();
+
+    ChatMessage decorate(Message message);
+
 }

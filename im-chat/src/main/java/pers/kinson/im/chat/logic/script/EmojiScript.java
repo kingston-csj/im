@@ -7,6 +7,7 @@ import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.chat.data.dao.OssResourceDao;
 import pers.kinson.im.chat.data.model.OssResource;
+import pers.kinson.im.common.logger.LoggerFunction;
 import pers.kinson.im.common.logger.LoggerUtil;
 import pers.kinson.im.common.utils.FileMD5Calculator;
 import pers.kinson.im.common.utils.IdFactory;
@@ -112,6 +113,7 @@ public class EmojiScript {
             ossResource.setLabel(file.getName().substring(0, file.getName().lastIndexOf(".")));
             ossResource.setCreatedDate(new Date());
             ossResource.setMd5(FileMD5Calculator.calculateMD5(file));
+            LoggerUtil.info(LoggerFunction.EMOIJ, "label", file.getName(), "type", "create");
             ossResourceDao.insert(ossResource);
         } catch (Exception e) {
             throw new IOException(e);
@@ -137,6 +139,7 @@ public class EmojiScript {
             ossResource.setLabel(fileVo.label);
             ossResource.setCreatedDate(new Date());
             ossResource.setMd5(fileVo.md5);
+            LoggerUtil.info(LoggerFunction.EMOIJ, "label", fileVo.label, "type", "modify");
             ossResourceDao.updateById(ossResource);
         } catch (Exception e) {
             throw new IOException(e);

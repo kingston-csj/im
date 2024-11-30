@@ -4,6 +4,7 @@ import jakarta.annotation.PostConstruct;
 import jforgame.commons.JsonUtil;
 import org.springframework.stereotype.Service;
 import pers.kinson.im.chat.logic.chat.message.FileMessageContent;
+import pers.kinson.im.chat.logic.chat.message.FileOnlineTransferMessageContent;
 import pers.kinson.im.chat.logic.chat.message.ImageMessageContent;
 import pers.kinson.im.chat.logic.chat.message.MediaMessageContent;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
@@ -23,6 +24,7 @@ public class MessageContentFactory {
         mapper.put(ContentType.text, TextMessageContent.class);
         mapper.put(ContentType.image, ImageMessageContent.class);
         mapper.put(ContentType.file, FileMessageContent.class);
+        mapper.put(ContentType.onlineTransfer, FileOnlineTransferMessageContent.class);
     }
 
     public MessageContent parse(byte type, String json) {
