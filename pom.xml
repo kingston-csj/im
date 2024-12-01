@@ -17,7 +17,7 @@
         <netty.version>4.1.107.Final</netty.version>
         <spring-boot.version>3.2.11</spring-boot.version>
         <mybatis-plus.version>3.5.8</mybatis-plus.version>
-        <jforgame.version>2.0.0</jforgame.version>
+        <jforgame.version>2.1.1</jforgame.version>
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <minio.version>8.5.9</minio.version>
