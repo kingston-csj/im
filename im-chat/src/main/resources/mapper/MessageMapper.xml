@@ -22,4 +22,5 @@
         AND (receiver = #{receiver} OR sender = #{receiver})
         AND id > #{maxSeq}
     </select>
+
 </mapper>

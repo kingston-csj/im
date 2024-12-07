@@ -12,3 +12,8 @@ mybatis-plus:
 # s3配置
 s3:
   type: minio
+
+
+server:
+  #  服务器版本号
+  version: 1.0.0

@@ -1,6 +1,8 @@
 package pers.kinson.im.chat.logic.chat;
 
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
@@ -9,6 +11,7 @@ import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResModifyMessage;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
+import pers.kinson.im.common.logger.LoggerUtil;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -16,6 +19,7 @@ import java.util.List;
 import java.util.Map;
 
 @Component
+@Slf4j
 public class ChatService {
 
     @Autowired
@@ -25,6 +29,15 @@ public class ChatService {
 
     public void init() {
         SpringContext.getBeansOfType(ChatChannelHandler.class).forEach(e -> handlers.put(e.channelType(), e));
+    }
+
+
+    @Scheduled(cron = "0 59 23 * * ?")
+    private void checkExpired() {
+        int removed = messageDao.clearExpiredMessage();
+        if (removed > 0) {
+            log.info("清除{}条记录", removed);
+        }
     }
 
     private boolean checkDirtyWords(String content) {
