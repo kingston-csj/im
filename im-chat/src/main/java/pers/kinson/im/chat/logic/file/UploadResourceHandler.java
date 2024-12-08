@@ -3,6 +3,8 @@ package pers.kinson.im.chat.logic.file;
 import jforgame.commons.NumberUtil;
 import jforgame.commons.Triple;
 import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.data.dao.OssResourceDao;
+import pers.kinson.im.chat.data.model.OssResource;
 import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.logic.file.message.req.ReqUploadFile;
 import pers.kinson.im.chat.logic.file.message.res.ResUploadFile;
@@ -15,6 +17,8 @@ import pers.kinson.im.common.utils.IdFactory;
 import pers.kinson.im.oss.OssService;
 import pers.kinson.im.oss.S3Client;
 import pers.kinson.im.oss.UploadFileVo;
+
+import java.util.Date;
 
 public interface UploadResourceHandler {
 
@@ -42,10 +46,14 @@ public interface UploadResourceHandler {
         String key = IdFactory.nextUUId();
         String objectName = String.format("%s%s", key, "." + suffix);
         String fullPath = catalog + "/" + objectName;
-        String contentType = SpringContext.getBean(OssService.class).getContentType(suffix);
+        OssService ossService = SpringContext.getBean(OssService.class);
+        String contentType = ossService.getContentType(suffix);
         String presignedUrl = SpringContext.getBean(S3Client.class).generatePresignedUrl(fullPath, contentType);
+
+        OssResource ossResource = OssResource.builder().type(ossService.getPathOf(suffix)).createdDate(new Date()).originalName(originalFileName).url(fullPath).build();
+        SpringContext.getBean(OssResourceDao.class).insert(ossResource);
         LoggerUtil.info(LoggerFunction.UPLOAD, "fileName", originalFileName, "objectName", objectName, "fullPath", fullPath);
-        return new Triple<>(objectName, SpringContext.getBean(OssService.class).fullOssPath(fullPath), presignedUrl);
+        return new Triple<>(objectName, ossService.fullOssPath(fullPath), presignedUrl);
     }
 }
 
@@ -58,20 +66,16 @@ class ChatMediaFileHandler implements UploadResourceHandler {
 
     @Override
     public ResUploadFile handle(String file, ReqUploadFile request) throws Exception {
-        UploadFileVo fileVo = UploadFileVo.builder().fileName(file)
-                .build();
-        String suffix = suffixType(fileVo.getFileName());
+        String suffix = suffixType(file);
         OssService ossService = SpringContext.getBean(OssService.class);
         // 根据文件类型选择目录
         String catalog = ossService.getPathOf(suffix);
-        fileVo.setCatalog(catalog);
-
         Triple<String, String, String> urls = uploadResource(catalog, file);
 
         return ResUploadFile.builder()
                 .cdnUrl(urls.getSecond())
                 .presignedUrl(urls.getThird())
-                .name(fileVo.getFileName()).build();
+                .name(file).build();
     }
 
 }

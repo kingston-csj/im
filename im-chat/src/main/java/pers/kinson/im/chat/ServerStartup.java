@@ -1,8 +1,6 @@
 package pers.kinson.im.chat;
 
-import com.mysql.cj.admin.ServerController;
 import jforgame.socket.share.ServerNode;
-import lombok.extern.slf4j.Slf4j;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.boot.Banner;
@@ -15,7 +13,6 @@ import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.config.ServerProperties;
 import pers.kinson.im.chat.logic.chat.ChatService;
 import pers.kinson.im.chat.logic.script.EmojiScript;
-import pers.kinson.im.chat.logic.system.SystemController;
 
 import java.util.ArrayList;
 import java.util.List;

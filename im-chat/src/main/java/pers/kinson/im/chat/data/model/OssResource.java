@@ -3,7 +3,10 @@ package pers.kinson.im.chat.data.model;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.Date;
 
@@ -12,6 +15,9 @@ import java.util.Date;
  */
 @TableName(value = "ossresource")
 @Data
+@Builder
+@AllArgsConstructor
+@NoArgsConstructor
 public class OssResource {
 
     @TableId(type = IdType.AUTO)

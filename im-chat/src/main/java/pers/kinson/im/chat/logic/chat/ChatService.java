@@ -4,14 +4,17 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.scheduling.annotation.Scheduled;
 import org.springframework.stereotype.Component;
+import org.springframework.util.CollectionUtils;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.MessageDao;
+import pers.kinson.im.chat.data.dao.OssResourceDao;
 import pers.kinson.im.chat.data.model.Message;
+import pers.kinson.im.chat.data.model.OssResource;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResModifyMessage;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
-import pers.kinson.im.common.logger.LoggerUtil;
+import pers.kinson.im.oss.S3Client;
 
 import java.util.Collection;
 import java.util.HashMap;
@@ -25,6 +28,12 @@ public class ChatService {
     @Autowired
     MessageDao messageDao;
 
+    @Autowired
+    OssResourceDao ossResourceDao;
+
+    @Autowired
+    S3Client s3Client;
+
     Map<Byte, ChatChannelHandler> handlers = new HashMap<>();
 
     public void init() {
@@ -36,12 +45,15 @@ public class ChatService {
     private void checkExpired() {
         int removed = messageDao.clearExpiredMessage();
         if (removed > 0) {
-            log.info("清除{}条记录", removed);
+            log.info("清除{}条聊天记录", removed);
         }
-    }
-
-    private boolean checkDirtyWords(String content) {
-        return true;
+        List<OssResource> ossResources = ossResourceDao.clearExpired();
+        if (!CollectionUtils.isEmpty(ossResources)) {
+            for (OssResource ossResource : ossResources) {
+                s3Client.remove(ossResource.getUrl());
+            }
+            log.info("清除{}条oss记录", ossResources.size());
+        }
     }
 
 

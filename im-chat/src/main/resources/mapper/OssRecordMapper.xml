@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="pers.kinson.im.chat.data.dao.OssResourceDao">
+    <resultMap id="record" type="pers.kinson.im.chat.data.model.OssResource">
+    </resultMap>
+    <select id="clearExpired"
+            resultMap="record">
+        SELECT * FROM ossresource
+        WHERE type != "emoji"
+        AND createdDate &lt; NOW() - INTERVAL 3 DAY;
+    </select>
+
+</mapper>
