@@ -5,6 +5,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
 import org.springframework.stereotype.Component;
+import pers.kinson.im.chat.config.ServerProperties;
 import pers.kinson.im.chat.data.dao.OssResourceDao;
 import pers.kinson.im.chat.data.model.OssResource;
 import pers.kinson.im.common.logger.LoggerFunction;
@@ -36,9 +37,12 @@ public class EmojiScript {
     @Autowired
     OssService ossService;
 
+    @Autowired
+    ServerProperties serverProperties;
+
     public void updateEmojiResource() {
         Map<String, OssResource> existed = ossResourceDao.selectList(new LambdaQueryWrapper<>()).stream().collect(Collectors.toMap(OssResource::getLabel, Function.identity()));
-        String folderUrl = "D:\\java_projects\\im\\im\\im-chat\\src\\test\\resources\\emoji";
+        String folderUrl = serverProperties.getEmojiPath();
         Map<String, FileVo> newFiles = listFiles(folderUrl);
 
         newFiles.forEach((key, value) -> {
@@ -69,7 +73,6 @@ public class EmojiScript {
         try {
             Resource resource = new FileSystemResource(directoryPath);
             File directory = resource.getFile();
-
             if (directory.exists()) {
                 File[] fileList = directory.listFiles();
                 if (fileList != null) {

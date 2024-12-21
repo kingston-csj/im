@@ -15,4 +15,9 @@ public class ServerProperties {
      * 版本号
      */
     private String version;
+
+    /**
+     * emoji资源目录路径
+     */
+    private String emojiPath;
 }

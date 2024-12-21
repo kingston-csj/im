@@ -15,10 +15,10 @@ public class AdminController {
     @Autowired
     ServerProperties serverProperties;
 
-    // curl -X POST -H "Content-Type: application/json" -d '{"versioin":"1.2.0"}' http://localhost:8080/admin/modifyClientVersion
+    // curl -X POST -H "Content-Type: application/json" -d '{"version":"1.2.0"}' http://localhost:8080/admin/modifyClientVersion
     @PostMapping(value = "/modifyClientVersion")
     public HttpResult modifyClientVersion(@RequestBody ReqModifyClientVersion req) {
         serverProperties.setVersion(req.getVersion());
-        return HttpResult.ok();
+        return HttpResult.ok(serverProperties.getVersion());
     }
 }
