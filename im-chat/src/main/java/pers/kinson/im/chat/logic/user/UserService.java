@@ -18,6 +18,7 @@ import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.UserDao;
 import pers.kinson.im.chat.data.model.User;
+import pers.kinson.im.chat.logic.avatar.AvatarService;
 import pers.kinson.im.chat.logic.user.message.res.ResUserInfo;
 import pers.kinson.im.chat.logic.user.message.res.ResUserRegister;
 import pers.kinson.im.chat.logic.util.IdService;
@@ -49,7 +50,7 @@ public class UserService {
 
     @PostConstruct
     private void init() {
-        userDao.selectIdAndNameList().forEach(e->{
+        userDao.selectIdAndNameList().forEach(e -> {
             userIdNameMapper.put(e.getUserId(), e.getUserName());
         });
     }
@@ -111,6 +112,9 @@ public class UserService {
         newUser.setUserName(nickName);
         newUser.setPassword(password);
 
+        String url = SpringContext.getBean(AvatarService.class).listAllAvatar().get(0).getUrl();
+        newUser.setAvatar(SpringContext.getBean(OssService.class).fullOssPath(url));
+
         userDao.insert(newUser);
 
         return newUser;
@@ -122,7 +126,7 @@ public class UserService {
         response.setUserId(user.getUserId());
         response.setUserName(user.getUserName());
         response.setSignature(user.getSignature());
-        response.setAvatar(SpringContext.getBean(OssService.class).fullOssPath(user.getAvatar()));
+        response.setAvatar(user.getAvatar());
         response.setChatMaxSeq(user.getChatMaxSeq());
 
         SessionManager.INSTANCE.sendPacketTo(user.getUserId(), response);

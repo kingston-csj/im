@@ -20,4 +20,9 @@ public class ServerProperties {
      * emoji资源目录路径
      */
     private String emojiPath;
+
+    /**
+     * avatar资源目录路径
+     */
+    private String avatarPath;
 }

@@ -9,6 +9,8 @@ public enum LoggerFunction {
 
     EMOIJ,
 
+    AVATAR,
+
     ;
 
 

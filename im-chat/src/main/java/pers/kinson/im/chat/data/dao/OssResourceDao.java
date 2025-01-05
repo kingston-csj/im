@@ -9,5 +9,9 @@ import java.util.List;
 @Repository
 public interface OssResourceDao extends BaseMapper<OssResource> {
 
+
+    List<OssResource> selectByType(String type);
+
     List<OssResource> clearExpired();
+
 }

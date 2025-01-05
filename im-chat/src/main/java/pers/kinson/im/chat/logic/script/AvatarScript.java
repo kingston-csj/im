@@ -1,6 +1,5 @@
 package pers.kinson.im.chat.logic.script;
 
-import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.io.FileSystemResource;
 import org.springframework.core.io.Resource;
@@ -26,8 +25,7 @@ import java.util.function.Function;
 import java.util.stream.Collectors;
 
 @Component
-@Slf4j
-public class EmojiScript {
+public class AvatarScript {
 
     @Autowired
     S3Client s3Client;
@@ -42,17 +40,15 @@ public class EmojiScript {
     ServerProperties serverProperties;
 
     public void uploadResource() {
-        Map<String, OssResource> existed = ossResourceDao.selectByType("emoji").stream().collect(Collectors.toMap(OssResource::getLabel, Function.identity()));
-        String folderUrl = serverProperties.getEmojiPath();
+        Map<String, OssResource> existed = ossResourceDao.selectByType("avatar").stream().collect(Collectors.toMap(OssResource::getOriginalName, Function.identity()));
+        String folderUrl = serverProperties.getAvatarPath();
         Map<String, FileVo> newFiles = listFiles(folderUrl);
-        log.info("表情文件总量{}", newFiles.size());
 
         newFiles.forEach((key, value) -> {
             // 新增
             if (!existed.containsKey(key)) {
-                String id = IdFactory.nextUUId();
                 try {
-                    doUpload(value.file, id);
+                    doUpload(value.file, key);
                 } catch (IOException ex) {
                     throw new RuntimeException(ex);
                 }
@@ -100,25 +96,25 @@ public class EmojiScript {
         public FileVo(File file) throws Exception {
             this.file = file;
             this.md5 = FileMD5Calculator.calculateMD5(file);
-            this.label = file.getName().substring(0, file.getName().lastIndexOf("."));
+            this.label = file.getName() ;
         }
     }
 
-    private void doUpload(File file, String id) throws IOException {
+    private void doUpload(File file, String name) throws IOException {
         try {
             String suffix = file.getName().substring(file.getName().lastIndexOf(".") + 1);
-            String catalog = FileTypes.EMOJI.getPath() + "/";
-            String objectName = String.format("%s%s", id, "." + suffix);
-            String fullPath = catalog + objectName;
+            String catalog = FileTypes.AVATAR.getPath() + "/";
+            String fullPath = catalog + name;
             s3Client.upload(new FileInputStream(file), fullPath, ossService.getContentType(suffix));
             OssResource ossResource = new OssResource();
             ossResource.setUrl(fullPath);
             ossResource.setOriginalName(file.getName());
-            ossResource.setType(FileTypes.EMOJI.getPath());
+            ossResource.setType(FileTypes.AVATAR.getPath());
             ossResource.setLabel(file.getName().substring(0, file.getName().lastIndexOf(".")));
             ossResource.setCreatedDate(new Date());
+            ossResource.setSource("official");
             ossResource.setMd5(FileMD5Calculator.calculateMD5(file));
-            LoggerUtil.info(LoggerFunction.EMOIJ, "label", file.getName(), "type", "create");
+            LoggerUtil.info(LoggerFunction.AVATAR, "label", file.getName(), "type", "create");
             ossResourceDao.insert(ossResource);
         } catch (Exception e) {
             throw new IOException(e);
@@ -132,7 +128,7 @@ public class EmojiScript {
             String oldPath = ossResource.getUrl();
             // 删掉旧的
             s3Client.remove(oldPath);
-            String catalog = FileTypes.EMOJI.getPath() + "/";
+            String catalog = FileTypes.AVATAR.getPath() + "/";
             String objectName = String.format("%s%s", IdFactory.nextUUId(), "." + suffix);
             String newPath = catalog + objectName;;
             // 上传新的
@@ -140,11 +136,11 @@ public class EmojiScript {
             ossResource.setUrl(oldPath);
             ossResource.setUrl(newPath);
             ossResource.setOriginalName(fileName);
-            ossResource.setType(FileTypes.EMOJI.getPath());
+            ossResource.setType(FileTypes.AVATAR.getPath());
             ossResource.setLabel(fileVo.label);
             ossResource.setCreatedDate(new Date());
             ossResource.setMd5(fileVo.md5);
-            LoggerUtil.info(LoggerFunction.EMOIJ, "label", fileVo.label, "type", "modify");
+            LoggerUtil.info(LoggerFunction.AVATAR, "label", fileVo.label, "type", "modify");
             ossResourceDao.updateById(ossResource);
         } catch (Exception e) {
             throw new IOException(e);

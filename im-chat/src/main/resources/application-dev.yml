@@ -8,7 +8,7 @@ spring:
 
 # s3配置
 s3:
-  endpoint: http://192.168.0.121:9000
+  endpoint: http://192.168.0.122:9000
   accessKey: pKZzDFNoJ4rwRKOsDgCQ
   secretKey: iRyB20GkRrUk65Ymr0qbpN2jbHck7eYMcQULTrAy
   bucketName: database

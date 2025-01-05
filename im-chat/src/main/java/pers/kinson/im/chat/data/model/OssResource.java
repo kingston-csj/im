@@ -43,5 +43,9 @@ public class OssResource {
     private String md5;
 
     private Date createdDate;
+    /**
+     * 图片来源，official代表官方
+     */
+    private String source;
 
 }

@@ -1,6 +1,6 @@
 spring:
   profiles:
-    active: test
+    active: dev
 
 mybatis-plus:
   mapperScanPath: pers.kinson.im.chat.data.dao
@@ -19,3 +19,4 @@ server:
   version: 1.0.0
   # emoji 资源目录路径
   emojiPath: D:\java_projects\im\im\im-chat\src\test\resources\emoji
+  avatarPath: D:\java_projects\im\im\im-chat\src\test\resources\avatar

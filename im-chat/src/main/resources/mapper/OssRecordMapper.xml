@@ -5,10 +5,16 @@
 <mapper namespace="pers.kinson.im.chat.data.dao.OssResourceDao">
     <resultMap id="record" type="pers.kinson.im.chat.data.model.OssResource">
     </resultMap>
+
+    <select id="selectByType"
+            resultMap="record">
+        SELECT * FROM ossresource
+        WHERE type  =  #{type} ;
+    </select>
     <select id="clearExpired"
             resultMap="record">
         SELECT * FROM ossresource
-        WHERE type != "emoji"
+        WHERE type != "emoji" AND type != "avatar"
         AND createdDate &lt; NOW() - INTERVAL 3 DAY;
     </select>
 

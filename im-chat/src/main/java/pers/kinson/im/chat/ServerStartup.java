@@ -12,6 +12,7 @@ import org.springframework.scheduling.annotation.EnableScheduling;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.config.ServerProperties;
 import pers.kinson.im.chat.logic.chat.ChatService;
+import pers.kinson.im.chat.logic.script.AvatarScript;
 import pers.kinson.im.chat.logic.script.EmojiScript;
 
 import java.util.ArrayList;
@@ -51,7 +52,9 @@ public class ServerStartup implements CommandLineRunner {
         SpringContext.getBean(ChatService.class).init();
 
         // 首次执行——上传表情包
-        SpringContext.getBean(EmojiScript.class).updateEmojiResource();
+        SpringContext.getBean(EmojiScript.class).uploadResource();
+        // 首次执行——上传头像包
+        SpringContext.getBean(AvatarScript.class).uploadResource();
 
         logger.info("当前客户端版本号：{}", SpringContext.getBean(ServerProperties.class).getVersion());
     }
