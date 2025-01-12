@@ -72,6 +72,15 @@ public class UserService {
         return this.lruUsers.get(userId);
     }
 
+    /**
+     * TODO 这里要用缓存
+     * @param userId
+     * @return
+     */
+    public User queryUser(long userId) {
+        return userDao.selectById(userId);
+    }
+
     public User validateUser(long userId, String password) {
         if (userId <= 0 || StringUtils.isEmpty(password)) {
             return null;

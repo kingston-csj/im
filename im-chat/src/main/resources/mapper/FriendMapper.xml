@@ -13,6 +13,7 @@
             u.userId,
             u.sex,
             u.userName,
+            u.avatar,
             f.remark,
             u.signature,
             COALESCE(fg.id, '') AS groupId,

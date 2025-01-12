@@ -108,25 +108,6 @@ public class DiscussionService {
         return 0;
     }
 
-//    public int newMessage(Long userId, Long discussionId, String content) {
-//        Discussion discussion = discussionDao.selectById(discussionId);
-//        if (discussion == null) {
-//            return I18nConstants.COMMON_NOT_FOUND;
-//        }
-//        ResNotifyMessage notify = new ResNotifyMessage();
-//        ChatMessage message = ChatMessage.builder().userId(userId).userName(SpringContext.getUserService().getUserName(userId))
-//                .content(content).date(DateUtil.format(new Date())).build();
-//        notify.setDiscussionId(discussionId);
-//
-//        memberDao.selectList(new LambdaQueryWrapper<>()).stream().filter(e -> SpringContext.getUserService().isOnlineUser(e.getUserId()))
-//                .forEach(e -> {
-//                    IdSession session = SessionManager.INSTANCE.getSessionBy(e.getUserId());
-//                    session.send(notify);
-//                });
-//
-//        return 0;
-//    }
-
     public List<DiscussionGroupVo> listAllDiscussion(Long userId) {
         return discussionDao.getMyGroups(userId).stream().map(DiscussionMapper.INSTANCE::toVo).toList();
     }
@@ -138,6 +119,7 @@ public class DiscussionService {
             if (SpringContext.getUserService().isOnlineUser(memberVo.getUserId())) {
                 memberVo.setOnline(CommonStatus.ONLINE_STATUS);
             }
+            memberVo.setAvatar(SpringContext.getUserService().queryUser(memberVo.getUserId()).getAvatar());
         }
         return memberVos;
 

@@ -45,7 +45,7 @@ public class FriendService {
 			item.setUserId(f.getUserId());
 			item.setUserName(f.getUserName());
 			item.setGroupName(f.getGroupName());
-			item.setHeadUrl("assets\\img\\head\\head.png");
+			item.setHeadUrl(f.getAvatar());
 			if (userService.isOnlineUser(f.getUserId())) {
 				item.setOnline(CommonStatus.ONLINE_STATUS);
 			}

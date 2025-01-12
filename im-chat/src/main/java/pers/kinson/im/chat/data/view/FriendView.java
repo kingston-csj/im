@@ -27,4 +27,9 @@ public class FriendView {
      */
     private String groupName;
 
+    /**
+     * 头像url
+     */
+    private String avatar;
+
 }

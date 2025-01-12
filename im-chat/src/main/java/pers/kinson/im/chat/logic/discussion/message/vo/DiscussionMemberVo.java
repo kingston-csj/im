@@ -25,4 +25,10 @@ public class DiscussionMemberVo {
     private byte position;
 
     private byte online;
+
+    /**
+     * 头像url
+     */
+    private String avatar;
+
 }
