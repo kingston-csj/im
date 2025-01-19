@@ -8,4 +8,6 @@ public class DiscussionGroupView {
     private Long id;
 
     private String name;
+
+    private String avatar;
 }

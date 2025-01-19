@@ -13,4 +13,6 @@ public class DiscussionGroupVo {
     private long maxSeq;
 
     private String name;
+
+    private String avatar;
 }

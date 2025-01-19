@@ -44,6 +44,8 @@ public class DiscussionService {
         discussion.setName(name);
         Date now = new Date();
         discussion.setCreatedDate(now);
+        // 先临时按创建者的头像吧
+        discussion.setAvatar(SpringContext.getUserService().queryUser(ownerId).getAvatar());
         discussionDao.insert(discussion);
 
         //自动创建一条成员记录

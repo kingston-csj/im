@@ -24,4 +24,6 @@ public class Discussion {
 
     private Long maxSeq;
 
+    private String avatar;
+
 }
