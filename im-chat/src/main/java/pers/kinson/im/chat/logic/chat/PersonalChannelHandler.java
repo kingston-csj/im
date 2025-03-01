@@ -4,12 +4,11 @@ import jforgame.commons.DateUtil;
 import jforgame.commons.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.kinson.business.entity.Message;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.data.dao.DiscussionDao;
-import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
+import pers.kinson.im.chat.core.UserCacheService;
 import pers.kinson.im.chat.data.dao.MessageDao;
-import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResNewMessageNotify;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
@@ -29,7 +28,7 @@ public class PersonalChannelHandler implements ChatChannelHandler {
 
     @Override
     public void send(Long senderId, Long target, MessageContent content) {
-        if (SpringContext.getUserService().getUserName(target) == null) {
+        if (SpringContext.getUserService().queryUser(target) == null) {
             return;
         }
         saveToDb(senderId, target, content);
@@ -73,8 +72,9 @@ public class PersonalChannelHandler implements ChatChannelHandler {
         vo.setDate(DateUtil.format(e.getDate()));
         vo.setSenderId(e.getSender());
         vo.setReceiverId(e.getReceiver());
-        vo.setReceiverName(SpringContext.getUserService().getUserName(e.getReceiver()));
-        vo.setSenderName(SpringContext.getUserService().getUserName(e.getSender()));
+
+        vo.setReceiverName(SpringContext.getBean(UserCacheService.class).get(e.getReceiver()).getName());
+        vo.setSenderName(SpringContext.getBean(UserCacheService.class).get(e.getSender()).getName());
         return vo;
     }
 

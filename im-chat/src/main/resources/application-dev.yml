@@ -16,3 +16,6 @@ s3:
 
 socket:
   port: 9090
+
+server:
+  port: 8071

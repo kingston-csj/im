@@ -1,9 +1,9 @@
 package pers.kinson.im.chat.data.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import pers.kinson.im.chat.data.model.User;
 import org.springframework.stereotype.Repository;
-import pers.kinson.im.chat.logic.user.io.UserProfile;
+import pers.kinson.business.cache.UserProfile;
+import pers.kinson.business.entity.User;
 
 import java.util.List;
 

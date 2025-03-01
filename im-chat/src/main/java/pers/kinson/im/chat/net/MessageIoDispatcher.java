@@ -66,15 +66,15 @@ public class MessageIoDispatcher extends ChainedMessageDispatcher {
 
     @Override
     public void onSessionClosed(IdSession session) {
-        BaseGameTask task = new BaseGameTask() {
-            @Override
-            public void action() {
-                long userId = NumberUtil.longValue(session.getId());
-                SpringContext.getUserService().removeFromOnline(userId);
-            }
-        };
-        task.setDispatchKey(session.hashCode());
-        threadModel.accept(task);
+//        BaseGameTask task = new BaseGameTask() {
+//            @Override
+//            public void action() {
+//                long userId = NumberUtil.longValue(session.getId());
+//                SpringContext.getUserService().removeFromOnline(userId);
+//            }
+//        };
+//        task.setDispatchKey(session.hashCode());
+//        threadModel.accept(task);
     }
 
     public void exceptionCaught(IdSession session, Throwable cause) {

@@ -6,12 +6,11 @@ import jforgame.socket.share.IdSession;
 import jforgame.socket.share.annotation.MessageRoute;
 import jforgame.socket.share.annotation.RequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Controller;
+import pers.kinson.business.entity.FriendApply;
+import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.core.HttpResult;
 import pers.kinson.im.chat.data.dao.FriendApplyDao;
-import pers.kinson.im.chat.data.model.FriendApply;
-import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.logic.friend.message.req.ReqApplyFriend;
 import pers.kinson.im.chat.logic.friend.message.req.ReqApplyFriendList;
 import pers.kinson.im.chat.logic.friend.message.req.ReqApplyResult;
@@ -19,14 +18,14 @@ import pers.kinson.im.chat.logic.friend.message.res.ResApplyFriendList;
 import pers.kinson.im.chat.logic.friend.message.vo.FriendApplyVo;
 import pers.kinson.im.chat.logic.friend.service.ApplyService;
 import pers.kinson.im.chat.logic.friend.service.FriendService;
+import pers.kinson.im.common.HttpResult;
 import pers.kinson.im.common.constants.CommonStatus;
 
 import java.util.List;
 
-@Component
+@Controller
 @MessageRoute
 public class ApplyFacade {
-
     @Autowired
     ApplyService applyService;
     @Autowired
@@ -60,9 +59,9 @@ public class ApplyFacade {
         if (req.getStatus() == CommonStatus.APPLY_STATUS_YES) {
             record.setStatus(CommonStatus.APPLY_STATUS_YES);
             int code = friendService.addNewFriend(req.getApplyId(), record.getFromId(), userId);
-            User user = SpringContext.getUserService().getOnlineUser(userId);
+            User user = SpringContext.getUserService().queryUser(userId);
             friendService.refreshUserFriends(user);
-            User other = SpringContext.getUserService().getOnlineUser( record.getFromId());
+            User other = SpringContext.getUserService().queryUser(record.getFromId());
             if (other != null) {
                 friendService.refreshUserFriends(other);
             }

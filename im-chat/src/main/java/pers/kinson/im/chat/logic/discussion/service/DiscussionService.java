@@ -7,12 +7,13 @@ import org.jetbrains.annotations.NotNull;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.util.CollectionUtils;
+import pers.kinson.business.entity.Discussion;
+import pers.kinson.business.entity.DiscussionMember;
+import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.core.UserCacheService;
 import pers.kinson.im.chat.data.dao.DiscussionDao;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
-import pers.kinson.im.chat.data.model.Discussion;
-import pers.kinson.im.chat.data.model.DiscussionMember;
-import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionMemberVo;
@@ -38,7 +39,7 @@ public class DiscussionService {
     ConcurrentMap<Long, LazyCacheMap<Long, ChatMessage>> groupMessages = new ConcurrentHashMap<>();
 
     public int create(Long ownerId, List<Long> members, String name) {
-        User user = SpringContext.getUserService().getOnlineUser(ownerId);
+        User user = SpringContext.getUserService().queryUser(ownerId);
         Discussion discussion = new Discussion();
         discussion.setCreatorId(ownerId);
         discussion.setName(name);
@@ -64,13 +65,13 @@ public class DiscussionService {
         member.setDiscussionId(discussionId);
         member.setUserId(ownerId);
         member.setJoinDate(now);
-        member.setNickName(SpringContext.getUserService().getUserName(ownerId));
+        member.setNickName(SpringContext.getBean(UserCacheService.class).get(ownerId).getName());
         memberDao.insert(member);
         return member;
     }
 
     public int join(Long userId, Long discussionId) {
-        User user = SpringContext.getUserService().getOnlineUser(userId);
+        User user = SpringContext.getUserService().queryUser(userId);
         if (user == null) {
             return I18nConstants.COMMON_NOT_FOUND;
         }
@@ -93,7 +94,7 @@ public class DiscussionService {
     }
 
     public int leave(Long userId, Long discussionId) {
-        User user = SpringContext.getUserService().getOnlineUser(userId);
+        User user = SpringContext.getUserService().queryUser(userId);
         if (user == null) {
             return I18nConstants.COMMON_NOT_FOUND;
         }
@@ -118,7 +119,7 @@ public class DiscussionService {
         List<DiscussionMember> members = memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getDiscussionId, discussionId));
         List<DiscussionMemberVo> memberVos = members.stream().map(DiscussionMemberMapper.INSTANCE::toVo).collect(Collectors.toList());
         for (DiscussionMemberVo memberVo : memberVos) {
-            if (SpringContext.getUserService().isOnlineUser(memberVo.getUserId())) {
+            if (SpringContext.getBean(UserCacheService.class).get(memberVo.getUserId()).getOnlineStatus() > 0) {
                 memberVo.setOnline(CommonStatus.ONLINE_STATUS);
             }
             memberVo.setAvatar(SpringContext.getUserService().queryUser(memberVo.getUserId()).getAvatar());

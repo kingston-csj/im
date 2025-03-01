@@ -3,7 +3,7 @@ package pers.kinson.im.chat.data.dao;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.apache.ibatis.annotations.Delete;
 import org.springframework.stereotype.Repository;
-import pers.kinson.im.chat.data.model.Message;
+import pers.kinson.business.entity.Message;
 
 import java.util.List;
 

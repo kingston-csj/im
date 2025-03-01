@@ -1,0 +1,21 @@
+spring:
+  profiles:
+    active: dev
+
+mybatis-plus:
+  mapperScanPath: pers.kinson.im.web.data.dao
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    mapUnderscoreToCamelCase: false
+
+# s3配置
+s3:
+  type: minio
+
+
+server:
+  #  服务器版本号
+  version: 1.0.0
+  # emoji 资源目录路径
+  emojiPath: D:\java_projects\im\im\im-chat\src\test\resources\emoji
+  avatarPath: D:\java_projects\im\im\im-chat\src\test\resources\avatar

@@ -1,11 +1,9 @@
 package pers.kinson.im.chat.logic.friend.message.vo;
 
-import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.common.constants.CmdConst;
 
 @Data
-@MessageMeta(cmd = CmdConst.FriendVo)
 public class FriendItemVo {
 
     private long userId;

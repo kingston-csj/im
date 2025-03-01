@@ -2,7 +2,7 @@ package pers.kinson.im.chat.data.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
-import pers.kinson.im.chat.data.model.Discussion;
+import pers.kinson.business.entity.Discussion;
 import pers.kinson.im.chat.data.view.DiscussionGroupView;
 
 import java.util.List;

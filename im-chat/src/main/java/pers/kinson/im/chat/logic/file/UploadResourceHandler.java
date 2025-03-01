@@ -2,10 +2,10 @@ package pers.kinson.im.chat.logic.file;
 
 import jforgame.commons.NumberUtil;
 import jforgame.commons.Triple;
+import pers.kinson.business.entity.OssResource;
+import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.OssResourceDao;
-import pers.kinson.im.chat.data.model.OssResource;
-import pers.kinson.im.chat.data.model.User;
 import pers.kinson.im.chat.logic.file.message.req.ReqUploadFile;
 import pers.kinson.im.chat.logic.file.message.res.ResUploadFile;
 import pers.kinson.im.chat.logic.user.UserService;
@@ -97,7 +97,7 @@ class UserAvatarHandler implements UploadResourceHandler {
             throw new BusinessRequestException(I18nConstants.COMMON_ILLEGAL_PARAMS);
         }
         long userId = NumberUtil.longValue(request.getParams());
-        User user = SpringContext.getBean(UserService.class).getOnlineUser(userId);
+        User user = SpringContext.getBean(UserService.class).queryUser(userId);
         if (user == null) {
             throw new BusinessRequestException(I18nConstants.COMMON_ILLEGAL_PARAMS);
         }

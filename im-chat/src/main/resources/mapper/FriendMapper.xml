@@ -4,7 +4,7 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="pers.kinson.im.chat.data.dao.FriendDao">
 
-	<resultMap id="friendView" type="pers.kinson.im.chat.data.view.FriendView">
+	<resultMap id="friendView" type="pers.kinson.business.view.FriendView">
 	</resultMap>
 
 	<select id="getMyFriends" parameterType="java.lang.Long"

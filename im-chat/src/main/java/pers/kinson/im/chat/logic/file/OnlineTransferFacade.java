@@ -6,10 +6,10 @@ import jforgame.socket.share.annotation.MessageRoute;
 import jforgame.socket.share.annotation.RequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+import pers.kinson.business.entity.Message;
 import pers.kinson.im.chat.base.SessionManager;
-import pers.kinson.im.chat.core.HttpResult;
+import pers.kinson.im.chat.core.CommonResponse;
 import pers.kinson.im.chat.data.dao.MessageDao;
-import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.ChatService;
 import pers.kinson.im.chat.logic.file.message.push.PushBeginTransferFile;
 import pers.kinson.im.chat.logic.file.message.req.ReqOnlineTransferFileAnswer;
@@ -34,7 +34,7 @@ public class OnlineTransferFacade {
         Long userId = NumberUtil.longValue(session.getId());
         int result = transferService.transferApply(userId, req.getReceiverId(), req);
         if (result > 0) {
-            session.send(HttpResult.fail(result));
+            session.send(CommonResponse.fail(result));
         }
     }
 
@@ -43,7 +43,7 @@ public class OnlineTransferFacade {
         Long userId = NumberUtil.longValue(session.getId());
         int result = transferService.transferAnswer(userId, req.getMessageId(), req.getStatus());
         if (result > 0) {
-            session.send(HttpResult.fail(result));
+            session.send(CommonResponse.fail(result));
             return;
         }
         Message message = messageDao.selectById(req.getMessageId());
@@ -64,7 +64,7 @@ public class OnlineTransferFacade {
         Long userId = NumberUtil.longValue(session.getId());
         int result = transferService.transferFinish(userId, req.getMessageId());
         if (result > 0) {
-            session.send(HttpResult.fail(result));
+            session.send(CommonResponse.fail(result));
         }
     }
 

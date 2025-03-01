@@ -9,7 +9,7 @@ import jforgame.socket.share.IdSession;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import pers.kinson.im.chat.data.model.User;
+import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.net.ChannelUtils;
 
 import io.netty.channel.Channel;
@@ -39,10 +39,7 @@ public enum SessionManager {
     }
 
     public void sendPacketTo(User user, Object pact) {
-        IdSession session = userId2Sessions.get(user.getUserId());
-        if (session != null) {
-            session.send(pact);
-        }
+        sendPacketTo(user.getUserId(), pact);
     }
 
     public void sendPacketTo(Long userId, Object pact) {
@@ -68,7 +65,6 @@ public enum SessionManager {
     }
 
     public void registerSession(User user, IdSession session) {
-        session.setAttribute("USER", user);
         session.setAttribute("ID", user.getUserId());
         userId2Sessions.put(user.getUserId(), session);
         session2UserIds.put(session, user.getUserId());

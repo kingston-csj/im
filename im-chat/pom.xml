@@ -85,9 +85,10 @@
             <artifactId>commons-codec</artifactId>
         </dependency>
         <dependency>
-            <groupId>org.projectlombok</groupId>
-            <artifactId>lombok</artifactId>
-            <scope>provided</scope>
+            <groupId>pers.kinson</groupId>
+            <artifactId>im-business</artifactId>
+            <version>1.0</version>
+            <scope>compile</scope>
         </dependency>
     </dependencies>
 
@@ -101,7 +102,7 @@
                         <manifest>
                             <addClasspath>true</addClasspath>
                             <classpathPrefix>libs/</classpathPrefix>
-                            <mainClass>pers.kinson.im.chat.ServerStartup</mainClass>
+                            <mainClass>pers.kinson.im.chat.ChatStartup</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

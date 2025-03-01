@@ -22,6 +22,7 @@
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <minio.version>8.5.9</minio.version>
         <amazons3.version>1.12.261</amazons3.version>
+        <mysql.version>8.0.28</mysql.version>
     </properties>
 
     <modules>
@@ -29,6 +30,8 @@
         <module>im-common</module>
         <module>im-oss</module>
         <module>im-business</module>
+        <module>im-user</module>
+        <module>im-web</module>
     </modules>
 
     <repositories>
@@ -106,6 +109,12 @@
                 <groupId>org.mapstruct</groupId>
                 <artifactId>mapstruct</artifactId>
                 <version>${mapstruct.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>mysql</groupId>
+                <artifactId>mysql-connector-java</artifactId>
+                <version>${mysql.version}</version>
             </dependency>
 
             <!-- Minio对象存储 -->

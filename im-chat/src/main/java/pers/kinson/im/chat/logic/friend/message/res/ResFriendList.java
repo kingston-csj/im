@@ -4,6 +4,7 @@ import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
 import pers.kinson.im.chat.logic.friend.message.vo.FriendItemVo;
 import pers.kinson.im.common.constants.CmdConst;
+
 import java.util.List;
 
 @Data
@@ -11,6 +12,5 @@ import java.util.List;
 public class ResFriendList {
 
 	private List<FriendItemVo> friends;
-
 
 }

@@ -1,9 +1,9 @@
 package pers.kinson.im.chat.data.dao;
 
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
-import pers.kinson.im.chat.data.model.Friends;
-import pers.kinson.im.chat.data.view.FriendView;
+import pers.kinson.business.entity.Friends;
 import org.springframework.stereotype.Repository;
+import pers.kinson.business.view.FriendView;
 
 import java.util.List;
 

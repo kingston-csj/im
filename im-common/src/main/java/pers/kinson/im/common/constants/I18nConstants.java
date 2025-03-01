@@ -15,4 +15,5 @@ public interface I18nConstants {
     int FRIEND_APPLY_ALREADY = 2001; // 已申请
     int FRIEND_ALREADY = 2002; // 已经是基友啦
     int CHAT_TRANSFER_TARGET_OFFLINE = 2003; // 对方离线，无法传输
+    int USER_ID_EXISTED = 2004; // 对方离线，无法传输
 }

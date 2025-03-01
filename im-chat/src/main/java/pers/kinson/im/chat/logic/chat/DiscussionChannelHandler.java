@@ -6,14 +6,15 @@ import jforgame.commons.JsonUtil;
 import jforgame.commons.NumberUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.kinson.business.entity.Discussion;
+import pers.kinson.business.entity.DiscussionMember;
+import pers.kinson.business.entity.Message;
 import pers.kinson.im.chat.base.SessionManager;
 import pers.kinson.im.chat.base.SpringContext;
+import pers.kinson.im.chat.core.UserCacheService;
 import pers.kinson.im.chat.data.dao.DiscussionDao;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
 import pers.kinson.im.chat.data.dao.MessageDao;
-import pers.kinson.im.chat.data.model.Discussion;
-import pers.kinson.im.chat.data.model.DiscussionMember;
-import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResNewMessageNotify;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
@@ -90,7 +91,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         vo.setDate(DateUtil.format(e.getDate()));
         vo.setSenderId(e.getSender());
         vo.setReceiverId(e.getReceiver());
-        vo.setSenderName(SpringContext.getUserService().getUserName(e.getSender()));
+        vo.setSenderName(SpringContext.getBean(UserCacheService.class).get(e.getSender()).getName());
         return vo;
     }
 

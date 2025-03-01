@@ -3,9 +3,9 @@ package pers.kinson.im.chat.logic.file;
 import jforgame.commons.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.kinson.business.entity.Message;
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.data.dao.MessageDao;
-import pers.kinson.im.chat.data.model.Message;
 import pers.kinson.im.chat.logic.chat.ChatService;
 import pers.kinson.im.chat.logic.chat.message.FileOnlineTransferMessageContent;
 import pers.kinson.im.chat.logic.file.message.req.ReqOnlineTransferFileApply;
@@ -27,9 +27,9 @@ public class OnlineTransferService {
 
     public int transferApply(Long fromId, Long toId, ReqOnlineTransferFileApply params) {
         // 目标不在线，无法使用在线传输
-        if (!SpringContext.getUserService().isOnlineUser(toId)) {
-            return I18nConstants.CHAT_TRANSFER_TARGET_OFFLINE;
-        }
+//        if (!SpringContext.getUserService().isOnlineUser(toId)) {
+//            return I18nConstants.CHAT_TRANSFER_TARGET_OFFLINE;
+//        }
         // 系统自动生成一份聊天内容
         FileOnlineTransferMessageContent content = new FileOnlineTransferMessageContent();
         content.setName(params.getFileName());

@@ -12,8 +12,6 @@ import pers.kinson.im.chat.asyncdb.AysncDbService;
 import pers.kinson.im.chat.listener.EventDispatcher;
 import pers.kinson.im.chat.logic.chat.ChatService;
 import pers.kinson.im.chat.logic.chat.MessageContentFactory;
-import pers.kinson.im.chat.logic.friend.service.FriendService;
-import pers.kinson.im.chat.logic.search.SearchService;
 import pers.kinson.im.chat.logic.user.UserService;
 import pers.kinson.im.chat.logic.util.IdService;
 
@@ -36,15 +34,6 @@ public class SpringContext implements ApplicationContextAware {
         self = this;
     }
 
-    @Getter
-    private static UserService userService;
-
-    @Getter
-    private static FriendService friendService;
-
-    @Getter
-    private static SearchService searchService;
-
     /**
      * 异步持久化服务
      */
@@ -53,6 +42,9 @@ public class SpringContext implements ApplicationContextAware {
 
     @Getter
     private static ChatService chatService;
+
+    @Getter
+    private static UserService userService;
 
     @Getter
     private static IdService idService;
@@ -87,18 +79,8 @@ public class SpringContext implements ApplicationContextAware {
     }
 
     @Resource
-    public void setUserService(UserService userService) {
-        SpringContext.userService = userService;
-    }
-
-    @Resource
-    public void setFriendService(FriendService friendService) {
-        SpringContext.friendService = friendService;
-    }
-
-    @Resource
-    public void setSearchService(SearchService searchService) {
-        SpringContext.searchService = searchService;
+    public void setUserService(UserService idService) {
+        SpringContext.userService = idService;
     }
 
     @Resource
