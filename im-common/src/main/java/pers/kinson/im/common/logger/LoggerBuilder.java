@@ -48,7 +48,7 @@ public class LoggerBuilder {
         String fileName = name.toLowerCase();
         try {
             fp = OptionHelper.substVars(LoggerBuilder.LOG_PATH + "/" + fileName + "/" + fileName + ".log.%d{yyyy-MM-dd}", context);
-        } catch (ScanException e) {
+        } catch (Exception e) {
             throw new RuntimeException(e);
         }
 

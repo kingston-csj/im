@@ -1,7 +1,5 @@
 package pers.kinson.im.chat.base;
 
-import jakarta.annotation.PostConstruct;
-import jakarta.annotation.Resource;
 import lombok.Getter;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
@@ -13,8 +11,9 @@ import pers.kinson.im.chat.listener.EventDispatcher;
 import pers.kinson.im.chat.logic.chat.ChatService;
 import pers.kinson.im.chat.logic.chat.MessageContentFactory;
 import pers.kinson.im.chat.logic.user.UserService;
-import pers.kinson.im.chat.logic.util.IdService;
 
+import javax.annotation.PostConstruct;
+import javax.annotation.Resource;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Map;
@@ -47,9 +46,6 @@ public class SpringContext implements ApplicationContextAware {
     private static UserService userService;
 
     @Getter
-    private static IdService idService;
-
-    @Getter
     private static EventDispatcher eventDispatcher;
 
     private static ServerConfigs serverConfigs;
@@ -79,16 +75,6 @@ public class SpringContext implements ApplicationContextAware {
     }
 
     @Resource
-    public void setUserService(UserService idService) {
-        SpringContext.userService = idService;
-    }
-
-    @Resource
-    public void setIdService(IdService idService) {
-        SpringContext.idService = idService;
-    }
-
-    @Resource
     public void setAysncDbService(AysncDbService aysncDbService) {
         SpringContext.aysncDbService = aysncDbService;
     }
@@ -113,4 +99,8 @@ public class SpringContext implements ApplicationContextAware {
         SpringContext.messageContentFactory = messageContentFactory;
     }
 
+    @Resource
+    public void setUserService(UserService userService) {
+        SpringContext.userService = userService;
+    }
 }

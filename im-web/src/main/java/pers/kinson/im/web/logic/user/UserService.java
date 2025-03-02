@@ -1,6 +1,5 @@
 package pers.kinson.im.web.logic.user;
 
-import jakarta.annotation.PostConstruct;
 import jforgame.commons.ds.ConcurrentHashSet;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +11,7 @@ import pers.kinson.im.oss.OssService;
 import pers.kinson.im.web.data.dao.UserDao;
 import pers.kinson.im.web.logic.avatar.AvatarService;
 
+import javax.annotation.PostConstruct;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;

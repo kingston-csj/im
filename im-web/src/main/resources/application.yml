@@ -1,6 +1,15 @@
 spring:
   profiles:
     active: dev
+  ##微服务节点名称
+  application:
+    name: web
+  config:
+    import: nacos:web.yml
+
+  jpa:
+    database-platform: org.hibernate.dialect.MySQL8Dialect
+
 
 mybatis-plus:
   mapperScanPath: pers.kinson.im.web.data.dao
@@ -11,6 +20,7 @@ mybatis-plus:
 # s3配置
 s3:
   type: minio
+
 
 
 server:

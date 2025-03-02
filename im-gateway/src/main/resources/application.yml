@@ -1,0 +1,38 @@
+spring:
+  resources:
+    static-locations: classpath:/static/
+  main:
+    banner-mode: off
+    ## 循环依赖？？都没有代码
+    allow-circular-references: true
+  ##微服务节点名称
+  application:
+    name: gateway
+  config:
+    import: nacos:gateway.yml
+  cloud:
+    ##nacos配置与服务注册
+    nacos:
+      config:
+        server-addr: 192.168.0.122:8848
+        namespace: a3262568-bb11-460c-a947-67d898d02d33
+        group: im
+        file-extension: yaml
+      discovery:
+        server-addr: 192.168.0.122:8848
+        namespace: a3262568-bb11-460c-a947-67d898d02d33
+        group: im
+
+
+##actuator监控信息
+management:
+  endpoints:
+    web:
+      exposure:
+        include: gateway
+  endpoint:
+    health:
+      show-details: always
+
+
+

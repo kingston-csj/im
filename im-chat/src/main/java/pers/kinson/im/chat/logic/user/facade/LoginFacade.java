@@ -19,7 +19,6 @@ public class LoginFacade {
 
     @RequestHandler
     public void action(IdSession session, ReqConnectSocket req) {
-        Channel channel = (Channel) session.getRawSession();
         User user = SpringContext.getUserService().queryUser(req.getUserId());
         SessionManager.INSTANCE.registerSession(user, session);
         session.send(new ResConnectServer());
@@ -27,6 +26,5 @@ public class LoginFacade {
 
         SpringContext.getUserService().refreshUserProfile(user);
     }
-
 
 }

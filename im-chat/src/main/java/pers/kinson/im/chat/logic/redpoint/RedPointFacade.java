@@ -25,13 +25,13 @@ public class RedPointFacade {
 //    @EventHandler(value = {EventType.LOGIN})
 //    public void onUserLogin(UserLoginEvent loginEvent) {
 //        long userId = loginEvent.getUserId();
-//        User user = SpringContext.getUserService().getOnlineUser(userId);
+//        User account = SpringContext.getUserService().getOnlineUser(userId);
 //        Map<Integer, RedPoint> points = new HashMap<>();
 //        SpringContext.getBeansOfType(RedPointListener.class).forEach(e->e.register(userId, points));
 //        if (!CollectionUtils.isEmpty(points)) {
 //            ResRedPoint resRedPoint = new ResRedPoint();
 //            resRedPoint.setPoints(points.values().stream().toList());
-//            SessionManager.INSTANCE.sendPacketTo(user, resRedPoint);
+//            SessionManager.INSTANCE.sendPacketTo(account, resRedPoint);
 //        }
 //    }
 }

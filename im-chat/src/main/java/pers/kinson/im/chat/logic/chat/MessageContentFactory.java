@@ -1,16 +1,15 @@
 package pers.kinson.im.chat.logic.chat;
 
-import jakarta.annotation.PostConstruct;
 import jforgame.commons.JsonUtil;
 import org.springframework.stereotype.Service;
 import pers.kinson.im.chat.logic.chat.message.FileMessageContent;
 import pers.kinson.im.chat.logic.chat.message.FileOnlineTransferMessageContent;
 import pers.kinson.im.chat.logic.chat.message.ImageMessageContent;
-import pers.kinson.im.chat.logic.chat.message.MediaMessageContent;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.TextMessageContent;
 import pers.kinson.im.common.constants.ContentType;
 
+import javax.annotation.PostConstruct;
 import java.util.HashMap;
 import java.util.Map;
 

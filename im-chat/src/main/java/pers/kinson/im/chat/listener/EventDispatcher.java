@@ -7,11 +7,12 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import java.util.concurrent.LinkedBlockingQueue;
 
 
-import jakarta.annotation.PostConstruct;
 import jforgame.commons.thread.NamedThreadFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import pers.kinson.im.common.logger.LoggerUtil;
+
+import javax.annotation.PostConstruct;
 
 
 @Component

@@ -1,11 +1,11 @@
 package pers.kinson.im.web;
 
-import jakarta.annotation.PostConstruct;
 import org.springframework.beans.BeansException;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.stereotype.Component;
 
+import javax.annotation.PostConstruct;
 import java.lang.annotation.Annotation;
 import java.util.Collection;
 import java.util.Map;

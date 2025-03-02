@@ -107,7 +107,7 @@ class UserAvatarHandler implements UploadResourceHandler {
 
         Triple<String, String, String> urls = uploadResource(catalog, file);
         user.setAvatar(urls.getSecond());
-        SpringContext.getUserService().saveUser(user);
+//        SpringContext.getUserService().saveUser(user);
 
         return ResUploadFile.builder()
                 .cdnUrl(urls.getSecond())

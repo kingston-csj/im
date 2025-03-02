@@ -70,11 +70,10 @@ public class DiscussionFacade {
     @EventHandler(value = {EventType.LOGIN})
     public void onUserLogin(UserLoginEvent loginEvent) {
         long userId = loginEvent.getUserId();
-        User user = SpringContext.getUserService().queryUser(userId);
         List<DiscussionGroupVo> discussionGroupVos = discussionService.listAllDiscussion(userId);
         ResViewDiscussionList response = new ResViewDiscussionList();
         response.setGroups(discussionGroupVos);
-        SessionManager.INSTANCE.sendPacketTo(user, response);
+        SessionManager.INSTANCE.sendPacketTo(userId, response);
     }
 
 }

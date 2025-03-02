@@ -10,8 +10,6 @@ import pers.kinson.business.entity.Discussion;
 import pers.kinson.business.entity.DiscussionMember;
 import pers.kinson.business.entity.Message;
 import pers.kinson.im.chat.base.SessionManager;
-import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.core.UserCacheService;
 import pers.kinson.im.chat.data.dao.DiscussionDao;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
 import pers.kinson.im.chat.data.dao.MessageDao;
@@ -19,6 +17,7 @@ import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResNewMessageNotify;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 import pers.kinson.im.common.constants.Channels;
+import pers.kinson.im.infrastructure.security.AccountServiceClient;
 
 import java.util.Collection;
 import java.util.Date;
@@ -36,6 +35,8 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
     @Autowired
     MessageDao messageDao;
 
+    @Autowired
+    AccountServiceClient accountServiceClient;
 
     @Override
     public void send(Long senderId, Long target, MessageContent content) {
@@ -91,7 +92,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         vo.setDate(DateUtil.format(e.getDate()));
         vo.setSenderId(e.getSender());
         vo.setReceiverId(e.getReceiver());
-        vo.setSenderName(SpringContext.getBean(UserCacheService.class).get(e.getSender()).getName());
+        vo.setSenderName(accountServiceClient.queryUserProfile(e.getReceiver()).getName());
         return vo;
     }
 

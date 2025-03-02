@@ -10,10 +10,4 @@ import java.util.List;
 @Repository
 public interface UserDao extends BaseMapper<User> {
 
-    int getMaxId();
-
-    User findByName(String nickName);
-
-    List<UserProfile> selectIdAndNameList();
-
 }

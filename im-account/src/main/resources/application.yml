@@ -1,0 +1,19 @@
+spring:
+  main:
+    banner-mode: off
+    allow-circular-references: true
+  ##微服务节点名称
+  application:
+    name: account
+  redis:
+    host: 192.168.0.122
+    port: 6389
+
+mybatis-plus:
+  mapperScanPath: pers.kinson.im.account.data.dao
+  mapper-locations: classpath*:mapper/**/*Mapper.xml
+  configuration:
+    mapUnderscoreToCamelCase: false
+
+
+

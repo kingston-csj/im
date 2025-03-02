@@ -14,12 +14,13 @@ import pers.kinson.im.web.logic.login.message.req.ReqUserLogin;
 import pers.kinson.im.web.logic.search.SearchService;
 import pers.kinson.im.web.logic.search.message.req.ReqSearchFriends;
 import pers.kinson.im.web.logic.search.message.vo.RecommendFriendItem;
+import pers.kinson.im.web.logic.user.message.req.ReqSaveProfile;
 import pers.kinson.im.web.logic.user.message.req.ReqUserRegister;
 
 import java.util.List;
 
 @RestController
-@RequestMapping("/user")
+@RequestMapping("/account")
 public class UserFacade {
 
     @Autowired
@@ -46,6 +47,19 @@ public class UserFacade {
         if (user == null) {
             return HttpResult.fail(I18nConstants.COMMON_NOT_FOUND);
         }
+        return HttpResult.ok();
+    }
+
+    @PostMapping(value = "/profile")
+    public HttpResult saveProgress(@RequestBody ReqSaveProfile req) {
+        User user = userService.queryUser(req.getId());
+        if (user== null) {
+            return HttpResult.fail(I18nConstants.COMMON_NOT_FOUND);
+        }
+        user.setAvatar(req.getAvatar());
+        user.setUserName(req.getName());
+        user.setSignature(req.getRemark());
+        userService.saveUser(user);
         return HttpResult.ok();
     }
 

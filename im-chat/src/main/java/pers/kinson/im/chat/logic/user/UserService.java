@@ -4,21 +4,17 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.base.SessionManager;
-import pers.kinson.im.chat.data.dao.UserDao;
 import pers.kinson.im.chat.logic.user.message.ResUserInfo;
+import pers.kinson.im.infrastructure.security.AccountServiceClient;
 
 @Service
 public class UserService {
 
     @Autowired
-    private UserDao userDao;
+    AccountServiceClient accountServiceClient;
 
     public User queryUser(long userId) {
-        return userDao.selectById(userId);
-    }
-
-    public void saveUser(User user) {
-        userDao.updateById(user);
+        return accountServiceClient.findById(userId);
     }
 
     public boolean isOnlineUser(long userId) {

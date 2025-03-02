@@ -18,6 +18,7 @@ import pers.kinson.im.chat.logic.chat.message.req.ReqMarkNewMessage;
 import pers.kinson.im.chat.logic.chat.message.res.ResNewMessage;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 import pers.kinson.im.common.constants.Channels;
+import pers.kinson.im.infrastructure.security.AccountServiceClient;
 
 import java.util.List;
 
@@ -29,7 +30,7 @@ public class ChatFacade {
     DiscussionMemberDao discussionMemberDao;
 
     @Autowired
-    UserDao userDao;
+    AccountServiceClient accountServiceClient;
 
     @RequestHandler
     public void reqChatToChannel(IdSession session, ReqChatToChannel req) {
@@ -53,9 +54,7 @@ public class ChatFacade {
     public void reqMarkNewMessage(IdSession session, ReqMarkNewMessage req) {
         long receiver = NumberUtil.longValue(session.getId());
         if (req.getChannel() == Channels.person) {
-            User user = userDao.selectById(receiver);
-            user.setChatMaxSeq(req.getMaxSeq());
-            userDao.updateById(user);
+            accountServiceClient.updateChatSeq(receiver, req.getMaxSeq());
         } else if (req.getChannel() == Channels.discussion) {
             DiscussionMember member = discussionMemberDao.selectOne(
                     new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getUserId, receiver)

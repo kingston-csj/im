@@ -4,15 +4,15 @@ import jforgame.commons.DateUtil;
 import jforgame.commons.JsonUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import pers.kinson.business.cache.UserProfile;
 import pers.kinson.business.entity.Message;
 import pers.kinson.im.chat.base.SessionManager;
-import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.core.UserCacheService;
 import pers.kinson.im.chat.data.dao.MessageDao;
 import pers.kinson.im.chat.logic.chat.message.MessageContent;
 import pers.kinson.im.chat.logic.chat.message.res.ResNewMessageNotify;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
 import pers.kinson.im.common.constants.Channels;
+import pers.kinson.im.infrastructure.security.AccountServiceClient;
 
 import java.util.Arrays;
 import java.util.Collection;
@@ -26,11 +26,11 @@ public class PersonalChannelHandler implements ChatChannelHandler {
     @Autowired
     MessageDao messageDao;
 
+    @Autowired
+    AccountServiceClient accountServiceClient;
+
     @Override
     public void send(Long senderId, Long target, MessageContent content) {
-        if (SpringContext.getUserService().queryUser(target) == null) {
-            return;
-        }
         saveToDb(senderId, target, content);
 
         ResNewMessageNotify notify = new ResNewMessageNotify();
@@ -73,8 +73,10 @@ public class PersonalChannelHandler implements ChatChannelHandler {
         vo.setSenderId(e.getSender());
         vo.setReceiverId(e.getReceiver());
 
-        vo.setReceiverName(SpringContext.getBean(UserCacheService.class).get(e.getReceiver()).getName());
-        vo.setSenderName(SpringContext.getBean(UserCacheService.class).get(e.getSender()).getName());
+        UserProfile receiver = accountServiceClient.queryUserProfile(e.getReceiver());
+        vo.setReceiverName(receiver.getName());
+        UserProfile sender = accountServiceClient.queryUserProfile(e.getSender());
+        vo.setSenderName(sender.getName());
         return vo;
     }
 

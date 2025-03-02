@@ -15,14 +15,23 @@
         <maven.compiler.source>17</maven.compiler.source>
         <maven.compiler.target>17</maven.compiler.target>
         <netty.version>4.1.107.Final</netty.version>
-        <spring-boot.version>3.2.11</spring-boot.version>
-        <mybatis-plus.version>3.5.8</mybatis-plus.version>
+        <spring-boot.version>2.7.18</spring-boot.version>
+        <mybatis-plus.version>3.5.2</mybatis-plus.version>
         <jforgame.version>2.1.1</jforgame.version>
         <lombok.version>1.18.30</lombok.version>
         <mapstruct.version>1.5.5.Final</mapstruct.version>
         <minio.version>8.5.9</minio.version>
         <amazons3.version>1.12.261</amazons3.version>
         <mysql.version>8.0.28</mysql.version>
+        <p6spy.version>3.9.1</p6spy.version>
+
+        <spring-cloud-alibaba.version>2021.0.5.0</spring-cloud-alibaba.version>
+        <spring-cloud-netflix.version>2.0.0.RELEASE</spring-cloud-netflix.version>
+        <spring-cloud.version>2021.0.3</spring-cloud.version>
+        <spring-cloud-openfeign.version>2.2.9.RELEASE</spring-cloud-openfeign.version>
+        <security-oauth.version>2.3.4.RELEASE</security-oauth.version>
+        <security-jwt.version>1.0.10.RELEASE</security-jwt.version>
+        <feign-httpclient.version>10.9</feign-httpclient.version>
     </properties>
 
     <modules>
@@ -30,8 +39,11 @@
         <module>im-common</module>
         <module>im-oss</module>
         <module>im-business</module>
-        <module>im-user</module>
+        <module>im-account</module>
         <module>im-web</module>
+        <module>im-gateway</module>
+        <module>im-infrastructure</module>
+        <module>im-security</module>
     </modules>
 
     <repositories>
@@ -61,6 +73,47 @@
                 <version>${spring-boot.version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-alibaba-dependencies</artifactId>
+                <version>${spring-cloud-alibaba.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security.oauth</groupId>
+                <artifactId>spring-security-oauth2</artifactId>
+                <version>${security-oauth.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.security</groupId>
+                <artifactId>spring-security-jwt</artifactId>
+                <version>${security-jwt.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-openfeign</artifactId>
+                <version>${spring-cloud-openfeign.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>io.github.openfeign</groupId>
+                <artifactId>feign-httpclient</artifactId>
+                <version>${feign-httpclient.version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>p6spy</groupId>
+                <artifactId>p6spy</artifactId>
+                <version>${p6spy.version}</version>
             </dependency>
             <dependency>
                 <groupId>io.github.jforgame</groupId>
@@ -115,6 +168,11 @@
                 <groupId>mysql</groupId>
                 <artifactId>mysql-connector-java</artifactId>
                 <version>${mysql.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus.version}</version>
             </dependency>
 
             <!-- Minio对象存储 -->

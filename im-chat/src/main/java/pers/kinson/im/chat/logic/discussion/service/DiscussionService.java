@@ -11,7 +11,6 @@ import pers.kinson.business.entity.Discussion;
 import pers.kinson.business.entity.DiscussionMember;
 import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.base.SpringContext;
-import pers.kinson.im.chat.core.UserCacheService;
 import pers.kinson.im.chat.data.dao.DiscussionDao;
 import pers.kinson.im.chat.data.dao.DiscussionMemberDao;
 import pers.kinson.im.chat.logic.chat.message.vo.ChatMessage;
@@ -21,6 +20,7 @@ import pers.kinson.im.chat.mapstruct.DiscussionMapper;
 import pers.kinson.im.chat.mapstruct.DiscussionMemberMapper;
 import pers.kinson.im.common.constants.CommonStatus;
 import pers.kinson.im.common.constants.I18nConstants;
+import pers.kinson.im.infrastructure.security.AccountServiceClient;
 
 import java.util.Date;
 import java.util.List;
@@ -35,6 +35,8 @@ public class DiscussionService {
     DiscussionDao discussionDao;
     @Autowired
     DiscussionMemberDao memberDao;
+    @Autowired
+    AccountServiceClient accountServiceClient;
 
     ConcurrentMap<Long, LazyCacheMap<Long, ChatMessage>> groupMessages = new ConcurrentHashMap<>();
 
@@ -65,7 +67,7 @@ public class DiscussionService {
         member.setDiscussionId(discussionId);
         member.setUserId(ownerId);
         member.setJoinDate(now);
-        member.setNickName(SpringContext.getBean(UserCacheService.class).get(ownerId).getName());
+        member.setNickName(accountServiceClient.queryUserProfile(ownerId).getName());
         memberDao.insert(member);
         return member;
     }
@@ -119,7 +121,7 @@ public class DiscussionService {
         List<DiscussionMember> members = memberDao.selectList(new LambdaQueryWrapper<DiscussionMember>().eq(DiscussionMember::getDiscussionId, discussionId));
         List<DiscussionMemberVo> memberVos = members.stream().map(DiscussionMemberMapper.INSTANCE::toVo).collect(Collectors.toList());
         for (DiscussionMemberVo memberVo : memberVos) {
-            if (SpringContext.getBean(UserCacheService.class).get(memberVo.getUserId()).getOnlineStatus() > 0) {
+            if (accountServiceClient.queryUserProfile(memberVo.getUserId()).getOnlineStatus() > 0) {
                 memberVo.setOnline(CommonStatus.ONLINE_STATUS);
             }
             memberVo.setAvatar(SpringContext.getUserService().queryUser(memberVo.getUserId()).getAvatar());

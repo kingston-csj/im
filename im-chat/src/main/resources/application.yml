@@ -1,6 +1,11 @@
 spring:
   profiles:
     active: dev
+  ##微服务节点名称
+  application:
+    name: chat
+  config:
+    import: nacos:chat.yml
 
 mybatis-plus:
   mapperScanPath: pers.kinson.im.chat.data.dao

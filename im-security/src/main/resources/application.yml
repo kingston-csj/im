@@ -1,0 +1,12 @@
+spring:
+  main:
+    banner-mode: off
+    allow-circular-references: true
+  ##微服务节点名称
+  application:
+    name: security
+  config:
+    import: nacos:security.yml
+
+
+

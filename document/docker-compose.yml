@@ -1,0 +1,61 @@
+version: '3.3'
+ 
+services:
+  db:
+    image: mysql:latest
+    container_name: im-mysql
+    environment:
+      MYSQL_PASSWORD: '123456'
+      MYSQL_ROOT_PASSWORD: '123456'
+    ports:
+      - "3306:3306"
+    volumes:
+      - ./data/mysql/data:/var/lib/mysql
+    restart: always
+    networks:
+      - im-network
+  nacos:
+    image: nacos/nacos-server:v2.3.1
+    container_name: im-nacos
+    environment:
+      - PREFER_HOST_MODE=hostname
+      - MODE=standalone
+      - NACOS_AUTH_IDENTITY_KEY=serverIdentity
+      - NACOS_AUTH_IDENTITY_VALUE=security
+      - NACOS_AUTH_TOKEN=SecretKey012345678901234567890123456789012345678901234567890123456789
+    ports:
+      - "8848:8848"
+      - "9848:9848"
+    networks:
+      - im-network 
+
+  minio:
+    image: minio/minio:latest
+    container_name: im-s3
+    ports:
+      - "9000:9000"
+      - "9001:9001"
+    environment:
+      MINIO_ROOT_USER: minioadmin
+      MINIO_ROOT_PASSWORD: minioadmin
+    command: server --console-address ":9001" /data    
+    volumes:
+      - ./data/minio:/data
+    restart: always
+    networks:
+      - im-network
+
+  redis:
+    image: redis:latest
+    container_name: im-redis
+    ports:
+      - "6379:6379"
+    volumes:
+      - ./data/redis:/data
+    restart: always
+    networks:
+      - im-network      
+networks:
+  im-network:
+     driver: bridge
+

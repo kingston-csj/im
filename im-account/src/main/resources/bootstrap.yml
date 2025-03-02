@@ -1,0 +1,23 @@
+spring:
+  config:
+    import: nacos:account.yml
+
+  cloud:
+    ##nacos配置与服务注册
+    nacos:
+      config:
+        server-addr: 192.168.0.122:8848
+        namespace: a3262568-bb11-460c-a947-67d898d02d33
+        group: im
+        file-extension: yaml
+        shared-configs:
+          - data-id: common-config.yml
+            group: im
+            refresh: true
+      discovery:
+        server-addr: 192.168.0.122:8848
+        namespace: a3262568-bb11-460c-a947-67d898d02d33
+        group: im
+
+
+
