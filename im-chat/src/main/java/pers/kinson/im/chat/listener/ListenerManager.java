@@ -1,11 +1,11 @@
 package pers.kinson.im.chat.listener;
 
+import org.springframework.stereotype.Component;
+import pers.kinson.im.common.logger.LoggerUtil;
+
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
-
-import org.springframework.stereotype.Component;
-import pers.kinson.im.common.logger.LoggerUtil;
 
 
 @Component

@@ -11,7 +11,7 @@ import pers.kinson.im.web.logic.script.AvatarScript;
 import pers.kinson.im.web.logic.script.EmojiScript;
 
 @SpringBootApplication
-@ComponentScan({"pers.kinson.im.web","pers.kinson.im.oss"})
+@ComponentScan({"pers.kinson.im","pers.kinson.im"})
 @EnableCaching
 @Slf4j
 @EnableDiscoveryClient

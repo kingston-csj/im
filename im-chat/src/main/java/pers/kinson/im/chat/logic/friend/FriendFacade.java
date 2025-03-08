@@ -5,7 +5,6 @@ import jforgame.socket.share.IdSession;
 import jforgame.socket.share.annotation.MessageRoute;
 import jforgame.socket.share.annotation.RequestHandler;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Controller;
 import pers.kinson.business.entity.User;
 import pers.kinson.im.chat.base.SpringContext;

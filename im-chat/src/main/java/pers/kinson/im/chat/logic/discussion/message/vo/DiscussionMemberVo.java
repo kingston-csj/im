@@ -5,8 +5,6 @@ import lombok.Getter;
 import lombok.Setter;
 import pers.kinson.im.common.constants.CmdConst;
 
-import java.util.Date;
-
 @Getter
 @Setter
 @MessageMeta(cmd = CmdConst.DiscussionGroupMemberVo)

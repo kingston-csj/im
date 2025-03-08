@@ -2,7 +2,6 @@ package pers.kinson.im.chat.logic.discussion.message.res;
 
 import jforgame.socket.share.annotation.MessageMeta;
 import lombok.Data;
-import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionGroupVo;
 import pers.kinson.im.chat.logic.discussion.message.vo.DiscussionMemberVo;
 import pers.kinson.im.common.constants.CmdConst;
 

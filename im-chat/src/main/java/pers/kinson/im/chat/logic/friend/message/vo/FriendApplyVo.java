@@ -1,7 +1,6 @@
 package pers.kinson.im.chat.logic.friend.message.vo;
 
 import lombok.Data;
-import pers.kinson.im.common.constants.CmdConst;
 import pers.kinson.im.common.constants.CommonStatus;
 
 @Data

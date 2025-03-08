@@ -1,18 +1,16 @@
 package pers.kinson.im.chat.base;
 
+import io.netty.channel.Channel;
+import jforgame.socket.share.IdSession;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import pers.kinson.business.entity.User;
+import pers.kinson.im.chat.net.ChannelUtils;
+
 import java.io.IOException;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ConcurrentMap;
-
-import jforgame.socket.share.IdSession;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import pers.kinson.business.entity.User;
-import pers.kinson.im.chat.net.ChannelUtils;
-
-import io.netty.channel.Channel;
 
 public enum SessionManager {
 

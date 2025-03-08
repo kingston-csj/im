@@ -1,7 +1,5 @@
 package pers.kinson.im.chat.net;
 
-import java.net.InetSocketAddress;
-
 import io.netty.channel.Channel;
 import io.netty.util.Attribute;
 import io.netty.util.AttributeKey;
@@ -31,8 +29,4 @@ public final class ChannelUtils {
 		return sessionAttr.get() ;
 	}
 	
-	public static String getIp(Channel channel) {
-		return ((InetSocketAddress)channel.remoteAddress()).getAddress().toString().substring(1);
-	}
-
 }

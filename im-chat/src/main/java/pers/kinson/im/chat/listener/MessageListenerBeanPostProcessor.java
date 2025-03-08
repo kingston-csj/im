@@ -1,7 +1,5 @@
 package pers.kinson.im.chat.listener;
 
-import java.lang.reflect.Method;
-
 import org.springframework.beans.BeansException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.config.BeanPostProcessor;
@@ -9,10 +7,11 @@ import org.springframework.context.ApplicationContext;
 import org.springframework.context.ApplicationContextAware;
 import org.springframework.core.Ordered;
 import org.springframework.stereotype.Component;
-
 import pers.kinson.im.chat.base.SpringContext;
 import pers.kinson.im.chat.listener.annotation.EventHandler;
 import pers.kinson.im.common.logger.LoggerUtil;
+
+import java.lang.reflect.Method;
 
 @Component
 public class MessageListenerBeanPostProcessor implements BeanPostProcessor, ApplicationContextAware, Ordered {

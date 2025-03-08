@@ -1,5 +1,6 @@
 package pers.kinson.im.infrastructure.config;
 
+import com.alibaba.cloud.nacos.client.NacosPropertySourceLocator;
 import lombok.Getter;
 import lombok.Setter;
 import org.springframework.boot.context.properties.ConfigurationProperties;
@@ -8,7 +9,8 @@ import org.springframework.stereotype.Component;
 import java.util.Map;
 
 /**
- * 读取shared-config的代码 @see NacosPropertySourceLocator
+ * 读取shared-config的代码
+ * @see NacosPropertySourceLocator
  */
 @ConfigurationProperties(prefix = "security.oauth2")
 @Component

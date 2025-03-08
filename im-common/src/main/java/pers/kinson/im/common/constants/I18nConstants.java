@@ -9,7 +9,7 @@ public interface I18nConstants {
     int COMMON_VERIFY_FAILED = 1005;  //验证不通过
     int COMMON_UNAUTHORIZED = 1006;   //未授权
     int COMMON_TOKEN_EXPIRED = 1007;   //token失效
-    int COMMON_DATA_ERROR = 1008;     //数据格式异常（客户端数据不符合约定格式）
+    int COMMON_DATA_ERROR = 1008;     //数据格式异常
 
 
     int FRIEND_APPLY_ALREADY = 2001; // 已申请

@@ -2,7 +2,6 @@ package pers.kinson.im.web.logic.user.message.req;
 
 import lombok.Data;
 import pers.kinson.im.common.constants.CommonStatus;
-import pers.kinson.im.common.constants.CmdConst;
 @Data
 public class ReqUserRegister {
 

@@ -17,10 +17,6 @@ import java.util.Date;
 @NoArgsConstructor
 public class Message {
 
-
-    public static byte TYPE_NORMAL  = 0;
-
-
     @TableId(type = IdType.AUTO)
     private Long id;
 

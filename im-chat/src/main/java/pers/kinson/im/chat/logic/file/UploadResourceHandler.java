@@ -16,7 +16,7 @@ import pers.kinson.im.common.logger.LoggerUtil;
 import pers.kinson.im.common.utils.IdFactory;
 import pers.kinson.im.oss.OssService;
 import pers.kinson.im.oss.S3Client;
-import pers.kinson.im.oss.UploadFileVo;
+import pers.kinson.im.oss.UploadFileParams;
 
 import java.util.Date;
 
@@ -89,7 +89,7 @@ class UserAvatarHandler implements UploadResourceHandler {
 
     @Override
     public ResUploadFile handle(String file, ReqUploadFile request) throws Exception {
-        UploadFileVo fileVo = UploadFileVo.builder().fileName(file)
+        UploadFileParams fileVo = UploadFileParams.builder().fileName(file)
                 .build();
         String suffix = suffixType(fileVo.getFileName());
         OssService ossService = SpringContext.getBean(OssService.class);
@@ -107,8 +107,6 @@ class UserAvatarHandler implements UploadResourceHandler {
 
         Triple<String, String, String> urls = uploadResource(catalog, file);
         user.setAvatar(urls.getSecond());
-//        SpringContext.getUserService().saveUser(user);
-
         return ResUploadFile.builder()
                 .cdnUrl(urls.getSecond())
                 .name(fileVo.getFileName()).build();

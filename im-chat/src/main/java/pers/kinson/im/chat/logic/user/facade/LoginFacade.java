@@ -1,6 +1,5 @@
 package pers.kinson.im.chat.logic.user.facade;
 
-import io.netty.channel.Channel;
 import jforgame.socket.share.IdSession;
 import jforgame.socket.share.annotation.MessageRoute;
 import jforgame.socket.share.annotation.RequestHandler;

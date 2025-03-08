@@ -8,7 +8,7 @@ import java.io.InputStream;
 
 @Data
 @Builder
-public class UploadFileVo {
+public class UploadFileParams {
 
     private InputStream inputStream;
 

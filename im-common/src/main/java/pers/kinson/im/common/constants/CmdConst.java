@@ -20,8 +20,6 @@ public interface CmdConst {
      * 推送--通用响应
      */
     int ResCommon = 1201;
-    int ResRedPoint = 1202;
-    int RedPointVo = 1203;
 
 
 
@@ -50,12 +48,6 @@ public interface CmdConst {
 
 
 
-
-
-    /**
-     * 请求--单聊
-     */
-    int ReqChatToUser = 4000;
     /**
      * 请求--群聊
      */
@@ -130,7 +122,6 @@ public interface CmdConst {
     int ResApplyFriendList = 5208;
     int ResApplyResult = 5209;
     int ResFriendOnlineStatus = 5210;
-
 
     /*
      * ------------------好友结束----------------------------

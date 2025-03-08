@@ -1,7 +1,7 @@
 package pers.kinson.im.web.data.dao;
 
-import org.springframework.stereotype.Repository;
 import org.apache.ibatis.annotations.Param;
+import org.springframework.stereotype.Repository;
 import pers.kinson.business.view.FriendView;
 
 import java.util.List;
