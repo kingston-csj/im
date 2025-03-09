@@ -45,7 +45,7 @@ im-server
 1. 安装git后，使用命令 git clone https://github.com/kingston-csj/im
 2. 安装docker-compose, 新建im文件目录,拷贝document目录下的docker-compose.yml文件到该目录，新建子目录im/data,在im目录下执行docker-compose
    up -d启动mysql,minio,redis,nacos服务
-3. 执行docker cp命令拷贝im-chat/src/test/resources/ddl目录下的im.sql到mysql容器内，新建数据库im，导入im.sql文件
+3. 执行docker cp命令拷贝im-web/src/test/resources/ddl目录下的im.sql到mysql容器内，新建数据库im，导入im.sql文件
 4. 首次本地部署，配置application.yml的emojiPath,avatarPath参数，安装im-chat/src/test/resources/目录下的表情包,头像包
 5. 进行nacos管理后台 http://ip:8848/nacos ,导入document目录下nacos配置(nacos_config_export.zip)，检查所有配置的信息，改为本地ip端口。
    分别启动im-chat,im-gateway,im-web,im-account服务(使用IDEA编辑器的Services工具栏可实现批量启动)

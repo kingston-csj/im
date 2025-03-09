@@ -92,7 +92,7 @@ public class DiscussionChannelHandler implements ChatChannelHandler {
         vo.setDate(DateUtil.format(e.getDate()));
         vo.setSenderId(e.getSender());
         vo.setReceiverId(e.getReceiver());
-        vo.setSenderName(accountServiceClient.queryUserProfile(e.getReceiver()).getName());
+        vo.setSenderName(accountServiceClient.queryUserProfile(e.getSender()).getName());
         return vo;
     }
 

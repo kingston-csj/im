@@ -27,5 +27,5 @@ server:
   #  服务器版本号
   version: 1.0.0
   # emoji 资源目录路径
-  emojiPath: D:\java_projects\im\im\im-chat\src\test\resources\emoji
-  avatarPath: D:\java_projects\im\im\im-chat\src\test\resources\avatar
+  emojiPath: D:\java_projects\im\im\im-web\src\test\resources\emoji
+  avatarPath: D:\java_projects\im\im\im-web\src\test\resources\avatar
