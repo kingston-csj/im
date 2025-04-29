@@ -29,7 +29,7 @@
         <spring-cloud-netflix.version>2.0.0.RELEASE</spring-cloud-netflix.version>
         <spring-cloud.version>2021.0.3</spring-cloud.version>
         <spring-cloud-openfeign.version>2.2.9.RELEASE</spring-cloud-openfeign.version>
-        <security-oauth.version>2.3.4.RELEASE</security-oauth.version>
+        <security-oauth.version>2.3.5.RELEASE</security-oauth.version>
         <security-jwt.version>1.0.10.RELEASE</security-jwt.version>
         <feign-httpclient.version>10.9</feign-httpclient.version>
     </properties>
